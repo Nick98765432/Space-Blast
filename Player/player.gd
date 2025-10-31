@@ -1,0 +1,225 @@
+extends CharacterBody2D
+class_name Player
+
+const screenSize: Vector2 = Vector2(640, 360)
+var dead
+var damageMult: float = 1
+var parryEnergy: float = 100
+var health: float = 100
+var speed = 3600
+var parry: bool = false
+var parryCooled: bool = true
+var shotCooled: bool = true
+var shotCooled2: bool = true
+var shotCooled3: bool = true
+var weapon = 1
+var ammo = 30
+var enemyCount := 0
+var encounter: Vector2i = Vector2i(0, 0) 
+var dir
+var blast: PackedScene = preload("res://Player/Energy Blast Player.tscn")
+var resist = 0
+var powerup = PlayerData.playerSuper
+var beserkModifier = 0
+var powerupMult = 1
+var spawnLocation: Vector2
+var ableToShoot: bool = true
+var direction: float
+var current: Vector2
+@onready var parry_timer: Timer = $"parry timer"
+@onready var shot_cooldown: Timer = $"Shot cooldown"
+@onready var parry_particles: GPUParticles2D = $"parry particles"
+@onready var wall_and_evir_collisons: CollisionShape2D = $"Wall and evir collisons"
+@onready var parry_hurt_box: Area2D = $ParryHurtBox
+@onready var shotgun_cooldown: Timer = $"Shotgun cooldown"
+@onready var fullauto_cooldown: Timer = $"Fullauto cooldown"
+@onready var fullauto_regain: Timer = $"Fullauto regain"
+@onready var full_charge: GPUParticles2D = $fullCharge
+@onready var switch_speed: Timer = $"Switch Speed"
+@onready var health_bar: TextureProgressBar = $HealthBar
+@onready var player_sprite: Sprite2D = $"Player sprite"
+
+
+
+
+
+
+
+
+func _ready() -> void:
+	await get_tree().create_timer(0.01).timeout
+	Signals.emit_signal("change")
+	full_charge.emitting = false
+
+
+func _physics_process(delta: float) -> void:
+	current = (global_position / screenSize).floor()
+	if not dead:
+		#damage mult for glass cannon
+		PlayerData.mult = 1
+		if PlayerData.playerUpgrades.has(1):
+			PlayerData.mult = 2
+		if PlayerData.playerUpgrades.has(2):
+			PlayerData.mult += abs((health/100) - 1.0)
+		if PlayerData.playerUpgrades.has(3):
+			if health <= PlayerData.maxHealth/2:
+				PlayerData.mult += 0.5
+		#bullet direction
+		dir = (get_global_mouse_position() - global_position).normalized()
+		#cap health
+		if health > PlayerData.maxHealth:
+			health = PlayerData.maxHealth
+		health_bar.value = health
+		if health <= 0:
+			dead = true
+			parryEnergy = 0
+			$Explode1.restart()
+			$Explode2.restart()
+			$"Player sprite".hide()
+		if powerup != 0:
+			if parryEnergy > 100:
+				parryEnergy = 100
+			if parryEnergy == 100:
+				full_charge.emitting = true
+			else:
+				full_charge.emitting = false
+		#movement
+		velocity += Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"), (Input.get_action_strength("down") - Input.get_action_strength("up"))).normalized() * delta * speed
+		velocity *= 0.85
+		#parry code
+		#parry colldown
+		if parryCooled and Input.is_action_just_pressed("parry"):
+			parry = true
+			parry_particles.restart()
+			parry_timer.start()
+			parryCooled = false
+			await get_tree().create_timer(1.2).timeout
+			parryCooled = true
+		#parry parrying
+		if parry:
+			player_sprite.rotate(deg_to_rad(22))
+			for i in parry_hurt_box.get_overlapping_areas():
+				if i.is_in_group("enemyProj"):
+					if i.ifParried == false and i.isParriable:
+						Hitstops.shortHitstop()
+						i.parried()
+						health += 15
+						parryEnergy += 30
+						parryCooled = true
+						ammo = 30
+		else:
+			player_sprite.look_at(get_global_mouse_position())
+			player_sprite.rotation_degrees -= 90
+			
+		#shoot
+		#checks for weapon type to shot correct shot
+		if Input.is_action_pressed("shoot") and ableToShoot:
+			if weapon == 1 and shotCooled:
+				shoot(1, dir.angle())
+				shotCooled = false
+				shot_cooldown.start()
+			if weapon == 2 and shotCooled2:
+				for i in 7:
+					shoot(2, dir.angle() + deg_to_rad(randf_range(-20, 20)))
+				shotCooled2 = false
+				shotgun_cooldown.start()
+			if weapon == 3 and shotCooled3 and ammo > 0:
+				shoot(3, dir.angle() + deg_to_rad(randf_range(-7, 7)))
+				shotCooled3 = false
+				ammo -= 1
+				fullauto_cooldown.start()
+		#supers
+		if powerup == 1:
+			if Input.is_action_just_pressed("alt fire") and parryEnergy >= 100 and weapon != 3:
+				if weapon == 1:
+					Signals.emit_signal("shakeSmall")
+					for i in 18:
+						shoot(1, dir.angle() + deg_to_rad(i * 20))
+				if weapon == 2:
+					tripleShotgun()
+				parryEnergy = 0
+		elif powerup == 2:
+			if Input.is_action_just_pressed("alt fire") and parryEnergy >= 100 and $"beserk duration".time_left <= 0:
+				resist = 0.15
+				speed = 4800
+				parryEnergy = 0
+				damageMult = 2
+				$"beserk duration".start(5 + beserkModifier)
+		#change weapons
+		if Input.is_action_just_pressed("shot"):
+			switch(1)
+		if Input.is_action_just_pressed("shotgun"):
+			switch(2)
+		if Input.is_action_just_pressed("fullAuto"):
+			switch(3)
+		move_and_slide()
+	else:
+		if Input.is_action_just_pressed("restart"):
+			global_position = spawnLocation
+			$"Player sprite".show()
+			health = 100
+			dead = false
+			encounter.y = 0
+			Signals.emit_signal("destroy")
+			Signals.emit_signal("change")
+	
+
+func switch(switchTo):
+	switch_speed.start()
+	ableToShoot = false
+	weapon = switchTo
+	if switchTo == 1:
+		$"Single Switch particle".restart()
+	elif switchTo == 2:
+		$"Shotgun Switch particle".restart()
+	elif switchTo == 3:
+		$"Auto Switch particle3".restart()
+	
+func _on_parry_timer_timeout() -> void:
+	parry = false
+
+func _on_shot_cooldown_timeout() -> void:
+	shotCooled = true
+
+
+func _on_shotgun_cooldown_timeout() -> void:
+	shotCooled2 = true
+
+
+func _on_fullauto_cooldown_timeout() -> void:
+	shotCooled3 = true
+
+
+func _on_fullauto_regain_timeout() -> void:
+	if (Input.is_action_pressed("shoot") == false and weapon == 3 and ammo < 30) or (weapon != 3 and ammo < 30):
+		ammo += 1
+
+func shoot(type, deg):
+	var shot = blast.instantiate()
+	shot.damageMult = damageMult * powerupMult * PlayerData.mult
+	shot.player = $"."
+	shot.type = type
+	shot.rotation = deg
+	shot.global_position = global_position
+	get_tree().get_root().add_child(shot)
+	
+func tripleShotgun():
+	Signals.emit_signal("shakeSmall")
+	for a in 4:
+		for i in 14:
+			shoot(2, dir.angle() + deg_to_rad(randf_range(-40, 40)))
+		await get_tree().create_timer(0.2).timeout
+		Signals.emit_signal("shakeSmall")
+
+func damage(amount):
+	health -= amount * (1 - resist)
+
+
+func _on_beserk_duration_timeout() -> void:
+	resist = 0
+	damageMult = 1
+	speed = 3600
+
+
+func _on_switch_speed_timeout() -> void:
+	ableToShoot = true

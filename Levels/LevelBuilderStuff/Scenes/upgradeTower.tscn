@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtfsaa7v8aerr"]
+
+[ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="1_1x3fr"]
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/upgrade_tower.gd" id="1_felw4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u1iam"]
+size = Vector2(48, 45.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxwbn"]
+size = Vector2(100, 132.5)
+
+[node name="UpgradeTower" type="StaticBody2D"]
+z_index = 2
+position = Vector2(0, 23)
+script = ExtResource("1_felw4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7.62939e-06, -23)
+scale = Vector2(0.40625, 1)
+texture = ExtResource("1_1x3fr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_u1iam")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -23)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 3.25)
+shape = SubResource("RectangleShape2D_lxwbn")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://4p3e8ik3mhq"]
+
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/next_room.gd" id="1_irhqt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtyxr"]
+
+[node name="NextRoom" type="Area2D"]
+script = ExtResource("1_irhqt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jtyxr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

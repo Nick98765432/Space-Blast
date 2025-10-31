@@ -1,0 +1,238 @@
+[gd_scene load_steps=25 format=3 uid="uid://cdaielgc0lshr"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_5eh5h"]
+[ext_resource type="Texture2D" uid="uid://b6i1ul2i3y5u7" path="res://Player/sprites and assets/Space Blast man.png" id="2_srdbb"]
+[ext_resource type="Texture2D" uid="uid://w7y3lpye4yye" path="res://Player/sprites and assets/SingleShot.png" id="3_tg2vb"]
+[ext_resource type="Texture2D" uid="uid://bdwt5dl7fpnfq" path="res://Player/sprites and assets/Shotgun.png" id="4_v3mkj"]
+[ext_resource type="Texture2D" uid="uid://33kgawwdgw5" path="res://Player/sprites and assets/fullAuto.png" id="5_f3aua"]
+[ext_resource type="Texture2D" uid="uid://cl5bttt2lep5d" path="res://Player/sprites and assets/No Life.png" id="6_bq038"]
+[ext_resource type="Texture2D" uid="uid://blgem7rjjvnhc" path="res://Player/sprites and assets/explode.png" id="6_n0myu"]
+[ext_resource type="Texture2D" uid="uid://elo6pwe1k81v" path="res://Player/sprites and assets/Life.png" id="7_thfcu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1nxxf"]
+radius = 10.2956
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_av5x2"]
+radius = 34.0147
+
+[sub_resource type="Curve" id="Curve_3v25s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.393333, 0.989011), 0.0, 0.0, 0, 0, Vector2(0.986667, 0.626374), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6n133"]
+curve = SubResource("Curve_3v25s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iu4af"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 30.0
+emission_ring_radius = 30.0
+emission_ring_inner_radius = 30.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 2.0
+orbit_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.2
+scale_max = 2.2
+scale_curve = SubResource("CurveTexture_6n133")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lkw0e"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 40.0
+emission_ring_radius = 40.0
+emission_ring_inner_radius = 40.0
+spread = 0.0
+orbit_velocity_min = -1.212
+orbit_velocity_max = 1.212
+radial_velocity_min = -100.0
+radial_velocity_max = -100.0
+scale_min = 3.0
+scale_max = 3.0
+
+[sub_resource type="Curve" id="Curve_yq2sb"]
+_data = [Vector2(0.0266667, 1), 0.0, 0.0, 0, 0, Vector2(0.506667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pw55s"]
+curve = SubResource("Curve_yq2sb")
+
+[sub_resource type="Curve" id="Curve_55r3l"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.415493, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rqvid"]
+curve = SubResource("Curve_55r3l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x3qpg"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 1, 0)
+scale_curve = SubResource("CurveTexture_rqvid")
+alpha_curve = SubResource("CurveTexture_pw55s")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xwsg4"]
+particles_animation = true
+particles_anim_h_frames = 12
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_882n6"]
+_data = [Vector2(0.028169, 1), 0.0, 0.0, 0, 0, Vector2(0.535211, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ddejo"]
+curve = SubResource("Curve_882n6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yb35e"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 45.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_ddejo")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oyew1"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 484.85
+initial_velocity_max = 621.21
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 5.0
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+texture_filter = 1
+script = ExtResource("1_5eh5h")
+
+[node name="Wall and evir collisons" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1nxxf")
+
+[node name="ParryHurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParryHurtBox"]
+shape = SubResource("CircleShape2D_av5x2")
+
+[node name="parry particles" type="GPUParticles2D" parent="."]
+self_modulate = Color(0, 0.870588, 1, 1)
+rotation = -0.0114999
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_iu4af")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+trail_enabled = true
+trail_lifetime = 0.05
+
+[node name="fullCharge" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_lkw0e")
+local_coords = true
+
+[node name="Single Switch particle" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_x3qpg")
+texture = ExtResource("3_tg2vb")
+one_shot = true
+
+[node name="Shotgun Switch particle" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_x3qpg")
+texture = ExtResource("4_v3mkj")
+one_shot = true
+
+[node name="Auto Switch particle3" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_x3qpg")
+texture = ExtResource("5_f3aua")
+one_shot = true
+
+[node name="Player sprite" type="Sprite2D" parent="."]
+modulate = Color(1.1, 1, 1, 1)
+rotation = -1.5708
+texture = ExtResource("2_srdbb")
+
+[node name="Explode1" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_xwsg4")
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_yb35e")
+texture = ExtResource("6_n0myu")
+one_shot = true
+explosiveness = 1.0
+
+[node name="Explode2" type="GPUParticles2D" parent="."]
+self_modulate = Color(0, 0.792157, 1, 1)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_oyew1")
+one_shot = true
+explosiveness = 1.0
+
+[node name="parry timer" type="Timer" parent="."]
+wait_time = 0.36
+one_shot = true
+
+[node name="Shot cooldown" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="Shotgun cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Fullauto cooldown" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="Fullauto regain" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="beserk duration" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Switch Speed" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="outline" type="Sprite2D" parent="."]
+position = Vector2(2, -31)
+texture = ExtResource("6_bq038")
+
+[node name="outline2" type="Sprite2D" parent="."]
+position = Vector2(0, -31)
+texture = ExtResource("6_bq038")
+
+[node name="outline3" type="Sprite2D" parent="."]
+position = Vector2(2, -29)
+texture = ExtResource("6_bq038")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = -24.0
+offset_top = -45.0
+offset_right = 24.0
+offset_bottom = -13.0
+value = 100.0
+texture_under = ExtResource("6_bq038")
+texture_progress = ExtResource("7_thfcu")
+texture_progress_offset = Vector2(1, -1)
+
+[connection signal="timeout" from="parry timer" to="." method="_on_parry_timer_timeout"]
+[connection signal="timeout" from="Shot cooldown" to="." method="_on_shot_cooldown_timeout"]
+[connection signal="timeout" from="Shotgun cooldown" to="." method="_on_shotgun_cooldown_timeout"]
+[connection signal="timeout" from="Fullauto cooldown" to="." method="_on_fullauto_cooldown_timeout"]
+[connection signal="timeout" from="Fullauto regain" to="." method="_on_fullauto_regain_timeout"]
+[connection signal="timeout" from="beserk duration" to="." method="_on_beserk_duration_timeout"]
+[connection signal="timeout" from="Switch Speed" to="." method="_on_switch_speed_timeout"]

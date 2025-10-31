@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://csiqn5fgo30nh"]
+
+[ext_resource type="Script" path="res://Enemies/melee_enemy.gd" id="1_dl4my"]
+[ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="1_s3pay"]
+[ext_resource type="Texture2D" uid="uid://b3ct4sarc83iu" path="res://Enemies/attacks/Sprites and assets/parriable.png" id="3_ia5un"]
+[ext_resource type="Script" path="res://Enemies/health.gd" id="4_en03p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_68ks7"]
+radius = 56.5454
+
+[sub_resource type="Curve" id="Curve_ggh7k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.288732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_u05p3"]
+curve = SubResource("Curve_ggh7k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4e3eb"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(10, -3, 0)
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_u05p3")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_78sho"]
+radius = 19.0
+
+[node name="MeleeEnemy" type="CharacterBody2D" groups=["enemies"]]
+texture_filter = 1
+collision_layer = 0
+collision_mask = 2
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_dl4my")
+
+[node name="enemySprite" type="Sprite2D" parent="."]
+scale = Vector2(0.21875, 0.21875)
+texture = ExtResource("1_s3pay")
+
+[node name="wall collisions" type="CollisionShape2D" parent="."]
+scale = Vector2(0.21875, 0.21875)
+shape = SubResource("CircleShape2D_68ks7")
+
+[node name="pathfinding" type="NavigationAgent2D" parent="."]
+
+[node name="parryTele" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_4e3eb")
+texture = ExtResource("3_ia5un")
+lifetime = 0.2
+one_shot = true
+
+[node name="lineOfSight" type="RayCast2D" parent="."]
+
+[node name="sightTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="attackTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_78sho")
+
+[node name="healthHandler" type="Node2D" parent="."]
+script = ExtResource("4_en03p")
+health = 2.0
+
+[connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]
+[connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

@@ -1,0 +1,279 @@
+[gd_scene load_steps=27 format=3 uid="uid://dxh3f8dmbtts7"]
+
+[ext_resource type="Script" path="res://Enemies/gun_man.gd" id="1_jniij"]
+[ext_resource type="Texture2D" uid="uid://nvxfte3traah" path="res://Enemies/Sprites and Assets/evil Space Blast man.png" id="2_xjowx"]
+[ext_resource type="Texture2D" uid="uid://b3ct4sarc83iu" path="res://Enemies/attacks/Sprites and assets/parriable.png" id="3_634cj"]
+[ext_resource type="Script" path="res://Enemies/line_of_sight.gd" id="3_fs2v0"]
+[ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_prswo"]
+[ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="5_45j5v"]
+[ext_resource type="Script" path="res://Enemies/health.gd" id="5_465hg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tt43m"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1hlno"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 40.0
+emission_ring_radius = 40.0
+emission_ring_inner_radius = 40.0
+spread = 0.0
+orbit_velocity_min = -1.212
+orbit_velocity_max = 1.212
+radial_velocity_min = -100.0
+radial_velocity_max = -100.0
+scale_min = 3.0
+scale_max = 3.0
+
+[sub_resource type="Curve" id="Curve_16nmr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.288732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rqpqc"]
+curve = SubResource("Curve_16nmr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ytuoc"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(10, -3, 0)
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_rqpqc")
+
+[sub_resource type="Curve" id="Curve_m6uir"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.288732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_veuqq"]
+curve = SubResource("Curve_m6uir")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1idl0"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(10, -3, 0)
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_veuqq")
+
+[sub_resource type="Curve" id="Curve_ibebj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g4c20"]
+curve = SubResource("Curve_ibebj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13pdn"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 100.0
+scale_max = 100.0
+scale_curve = SubResource("CurveTexture_g4c20")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ga6su"]
+particles_animation = true
+particles_anim_h_frames = 12
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_pevlc"]
+_data = [Vector2(0.028169, 1), 0.0, 0.0, 0, 0, Vector2(0.535211, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qje1b"]
+curve = SubResource("Curve_pevlc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fovjo"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 45.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_qje1b")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4m4bo"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 484.85
+initial_velocity_max = 621.21
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 5.0
+
+[sub_resource type="Shader" id="Shader_n1ync"]
+code = "shader_type canvas_item;
+uniform vec4 flashColour = vec4(1.0);
+uniform float mixAmount = 0.9;
+void fragment() {
+	vec4 colour = texture(TEXTURE, UV);
+	colour.rgb = mix(colour.rgb,flashColour.rgb,mixAmount);
+	COLOR = colour;
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5j6hf"]
+resource_local_to_scene = true
+shader = SubResource("Shader_n1ync")
+shader_parameter/flashColour = Vector4(1, 1, 1, 1)
+shader_parameter/mixAmount = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uo43w"]
+radius = 19.0
+
+[node name="GunMan" type="CharacterBody2D" groups=["enemies"]]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 6
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_jniij")
+
+[node name="wall collisions" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tt43m")
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="lineOfSight" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight2" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight3" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight4" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight5" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight6" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight7" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight8" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight9" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight10" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight11" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight12" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight13" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight14" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight15" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="lineOfSight16" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("3_fs2v0")
+
+[node name="pathfinding" type="NavigationAgent2D" parent="."]
+
+[node name="fullCharge" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_1hlno")
+local_coords = true
+
+[node name="parryTele" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_ytuoc")
+texture = ExtResource("3_634cj")
+lifetime = 0.2
+one_shot = true
+
+[node name="unparryTele" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_1idl0")
+texture = ExtResource("5_45j5v")
+lifetime = 0.2
+one_shot = true
+
+[node name="spawnPart" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_13pdn")
+lifetime = 0.5
+one_shot = true
+
+[node name="Explode1" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_ga6su")
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_fovjo")
+texture = ExtResource("4_prswo")
+one_shot = true
+explosiveness = 1.0
+
+[node name="Explode2" type="GPUParticles2D" parent="."]
+self_modulate = Color(1, 0.760784, 0, 1)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_4m4bo")
+one_shot = true
+explosiveness = 1.0
+
+[node name="enemySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5j6hf")
+texture = ExtResource("2_xjowx")
+
+[node name="sightTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="dirTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="shotCool" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_uo43w")
+
+[node name="healthHandler" type="Node2D" parent="."]
+script = ExtResource("5_465hg")
+health = 80.0
+
+[connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]
+[connection signal="timeout" from="dirTimer" to="." method="_on_dir_timer_timeout"]
+[connection signal="timeout" from="shotCool" to="." method="_on_shot_cool_timeout"]

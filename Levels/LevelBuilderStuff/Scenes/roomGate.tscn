@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsyhccs874dfd"]
+
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/room_gate.gd" id="1_hbb1x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awy3o"]
+
+[node name="RoomGate" type="StaticBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_hbb1x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_awy3o")

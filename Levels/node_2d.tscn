@@ -1,0 +1,341 @@
+[gd_scene load_steps=14 format=4 uid="uid://brty50fkbop4r"]
+
+[ext_resource type="PackedScene" uid="uid://cqwptbkpsicpn" path="res://UI/Upgrades.tscn" id="1_icrtm"]
+[ext_resource type="PackedScene" uid="uid://cdaielgc0lshr" path="res://Player/player.tscn" id="1_re1we"]
+[ext_resource type="Texture2D" uid="uid://484mit73nl15" path="res://Levels/Sprites and Assets/tile placeholder.png" id="2_gxhbb"]
+[ext_resource type="PackedScene" uid="uid://bnhvdwpsykjnm" path="res://Levels/LevelBuilderStuff/Scenes/Spawner.tscn" id="5_mnti6"]
+[ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/roomGate.tscn" id="6_58jge"]
+[ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/nextRoom.tscn" id="7_rod3q"]
+[ext_resource type="Script" path="res://Levels/camera_2d.gd" id="8_lqixe"]
+[ext_resource type="PackedScene" uid="uid://dtfsaa7v8aerr" path="res://Levels/LevelBuilderStuff/Scenes/upgradeTower.tscn" id="9_busbi"]
+[ext_resource type="PackedScene" uid="uid://hx5hf1kujilx" path="res://Levels/LevelBuilderStuff/Scenes/nextEncounter.tscn" id="10_mkktg"]
+[ext_resource type="Texture2D" uid="uid://g1xvkre0j6i5" path="res://Levels/Sprites and Assets/space.png" id="10_w2tp5"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_3rxq0"]
+vertices = PackedVector2Array(25, 25, -25, 25, -25, -25, 25, -25)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aghpw"]
+texture = ExtResource("2_gxhbb")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
+1:0/0 = 0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3rxq0")
+
+[sub_resource type="TileSet" id="TileSet_vgxan"]
+tile_size = Vector2i(50, 50)
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_aghpw")
+
+[node name="Test" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Bg" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 180)
+texture = ExtResource("10_w2tp5")
+
+[node name="Upgrades" parent="." instance=ExtResource("1_icrtm")]
+
+[node name="level" type="TileMapLayer" parent="."]
+z_index = -1
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAABAAAAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAABAAAAAAABAAUAAAABAAAAAAABAAYAAAAAAAAAAAABAAcAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAABAAAAAAACAAMAAAABAAAAAAACAAQAAAABAAAAAAACAAUAAAABAAAAAAACAAYAAAAAAAAAAAACAAcAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAABAAAAAAADAAIAAAABAAAAAAADAAMAAAABAAAAAAADAAQAAAAAAAAAAAADAAUAAAABAAAAAAADAAYAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAEAAUAAAABAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAABAAAAAAAFAAIAAAABAAAAAAAFAAMAAAABAAAAAAAFAAQAAAABAAAAAAAFAAUAAAABAAAAAAAFAAYAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAABAAAAAAAGAAIAAAABAAAAAAAGAAMAAAABAAAAAAAGAAQAAAABAAAAAAAGAAUAAAABAAAAAAAGAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAMAAAABAAAAAAAHAAQAAAABAAAAAAAHAAUAAAABAAAAAAAHAAYAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAABAAAAAAAIAAIAAAABAAAAAAAIAAMAAAABAAAAAAAIAAQAAAABAAAAAAAIAAUAAAABAAAAAAAIAAYAAAAAAAAAAAAIAAcAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAABAAAAAAAJAAIAAAABAAAAAAAJAAMAAAABAAAAAAAJAAQAAAABAAAAAAAJAAUAAAABAAAAAAAJAAYAAAAAAAAAAAAJAAcAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAABAAAAAAAKAAQAAAABAAAAAAAKAAUAAAABAAAAAAAKAAYAAAAAAAAAAAAKAAcAAAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAABAAAAAAALAAIAAAABAAAAAAALAAMAAAABAAAAAAALAAQAAAABAAAAAAALAAUAAAABAAAAAAALAAYAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAAAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAcAAAAAAAAAAAD//wcAAAAAAAAAAAD//wYAAAAAAAAAAAD//wUAAAAAAAAAAAD//wQAAAAAAAAAAAD//wMAAAAAAAAAAAD//wIAAAAAAAAAAAD//wEAAAAAAAAAAAD//wAAAAAAAAAAAAAMAAEAAAABAAAAAAAMAAIAAAABAAAAAAAMAAMAAAABAAAAAAAMAAQAAAABAAAAAAANAAAAAAAAAAAAAAANAAEAAAABAAAAAAANAAIAAAABAAAAAAANAAMAAAABAAAAAAANAAQAAAABAAAAAAANAAUAAAABAAAAAAANAAYAAAAAAAAAAAANAAcAAAAAAAAAAAAOAAAAAAAAAAAAAAAOAAEAAAABAAAAAAAOAAIAAAABAAAAAAAOAAMAAAABAAAAAAAOAAQAAAABAAAAAAAOAAUAAAABAAAAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAAAAAAPAAAAAAAAAAAAAAAPAAEAAAABAAAAAAAPAAIAAAABAAAAAAAPAAMAAAABAAAAAAAPAAQAAAABAAAAAAAPAAUAAAABAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAEAAAABAAAAAAAQAAIAAAABAAAAAAAQAAMAAAABAAAAAAAQAAQAAAABAAAAAAAQAAUAAAABAAAAAAAQAAYAAAAAAAAAAAAQAAcAAAAAAAAAAAARAAAAAAAAAAAAAAARAAEAAAABAAAAAAARAAIAAAABAAAAAAARAAMAAAABAAAAAAARAAQAAAABAAAAAAARAAUAAAABAAAAAAARAAYAAAAAAAAAAAARAAcAAAAAAAAAAAASAAAAAAAAAAAAAAASAAEAAAABAAAAAAASAAIAAAABAAAAAAASAAMAAAABAAAAAAASAAQAAAABAAAAAAASAAUAAAABAAAAAAASAAYAAAAAAAAAAAASAAcAAAAAAAAAAAATAAAAAAAAAAAAAAATAAEAAAABAAAAAAATAAIAAAABAAAAAAATAAMAAAABAAAAAAATAAQAAAAAAAAAAAATAAUAAAABAAAAAAATAAYAAAAAAAAAAAATAAcAAAAAAAAAAAAUAAAAAAAAAAAAAAAUAAEAAAABAAAAAAAUAAIAAAABAAAAAAAUAAMAAAABAAAAAAAUAAQAAAAAAAAAAAAUAAUAAAABAAAAAAAUAAYAAAAAAAAAAAAUAAcAAAAAAAAAAAAVAAAAAAAAAAAAAAAVAAEAAAAAAAAAAAAVAAIAAAAAAAAAAAAVAAMAAAABAAAAAAAVAAQAAAABAAAAAAAVAAUAAAABAAAAAAAVAAYAAAAAAAAAAAAVAAcAAAAAAAAAAAAWAAEAAAABAAAAAAAWAAIAAAABAAAAAAAWAAMAAAABAAAAAAAWAAQAAAABAAAAAAAWAAUAAAABAAAAAAAWAAYAAAAAAAAAAAAWAAcAAAAAAAAAAAAXAAEAAAABAAAAAAAXAAIAAAABAAAAAAAXAAMAAAABAAAAAAAXAAQAAAABAAAAAAAXAAUAAAABAAAAAAAXAAYAAAAAAAAAAAAXAAcAAAAAAAAAAAAYAAYAAAAAAAAAAAAYAAcAAAAAAAAAAAAZAAAAAAAAAAAAAAAZAAEAAAAAAAAAAAAZAAIAAAAAAAAAAAAZAAMAAAAAAAAAAAAZAAQAAAAAAAAAAAAZAAUAAAAAAAAAAAAZAAYAAAAAAAAAAAAZAAcAAAAAAAAAAAAYAAUAAAABAAAAAAAYAAQAAAABAAAAAAAYAAMAAAABAAAAAAAYAAIAAAABAAAAAAAYAAEAAAABAAAAAAD4/wMAAAABAAAAAAD4/wQAAAABAAAAAAD4/wUAAAABAAAAAAD4/wYAAAABAAAAAAD5/wQAAAABAAAAAAD6/wQAAAABAAAAAAD7/wQAAAABAAAAAAD7/wUAAAABAAAAAAD8/wUAAAABAAAAAAD9/wUAAAABAAAAAAD9/wQAAAABAAAAAAD+/wQAAAABAAAAAAD8/wQAAAABAAAAAAD+/wUAAAABAAAAAAD+/wYAAAABAAAAAAD+/wcAAAAAAAAAAAD9/wcAAAAAAAAAAAD8/wcAAAAAAAAAAAD7/wcAAAAAAAAAAAD6/wcAAAAAAAAAAAD5/wcAAAAAAAAAAAD4/wcAAAAAAAAAAAD3/wcAAAAAAAAAAAD2/wcAAAAAAAAAAAD2/wYAAAABAAAAAAD1/wYAAAABAAAAAAD0/wYAAAABAAAAAAD0/wUAAAABAAAAAAD0/wQAAAABAAAAAAD0/wMAAAABAAAAAAD0/wIAAAABAAAAAAD1/wIAAAABAAAAAAD1/wEAAAABAAAAAAD1/wMAAAABAAAAAAD2/wEAAAABAAAAAAD2/wIAAAABAAAAAAD2/wMAAAABAAAAAAD2/wQAAAABAAAAAAD1/wQAAAABAAAAAAD1/wUAAAABAAAAAAD2/wUAAAABAAAAAAD3/wUAAAABAAAAAAD3/wQAAAABAAAAAAD3/wYAAAABAAAAAAD5/wYAAAABAAAAAAD5/wUAAAABAAAAAAD6/wUAAAABAAAAAAD7/wYAAAABAAAAAAD6/wYAAAABAAAAAAD8/wYAAAABAAAAAAD9/wYAAAABAAAAAAANAP//AAAAAAAAAAANAP7/AAAAAAAAAAANAP3/AAAAAAAAAAANAPz/AAAAAAAAAAANAPv/AAAAAAAAAAANAPr/AAAAAAAAAAANAPn/AAAAAAAAAAAOAPn/AAAAAAAAAAAPAPn/AAAAAAAAAAAQAPn/AAAAAAAAAAARAPn/AAAAAAAAAAASAPn/AAAAAAAAAAATAPn/AAAAAAAAAAAZAP//AAAAAAAAAAAZAP7/AAAAAAAAAAAZAP3/AAAAAAAAAAAZAPz/AAAAAAAAAAAZAPv/AAAAAAAAAAAZAPr/AAAAAAAAAAAZAPn/AAAAAAAAAAAYAPn/AAAAAAAAAAAXAPn/AAAAAAAAAAAWAPn/AAAAAAAAAAAVAPn/AAAAAAAAAAAUAPn/AAAAAAAAAAAOAPr/AAABAAAAAAAOAPv/AAABAAAAAAAOAPz/AAABAAAAAAAOAP3/AAABAAAAAAAOAP7/AAABAAAAAAAOAP//AAABAAAAAAAPAPr/AAABAAAAAAAPAPv/AAABAAAAAAAPAPz/AAABAAAAAAAPAP3/AAABAAAAAAAPAP7/AAABAAAAAAAPAP//AAABAAAAAAAQAPr/AAABAAAAAAAQAPv/AAABAAAAAAAQAPz/AAABAAAAAAAQAP3/AAABAAAAAAAQAP7/AAABAAAAAAAQAP//AAABAAAAAAARAPr/AAABAAAAAAARAPv/AAABAAAAAAARAPz/AAABAAAAAAARAP3/AAABAAAAAAARAP7/AAABAAAAAAARAP//AAABAAAAAAASAPr/AAABAAAAAAASAPv/AAABAAAAAAASAPz/AAABAAAAAAASAP3/AAABAAAAAAASAP7/AAABAAAAAAASAP//AAABAAAAAAATAPr/AAABAAAAAAATAPv/AAABAAAAAAATAPz/AAABAAAAAAATAP3/AAABAAAAAAATAP7/AAABAAAAAAATAP//AAABAAAAAAAUAPr/AAABAAAAAAAUAPv/AAABAAAAAAAUAPz/AAABAAAAAAAUAP3/AAABAAAAAAAUAP7/AAABAAAAAAAUAP//AAABAAAAAAAVAPr/AAABAAAAAAAVAPv/AAABAAAAAAAVAPz/AAABAAAAAAAVAP3/AAABAAAAAAAVAP7/AAABAAAAAAAVAP//AAABAAAAAAAWAPr/AAABAAAAAAAWAPv/AAABAAAAAAAWAPz/AAABAAAAAAAWAP3/AAABAAAAAAAWAP7/AAABAAAAAAAWAP//AAABAAAAAAAXAPr/AAABAAAAAAAXAPv/AAABAAAAAAAXAPz/AAABAAAAAAAXAP3/AAABAAAAAAAXAP7/AAABAAAAAAAXAP//AAABAAAAAAAYAPr/AAABAAAAAAAYAPv/AAABAAAAAAAYAPz/AAABAAAAAAAYAP3/AAABAAAAAAAYAP7/AAABAAAAAAAYAP//AAABAAAAAAAWAAAAAAABAAAAAAAXAAAAAAABAAAAAAAYAAAAAAABAAAAAAD+/wAAAAAAAAAAAAD9/wAAAAAAAAAAAAD8/wAAAAAAAAAAAAD7/wAAAAAAAAAAAAD6/wAAAAAAAAAAAAD5/wAAAAAAAAAAAAD4/wAAAAAAAAAAAAD3/wAAAAAAAAAAAAD2/wAAAAAAAAAAAAD1/wAAAAAAAAAAAAD0/wAAAAAAAAAAAADz/wAAAAAAAAAAAADy/wAAAAAAAAAAAADx/wAAAAAAAAAAAADx/wEAAAAAAAAAAADx/wIAAAAAAAAAAADx/wMAAAAAAAAAAADx/wQAAAAAAAAAAADx/wUAAAAAAAAAAADx/wYAAAAAAAAAAADx/wcAAAAAAAAAAADy/wcAAAAAAAAAAADz/wcAAAAAAAAAAAD0/wcAAAAAAAAAAAD1/wcAAAAAAAAAAADy/wEAAAAAAAAAAADy/wIAAAAAAAAAAADy/wMAAAAAAAAAAADy/wQAAAAAAAAAAADy/wUAAAAAAAAAAADy/wYAAAAAAAAAAADz/wEAAAAAAAAAAADz/wIAAAAAAAAAAADz/wMAAAAAAAAAAADz/wQAAAAAAAAAAADz/wUAAAAAAAAAAADz/wYAAAAAAAAAAAD0/wEAAAABAAAAAAD3/wEAAAABAAAAAAD3/wIAAAABAAAAAAD3/wMAAAABAAAAAAD4/wEAAAABAAAAAAD4/wIAAAABAAAAAAD5/wEAAAABAAAAAAD5/wIAAAABAAAAAAD5/wMAAAABAAAAAAD6/wEAAAABAAAAAAD6/wIAAAABAAAAAAD6/wMAAAABAAAAAAD7/wEAAAABAAAAAAD7/wIAAAABAAAAAAD7/wMAAAABAAAAAAD8/wEAAAABAAAAAAD8/wIAAAABAAAAAAD8/wMAAAABAAAAAAD9/wEAAAABAAAAAAD9/wIAAAABAAAAAAD9/wMAAAABAAAAAAD+/wEAAAABAAAAAAD+/wIAAAABAAAAAAD+/wMAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_vgxan")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(320, 180)
+position_smoothing_enabled = true
+script = ExtResource("8_lqixe")
+player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("1_re1we")]
+position = Vector2(-467, 223)
+
+[node name="Spawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(106, 144)
+type = 1
+encounter = Vector2i(0, 1)
+player = NodePath("../Player")
+
+[node name="Spawner22" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(1161, -124)
+type = 6
+encounter = Vector2i(2, 1)
+player = NodePath("../Player")
+
+[node name="Spawner23" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(782, -125)
+type = 6
+encounter = Vector2i(2, 1)
+player = NodePath("../Player")
+
+[node name="Spawner24" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(797, -226)
+type = 4
+encounter = Vector2i(2, 2)
+player = NodePath("../Player")
+
+[node name="Spawner27" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(848, -77)
+type = 3
+encounter = Vector2i(2, 3)
+player = NodePath("../Player")
+
+[node name="Spawner28" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(1083, -197)
+type = 3
+encounter = Vector2i(2, 3)
+player = NodePath("../Player")
+
+[node name="Spawner29" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(1207, -55)
+type = 8
+encounter = Vector2i(2, 3)
+player = NodePath("../Player")
+
+[node name="Spawner30" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(744, -259)
+type = 8
+encounter = Vector2i(2, 3)
+player = NodePath("../Player")
+
+[node name="Spawner31" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(1203, -251)
+type = 8
+encounter = Vector2i(2, 4)
+player = NodePath("../Player")
+
+[node name="Spawner36" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(1205, 71)
+type = 8
+encounter = Vector2i(1, 4)
+player = NodePath("../Player")
+
+[node name="Spawner38" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(719, 183)
+type = 8
+encounter = Vector2i(1, 4)
+player = NodePath("../Player")
+
+[node name="Spawner37" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(1139, 69)
+type = 8
+encounter = Vector2i(1, 4)
+player = NodePath("../Player")
+
+[node name="Spawner39" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(985, 269)
+type = 4
+encounter = Vector2i(1, 4)
+player = NodePath("../Player")
+
+[node name="Spawner40" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(954, 77)
+type = 4
+encounter = Vector2i(1, 4)
+player = NodePath("../Player")
+
+[node name="Spawner33" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(945, -57)
+type = 5
+encounter = Vector2i(2, 4)
+player = NodePath("../Player")
+
+[node name="Spawner35" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(1054, -121)
+type = 4
+encounter = Vector2i(2, 4)
+player = NodePath("../Player")
+
+[node name="Spawner34" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(908, -261)
+type = 5
+encounter = Vector2i(2, 4)
+player = NodePath("../Player")
+
+[node name="Spawner32" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(754, -41)
+type = 8
+encounter = Vector2i(2, 4)
+player = NodePath("../Player")
+
+[node name="Spawner25" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(1139, -56)
+type = 4
+encounter = Vector2i(2, 2)
+player = NodePath("../Player")
+
+[node name="Spawner26" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(968, -171)
+type = 9
+encounter = Vector2i(2, 5)
+player = NodePath("../Player")
+
+[node name="Spawner2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(497, 262)
+type = 2
+encounter = Vector2i(0, 1)
+player = NodePath("../Player")
+
+[node name="Spawner3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(323, 77)
+type = 1
+encounter = Vector2i(0, 1)
+player = NodePath("../Player")
+
+[node name="Spawner4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(412, 208)
+type = 1
+player = NodePath("../Player")
+
+[node name="Spawner5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(475, 174)
+type = 2
+player = NodePath("../Player")
+
+[node name="RoomGate" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_58jge")]
+position = Vector2(637, 162)
+scale = Vector2(1, 16.2535)
+player = NodePath("../Player")
+disappearCondition = Vector2i(0, 4)
+appearCondition = Vector2i(1, 0)
+
+[node name="NextRoom" parent="." instance=ExtResource("7_rod3q")]
+position = Vector2(673, 165)
+scale = Vector2(1.90512, 13.468)
+
+[node name="Spawner6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(772, 66)
+type = 2
+encounter = Vector2i(1, 1)
+player = NodePath("../Player")
+
+[node name="Spawner7" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(861, 216)
+type = 1
+encounter = Vector2i(1, 1)
+player = NodePath("../Player")
+
+[node name="Spawner8" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(980, 111)
+type = 2
+encounter = Vector2i(1, 1)
+player = NodePath("../Player")
+
+[node name="UpgradeTower2" parent="." node_paths=PackedStringArray("player", "ui") instance=ExtResource("9_busbi")]
+position = Vector2(1194, 245)
+player = NodePath("../Player")
+ui = NodePath("../Upgrades")
+
+[node name="UpgradeTower3" parent="." node_paths=PackedStringArray("player", "ui") instance=ExtResource("9_busbi")]
+position = Vector2(100, 249)
+player = NodePath("../Player")
+ui = NodePath("../Upgrades")
+
+[node name="Spawner9" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(751, 228)
+type = 3
+encounter = Vector2i(1, 2)
+player = NodePath("../Player")
+
+[node name="Spawner10" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(898, 108)
+type = 3
+encounter = Vector2i(1, 2)
+player = NodePath("../Player")
+
+[node name="Spawner11" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(1096, 259)
+type = 3
+encounter = Vector2i(1, 2)
+player = NodePath("../Player")
+
+[node name="NextEncounter" parent="." instance=ExtResource("10_mkktg")]
+position = Vector2(887, 172)
+scale = Vector2(2.21961, 13.2979)
+collision_layer = 3
+collision_mask = 3
+returnCond = Vector2i(1, 0)
+
+[node name="Spawner12" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(258, 240)
+type = 5
+encounter = Vector2i(0, 2)
+player = NodePath("../Player")
+
+[node name="Spawner13" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(449, 102)
+type = 5
+encounter = Vector2i(0, 2)
+player = NodePath("../Player")
+
+[node name="Spawner19" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(549, 183)
+type = 5
+encounter = Vector2i(0, 3)
+player = NodePath("../Player")
+
+[node name="Spawner20" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(178, 172)
+type = 4
+encounter = Vector2i(0, 3)
+player = NodePath("../Player")
+
+[node name="Spawner14" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(214, 91)
+type = 5
+encounter = Vector2i(0, 2)
+player = NodePath("../Player")
+
+[node name="Spawner15" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(1090, 184)
+type = 3
+encounter = Vector2i(1, 3)
+player = NodePath("../Player")
+
+[node name="Spawner17" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(925, 266)
+type = 3
+encounter = Vector2i(1, 3)
+player = NodePath("../Player")
+
+[node name="Spawner16" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(760, 171)
+type = 5
+encounter = Vector2i(1, 3)
+player = NodePath("../Player")
+
+[node name="Spawner18" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(843, 93)
+type = 1
+encounter = Vector2i(1, 3)
+player = NodePath("../Player")
+
+[node name="RoomGate2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_58jge")]
+position = Vector2(1183, 14)
+scale = Vector2(9.12, 1)
+player = NodePath("../Player")
+disappearCondition = Vector2i(1, 5)
+appearCondition = Vector2i(2, 0)
+
+[node name="NextRoom2" parent="." instance=ExtResource("7_rod3q")]
+position = Vector2(1139, -12)
+scale = Vector2(16.68, 1)
+
+[node name="Spawner21" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(980, -246)
+isBoss = true
+type = 6
+encounter = Vector2i(2, 0)
+player = NodePath("../Player")
+
+[node name="Spawner42" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(-298, 295)
+type = 9
+player = NodePath("../Player")

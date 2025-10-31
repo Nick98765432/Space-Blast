@@ -1,0 +1,180 @@
+[gd_scene load_steps=21 format=3 uid="uid://m4g8koqlkrj6"]
+
+[ext_resource type="Script" path="res://Enemies/sentry_man.gd" id="1_k6fq7"]
+[ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="2_6coo5"]
+[ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="3_h00wr"]
+[ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_3k4vw"]
+[ext_resource type="Script" path="res://Enemies/health.gd" id="4_w3idl"]
+
+[sub_resource type="Shader" id="Shader_ufhk7"]
+code = "shader_type canvas_item;
+uniform vec4 flashColour = vec4(1.0);
+uniform float mixAmount = 0.9;
+void fragment() {
+	vec4 colour = texture(TEXTURE, UV);
+	colour.rgb = mix(colour.rgb,flashColour.rgb,mixAmount);
+	COLOR = colour;
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vmacq"]
+resource_local_to_scene = true
+shader = SubResource("Shader_ufhk7")
+shader_parameter/flashColour = Vector4(1, 1, 1, 1)
+shader_parameter/mixAmount = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y7wkp"]
+
+[sub_resource type="Curve" id="Curve_haouu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.288732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wgqx0"]
+curve = SubResource("Curve_haouu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0txfl"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(10, -3, 0)
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_wgqx0")
+
+[sub_resource type="Curve" id="Curve_kxb01"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ow8k0"]
+curve = SubResource("Curve_kxb01")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k8cve"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 100.0
+scale_max = 100.0
+scale_curve = SubResource("CurveTexture_ow8k0")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jqfqt"]
+particles_animation = true
+particles_anim_h_frames = 12
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_oa7j4"]
+_data = [Vector2(0.028169, 1), 0.0, 0.0, 0, 0, Vector2(0.535211, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_grgwl"]
+curve = SubResource("Curve_oa7j4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lwsei"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 45.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_grgwl")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ubtk3"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 484.85
+initial_velocity_max = 621.21
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nnoyq"]
+radius = 19.0
+
+[node name="SentryMan" type="CharacterBody2D" groups=["enemies"]]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 6
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_k6fq7")
+
+[node name="enemySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vmacq")
+scale = Vector2(0.171875, 0.203125)
+texture = ExtResource("2_6coo5")
+
+[node name="wall collisions" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y7wkp")
+
+[node name="pathfinding" type="NavigationAgent2D" parent="."]
+
+[node name="lineOfSight" type="RayCast2D" parent="."]
+
+[node name="parryTele" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_0txfl")
+texture = ExtResource("3_h00wr")
+lifetime = 0.2
+one_shot = true
+
+[node name="spawnPart" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_k8cve")
+lifetime = 0.5
+one_shot = true
+
+[node name="Explode1" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_jqfqt")
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_lwsei")
+texture = ExtResource("4_3k4vw")
+one_shot = true
+explosiveness = 1.0
+
+[node name="Explode2" type="GPUParticles2D" parent="."]
+self_modulate = Color(1, 0.760784, 0, 1)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_ubtk3")
+one_shot = true
+explosiveness = 1.0
+
+[node name="sightTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="dirTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="stateChange" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="shotCool" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="fireRate" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_nnoyq")
+
+[node name="healthHandler" type="Node2D" parent="."]
+script = ExtResource("4_w3idl")
+health = 3.5
+
+[connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]
+[connection signal="timeout" from="dirTimer" to="." method="_on_dir_timer_timeout"]
+[connection signal="timeout" from="stateChange" to="." method="_on_state_change_timeout"]
+[connection signal="timeout" from="shotCool" to="." method="_on_shot_cool_timeout"]
+[connection signal="timeout" from="fireRate" to="." method="_on_fire_rate_timeout"]

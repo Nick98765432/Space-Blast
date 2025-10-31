@@ -1,0 +1,211 @@
+[gd_scene load_steps=26 format=3 uid="uid://g1dyev87yne4"]
+
+[ext_resource type="Script" path="res://Enemies/fire_guy.gd" id="1_8644g"]
+[ext_resource type="Texture2D" uid="uid://bwmlbjctdxtoh" path="res://Enemies/Sprites and Assets/fire guy.png" id="2_xmcw8"]
+[ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="3_bipsx"]
+[ext_resource type="Script" path="res://Enemies/health.gd" id="4_as0db"]
+[ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_yemlu"]
+
+[sub_resource type="Shader" id="Shader_2i8ea"]
+code = "shader_type canvas_item;
+uniform vec4 flashColour = vec4(1.0);
+uniform float mixAmount = 0.9;
+void fragment() {
+	vec4 colour = texture(TEXTURE, UV);
+	colour.rgb = mix(colour.rgb,flashColour.rgb,mixAmount);
+	COLOR = colour;
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6qga"]
+resource_local_to_scene = true
+shader = SubResource("Shader_2i8ea")
+shader_parameter/flashColour = Vector4(1, 1, 1, 1)
+shader_parameter/mixAmount = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_twa16"]
+radius = 56.5454
+
+[sub_resource type="Curve" id="Curve_kyvag"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.288732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_u05p3"]
+curve = SubResource("Curve_kyvag")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_68vs0"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(10, -3, 0)
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_u05p3")
+
+[sub_resource type="Curve" id="Curve_e8uol"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_b8td2"]
+curve = SubResource("Curve_e8uol")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yf18r"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 100.0
+scale_max = 100.0
+scale_curve = SubResource("CurveTexture_b8td2")
+
+[sub_resource type="Curve" id="Curve_itmx4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.514084, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1vmkl"]
+curve = SubResource("Curve_itmx4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_acpmr"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(24, 0, 0)
+spread = 70.562
+initial_velocity_min = 200.0
+initial_velocity_max = 240.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_1vmkl")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qmv7j"]
+particles_animation = true
+particles_anim_h_frames = 12
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_mfdus"]
+_data = [Vector2(0.028169, 1), 0.0, 0.0, 0, 0, Vector2(0.535211, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_j5tb8"]
+curve = SubResource("Curve_mfdus")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5ki70"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 45.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_j5tb8")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_erei2"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 484.85
+initial_velocity_max = 621.21
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pt3d8"]
+radius = 19.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vl4tn"]
+size = Vector2(39, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8shb1"]
+size = Vector2(81, 20)
+
+[node name="FireGuy" type="CharacterBody2D" groups=["enemies"]]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 6
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_8644g")
+
+[node name="enemySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_k6qga")
+texture = ExtResource("2_xmcw8")
+
+[node name="wall collisions" type="CollisionShape2D" parent="."]
+scale = Vector2(0.21875, 0.21875)
+shape = SubResource("CircleShape2D_twa16")
+
+[node name="pathfinding" type="NavigationAgent2D" parent="."]
+
+[node name="parryTele" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_68vs0")
+texture = ExtResource("3_bipsx")
+lifetime = 0.2
+one_shot = true
+
+[node name="spawnPart" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_yf18r")
+lifetime = 0.5
+one_shot = true
+
+[node name="Fire" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_acpmr")
+lifetime = 0.3
+local_coords = true
+
+[node name="Explode1" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_qmv7j")
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_5ki70")
+texture = ExtResource("4_yemlu")
+one_shot = true
+explosiveness = 1.0
+
+[node name="Explode2" type="GPUParticles2D" parent="."]
+self_modulate = Color(1, 0.760784, 0, 1)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_erei2")
+one_shot = true
+explosiveness = 1.0
+
+[node name="lineOfSight" type="RayCast2D" parent="."]
+
+[node name="sightTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="attackTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_pt3d8")
+
+[node name="HurtboxFire" type="Area2D" parent="."]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="HurtboxFire"]
+position = Vector2(59, -10)
+shape = SubResource("RectangleShape2D_vl4tn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxFire"]
+position = Vector2(59, 8)
+shape = SubResource("RectangleShape2D_vl4tn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxFire"]
+position = Vector2(44.5, 0)
+shape = SubResource("RectangleShape2D_8shb1")
+
+[node name="healthHandler" type="Node2D" parent="."]
+script = ExtResource("4_as0db")
+health = 4.0
+
+[connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]
+[connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

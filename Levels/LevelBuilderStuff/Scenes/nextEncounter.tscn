@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://hx5hf1kujilx"]
+
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/next_encounter.gd" id="1_rdc66"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ba2c"]
+
+[node name="NextEncounter" type="Area2D"]
+monitorable = false
+script = ExtResource("1_rdc66")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8ba2c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
