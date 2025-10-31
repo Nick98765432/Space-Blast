@@ -336,6 +336,6 @@ encounter = Vector2i(2, 0)
 player = NodePath("../Player")
 
 [node name="Spawner42" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
-position = Vector2(-298, 295)
-type = 9
+position = Vector2(-187, 224)
+type = 7
 player = NodePath("../Player")
