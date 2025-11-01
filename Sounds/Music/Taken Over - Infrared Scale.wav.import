@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b46mr55iao38r"
-path="res://.godot/imported/Taken Over - Infrared Scale.wav-dbc98776461d27713ed90b64f0b0e172.sample"
+path="res://.godot/imported/Taken Over - Infrared Scale.wav-1945e47d0d498ad52b367111c9bbaf6b.sample"
 
 [deps]
 
-source_file="res://Sounds/Taken Over - Infrared Scale.wav"
-dest_files=["res://.godot/imported/Taken Over - Infrared Scale.wav-dbc98776461d27713ed90b64f0b0e172.sample"]
+source_file="res://Sounds/Music/Taken Over - Infrared Scale.wav"
+dest_files=["res://.godot/imported/Taken Over - Infrared Scale.wav-1945e47d0d498ad52b367111c9bbaf6b.sample"]
 
 [params]
 

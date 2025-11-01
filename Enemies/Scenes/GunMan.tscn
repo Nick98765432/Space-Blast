@@ -25,6 +25,28 @@ radial_velocity_max = -100.0
 scale_min = 3.0
 scale_max = 3.0
 
+[sub_resource type="Shader" id="Shader_n1ync"]
+code = "shader_type canvas_item;
+uniform vec4 flashColour = vec4(1.0);
+uniform float mixAmount = 0.9;
+void fragment() {
+	vec4 colour = texture(TEXTURE, UV);
+	colour.rgb = mix(colour.rgb,flashColour.rgb,mixAmount);
+	COLOR = colour;
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5j6hf"]
+resource_local_to_scene = true
+shader = SubResource("Shader_n1ync")
+shader_parameter/flashColour = Vector4(1, 1, 1, 1)
+shader_parameter/mixAmount = 0.0
+
 [sub_resource type="Curve" id="Curve_16nmr"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.288732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -95,28 +117,6 @@ initial_velocity_max = 621.21
 gravity = Vector3(0, 0, 0)
 scale_min = 3.0
 scale_max = 5.0
-
-[sub_resource type="Shader" id="Shader_n1ync"]
-code = "shader_type canvas_item;
-uniform vec4 flashColour = vec4(1.0);
-uniform float mixAmount = 0.9;
-void fragment() {
-	vec4 colour = texture(TEXTURE, UV);
-	colour.rgb = mix(colour.rgb,flashColour.rgb,mixAmount);
-	COLOR = colour;
-}
-
-//void light() {
-	// Called for every pixel for every light affecting the CanvasItem.
-	// Uncomment to replace the default light processing function with this one.
-//}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5j6hf"]
-resource_local_to_scene = true
-shader = SubResource("Shader_n1ync")
-shader_parameter/flashColour = Vector4(1, 1, 1, 1)
-shader_parameter/mixAmount = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uo43w"]
 radius = 19.0
@@ -206,6 +206,10 @@ amount = 20
 process_material = SubResource("ParticleProcessMaterial_1hlno")
 local_coords = true
 
+[node name="enemySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5j6hf")
+texture = ExtResource("2_xjowx")
+
 [node name="parryTele" type="GPUParticles2D" parent="."]
 z_index = 1
 emitting = false
@@ -247,10 +251,6 @@ amount = 40
 process_material = SubResource("ParticleProcessMaterial_4m4bo")
 one_shot = true
 explosiveness = 1.0
-
-[node name="enemySprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_5j6hf")
-texture = ExtResource("2_xjowx")
 
 [node name="sightTimer" type="Timer" parent="."]
 wait_time = 0.1

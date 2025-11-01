@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c4oisdxdslhy0"
+path="res://.godot/imported/Beyond Comprehension - Infrared Scale.wav-a2623d0abdc8dd2235d1b6417ac9e47b.sample"
+
+[deps]
+
+source_file="res://Sounds/Music/Beyond Comprehension - Infrared Scale.wav"
+dest_files=["res://.godot/imported/Beyond Comprehension - Infrared Scale.wav-a2623d0abdc8dd2235d1b6417ac9e47b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

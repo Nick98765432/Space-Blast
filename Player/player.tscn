@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cl5bttt2lep5d" path="res://Player/sprites and assets/No Life.png" id="6_bq038"]
 [ext_resource type="Texture2D" uid="uid://blgem7rjjvnhc" path="res://Player/sprites and assets/explode.png" id="6_n0myu"]
 [ext_resource type="Texture2D" uid="uid://elo6pwe1k81v" path="res://Player/sprites and assets/Life.png" id="7_thfcu"]
-[ext_resource type="AudioStream" uid="uid://c3e8u2jrnxlj1" path="res://Sounds/Reload GFL7.wav" id="9_t2qnr"]
+[ext_resource type="AudioStream" uid="uid://c3e8u2jrnxlj1" path="res://Sounds/SFX/Reload GFL7.wav" id="9_t2qnr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1nxxf"]
 radius = 10.2956
