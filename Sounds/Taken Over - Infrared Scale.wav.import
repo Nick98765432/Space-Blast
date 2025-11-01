@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b46mr55iao38r"
+path="res://.godot/imported/Taken Over - Infrared Scale.wav-dbc98776461d27713ed90b64f0b0e172.sample"
+
+[deps]
+
+source_file="res://Sounds/Taken Over - Infrared Scale.wav"
+dest_files=["res://.godot/imported/Taken Over - Infrared Scale.wav-dbc98776461d27713ed90b64f0b0e172.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

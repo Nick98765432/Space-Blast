@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bi20r3lox2aba"
+path="res://.godot/imported/Another Chance - Infrared Scale.wav-8e8bb4d12edb94327e1d2c9eec7a6953.sample"
+
+[deps]
+
+source_file="res://Sounds/Another Chance - Infrared Scale.wav"
+dest_files=["res://.godot/imported/Another Chance - Infrared Scale.wav-8e8bb4d12edb94327e1d2c9eec7a6953.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

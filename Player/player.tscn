@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cdaielgc0lshr"]
+[gd_scene load_steps=26 format=3 uid="uid://cdaielgc0lshr"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_5eh5h"]
 [ext_resource type="Texture2D" uid="uid://b6i1ul2i3y5u7" path="res://Player/sprites and assets/Space Blast man.png" id="2_srdbb"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cl5bttt2lep5d" path="res://Player/sprites and assets/No Life.png" id="6_bq038"]
 [ext_resource type="Texture2D" uid="uid://blgem7rjjvnhc" path="res://Player/sprites and assets/explode.png" id="6_n0myu"]
 [ext_resource type="Texture2D" uid="uid://elo6pwe1k81v" path="res://Player/sprites and assets/Life.png" id="7_thfcu"]
+[ext_resource type="AudioStream" uid="uid://c3e8u2jrnxlj1" path="res://Sounds/Reload GFL7.wav" id="9_t2qnr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1nxxf"]
 radius = 10.2956
@@ -228,6 +229,12 @@ value = 100.0
 texture_under = ExtResource("6_bq038")
 texture_progress = ExtResource("7_thfcu")
 texture_progress_offset = Vector2(1, -1)
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="ChangeWeap" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_t2qnr")
+volume_db = -5.5
 
 [connection signal="timeout" from="parry timer" to="." method="_on_parry_timer_timeout"]
 [connection signal="timeout" from="Shot cooldown" to="." method="_on_shot_cooldown_timeout"]

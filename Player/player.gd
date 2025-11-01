@@ -38,6 +38,7 @@ var current: Vector2
 @onready var switch_speed: Timer = $"Switch Speed"
 @onready var health_bar: TextureProgressBar = $HealthBar
 @onready var player_sprite: Sprite2D = $"Player sprite"
+@onready var change_weap: AudioStreamPlayer = $Sounds/ChangeWeap
 
 
 
@@ -168,6 +169,7 @@ func switch(switchTo):
 	switch_speed.start()
 	ableToShoot = false
 	weapon = switchTo
+	change_weap.play()
 	if switchTo == 1:
 		$"Single Switch particle".restart()
 	elif switchTo == 2:
