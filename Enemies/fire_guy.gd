@@ -18,6 +18,8 @@ var pos: Vector2
 @onready var health_handler: Node2D = $healthHandler
 @onready var fire: GPUParticles2D = $Fire
 @onready var hurtbox_fire: Area2D = $HurtboxFire
+@onready var beep: AudioStreamPlayer = $Sounds/beep
+@onready var burn: AudioStreamPlayer = $Sounds/burn
 
 
 
@@ -46,6 +48,7 @@ func _physics_process(delta: float) -> void:
 			if attack_timer.time_left <= 0 and not(isAttacking) and global_position.distance_to(player.global_position) < 120:
 				attack_timer.start()
 				parry_tele.restart()
+				beep.play()
 			
 		else:
 			enemy_sprite.look_at(pathfinding.get_next_path_position())
@@ -71,9 +74,11 @@ func _on_sight_timer_timeout() -> void:
 func _on_attack_timer_timeout() -> void:
 	isAttacking = true
 	fire.emitting = true
+	burn.play()
 	attackDir = movementDir
 	pos = player.global_position
 	await get_tree().create_timer(1.5).timeout
+	burn.stop()
 	isAttacking = false
 	isParryable = false
 	fire.emitting = false

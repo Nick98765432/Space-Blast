@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://baf18w7dapdcd"]
+[gd_scene load_steps=25 format=3 uid="uid://baf18w7dapdcd"]
 
 [ext_resource type="Script" path="res://Enemies/boss_man_1.gd" id="1_2or2x"]
 [ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="2_b26iq"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="3_ultkt"]
 [ext_resource type="Script" path="res://Enemies/health.gd" id="4_03edg"]
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="5_4osuj"]
+[ext_resource type="AudioStream" uid="uid://ceq45fr44qmqb" path="res://Sounds/SFX/dash.wav" id="6_gjq6p"]
+[ext_resource type="AudioStream" uid="uid://cq5od7p62h3ie" path="res://Sounds/SFX/Shotgun-Clueless79.wav" id="7_svclv"]
+[ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="8_khxfb"]
 
 [sub_resource type="Shader" id="Shader_w7yh6"]
 code = "shader_type canvas_item;
@@ -168,6 +171,20 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("CircleShape2D_1jut4")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="dashSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_gjq6p")
+volume_db = -7.0
+
+[node name="shootSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_svclv")
+volume_db = -12.0
+pitch_scale = 2.04
+
+[node name="beep" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_khxfb")
 
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("4_03edg")

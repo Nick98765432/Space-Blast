@@ -23,6 +23,9 @@ var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn"
 @onready var attack_timer: Timer = $attackTimer
 @onready var hitbox: Area2D = $hitbox
 @onready var health_handler: Node2D = $healthHandler
+@onready var dash_sfx: AudioStreamPlayer = $Sounds/dashSFX
+@onready var shoot_sfx: AudioStreamPlayer = $Sounds/shootSFX
+@onready var beep: AudioStreamPlayer = $Sounds/beep
 
 
 
@@ -91,6 +94,7 @@ func _on_attack_timer_timeout() -> void:
 	if combo.x == 2:
 		if combo.y == 0:
 			parry_tele.restart()
+			beep.play()
 			await get_tree().create_timer(0.2).timeout
 			shotgun()
 			combo.y += 1
@@ -132,7 +136,9 @@ func dash(parriable):
 		parry_tele.restart()
 	else:
 		unparry_tele.restart()
+	beep.play()
 	await get_tree().create_timer(0.3).timeout
+	dash_sfx.play()
 	damageDone = false
 	isAttacking = true
 	isParryable = parriable
@@ -160,6 +166,7 @@ func shoot(type):
 		
 func shotgun():
 	var orig = enemy_sprite.rotation_degrees
+	shoot_sfx.play()
 	for i in 7:
 		enemy_sprite.rotation_degrees += randf_range(-20, 20)
 		shoot(3)

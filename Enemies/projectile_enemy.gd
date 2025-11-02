@@ -16,6 +16,8 @@ var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn"
 @onready var shot_cool: Timer = $shotCool
 @onready var parry_tele: GPUParticles2D = $parryTele
 @onready var health_handler: healthHandler = $healthHandler
+@onready var beep: AudioStreamPlayer = $Sounds/beep
+@onready var shoot_sfx: AudioStreamPlayer = $Sounds/shootSFX
 
 func _ready() -> void:
 	$spawnPart.emitting = true
@@ -63,6 +65,7 @@ func makePath():
 
 func shoot():
 	var energy = shot.instantiate()
+	shoot_sfx.play()
 	energy.type = 1
 	energy.target = player
 	energy.rotation = enemy_sprite.rotation
@@ -92,6 +95,7 @@ func _on_state_change_timeout() -> void:
 func _on_shot_cool_timeout() -> void:
 	if line_of_sight.get_collider() == player and dead == false:
 		parry_tele.emitting = true
+		beep.play()
 		await get_tree().create_timer(0.2).timeout
 		shoot()
 		velocity = (movementDir * 1000).rotated(deg_to_rad(sideDir + 180))

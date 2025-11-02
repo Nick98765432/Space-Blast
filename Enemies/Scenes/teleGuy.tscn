@@ -1,10 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://besa8sh5wvqpr"]
+[gd_scene load_steps=27 format=3 uid="uid://besa8sh5wvqpr"]
 
 [ext_resource type="Script" path="res://Enemies/tele_guy.gd" id="1_a0x31"]
 [ext_resource type="Texture2D" uid="uid://ic5rmg46vvx2" path="res://Enemies/Sprites and Assets/teleGuy.png" id="2_y7c74"]
 [ext_resource type="Script" path="res://Enemies/health.gd" id="3_73vox"]
 [ext_resource type="Texture2D" uid="uid://b3ct4sarc83iu" path="res://Enemies/attacks/Sprites and assets/parriable.png" id="3_kavix"]
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_yao72"]
+[ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="5_2a8xu"]
+[ext_resource type="AudioStream" uid="uid://bhlrdaxayfawi" path="res://Sounds/SFX/shoot - V-ktor.wav" id="6_yxst8"]
+[ext_resource type="AudioStream" uid="uid://dny2jn0axu2qu" path="res://Sounds/SFX/outroelison__teleport.wav" id="7_rx4yk"]
 
 [sub_resource type="Shader" id="Shader_u0n1h"]
 code = "shader_type canvas_item;
@@ -178,6 +181,17 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("CircleShape2D_3oae3")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="beep" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_2a8xu")
+
+[node name="shootSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_yxst8")
+
+[node name="teleportSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_rx4yk")
 
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("3_73vox")

@@ -24,6 +24,11 @@ var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn"
 @onready var hitbox: Area2D = $hitbox
 @onready var health_handler: Node2D = $healthHandler
 @onready var teleport: GPUParticles2D = $Teleport
+@onready var dash_sfx: AudioStreamPlayer = $Sounds/dashSFX
+@onready var shoot_sfx: AudioStreamPlayer = $Sounds/shootSFX
+@onready var beep: AudioStreamPlayer = $Sounds/beep
+@onready var teleport_sfx: AudioStreamPlayer = $Sounds/teleportSFX
+
 
 
 
@@ -115,7 +120,7 @@ func _on_attack_timer_timeout() -> void:
 			done()
 			combo.y += 1
 		if combo.y == 2:
-			parry_tele.restart()
+			telegraph()
 			await get_tree().create_timer(0.2).timeout
 			shotgun()
 			await get_tree().create_timer(0.2).timeout
@@ -136,7 +141,7 @@ func _on_attack_timer_timeout() -> void:
 			done()
 			combo.y += 1
 		if combo.y == 1:
-			parry_tele.restart()
+			telegraph()
 			await get_tree().create_timer(0.2).timeout
 			shotgun()
 			await get_tree().create_timer(0.2).timeout
@@ -167,10 +172,11 @@ func attack(parry):
 
 func dash(parriable, predict):
 	if parriable:
-		parry_tele.restart()
+		telegraph()
 	else:
-		unparry_tele.restart()
+		untelegraph()
 	await get_tree().create_timer(0.1).timeout
+	dash_sfx.play()
 	damageDone = false
 	isAttacking = true
 	isParryable = parriable
@@ -197,6 +203,7 @@ func shoot(type):
 		get_tree().get_root().add_child(energy)
 		
 func shotgun():
+	shoot_sfx.play()
 	var orig = enemy_sprite.rotation_degrees
 	for i in 7:
 		enemy_sprite.rotation_degrees += randf_range(-20, 20)
@@ -211,6 +218,7 @@ func telePart():
 
 func tele():
 	telePart()
+	teleport_sfx.play()
 	global_position = player.global_position
 	enemy_sprite.rotation_degrees = randf_range(-180, 180)
 	velocity = enemy_sprite.transform.x * 6000
@@ -220,9 +228,18 @@ func tele():
 func keepTele(time: float):
 	var pos = global_position
 	await get_tree().create_timer(time).timeout
+	teleport_sfx.play()
 	telePart()
 	global_position = pos
 	damageDone = false
 	isParryable = true
-	parry_tele.restart()
+	telegraph()
 	attackDir = to_local((player.global_position + (player.velocity * (global_position.distance_to(player.global_position)/600)))).normalized()
+
+func untelegraph():
+	unparry_tele.restart()
+	beep.play()
+
+func telegraph():
+	parry_tele.restart()
+	beep.play()

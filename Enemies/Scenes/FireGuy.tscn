@@ -1,10 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://g1dyev87yne4"]
+[gd_scene load_steps=28 format=3 uid="uid://g1dyev87yne4"]
 
 [ext_resource type="Script" path="res://Enemies/fire_guy.gd" id="1_8644g"]
 [ext_resource type="Texture2D" uid="uid://bwmlbjctdxtoh" path="res://Enemies/Sprites and Assets/fire guy.png" id="2_xmcw8"]
 [ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="3_bipsx"]
 [ext_resource type="Script" path="res://Enemies/health.gd" id="4_as0db"]
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_yemlu"]
+[ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="5_wk13u"]
+[ext_resource type="AudioStream" uid="uid://ytn00o5nhh31" path="res://Sounds/SFX/burn.wav" id="6_bsk5f"]
 
 [sub_resource type="Shader" id="Shader_2i8ea"]
 code = "shader_type canvas_item;
@@ -202,6 +204,15 @@ shape = SubResource("RectangleShape2D_vl4tn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxFire"]
 position = Vector2(44.5, 0)
 shape = SubResource("RectangleShape2D_8shb1")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="beep" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_wk13u")
+
+[node name="burn" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_bsk5f")
+volume_db = 3.0
 
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("4_as0db")

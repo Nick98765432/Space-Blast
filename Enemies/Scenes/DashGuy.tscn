@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dlsq1o0y6vrt"]
+[gd_scene load_steps=24 format=3 uid="uid://dlsq1o0y6vrt"]
 
 [ext_resource type="Script" path="res://Enemies/dash_guy.gd" id="1_fmvda"]
 [ext_resource type="Texture2D" uid="uid://cxyqnx6xehoc5" path="res://Enemies/Sprites and Assets/DashGuy.png" id="2_tmatv"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="4_l2aw4"]
 [ext_resource type="Script" path="res://Enemies/health.gd" id="4_p17o5"]
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="5_8vsm7"]
+[ext_resource type="AudioStream" uid="uid://ceq45fr44qmqb" path="res://Sounds/SFX/dash.wav" id="6_tvtlu"]
+[ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="8_qp72s"]
 
 [sub_resource type="Shader" id="Shader_cb8et"]
 code = "shader_type canvas_item;
@@ -167,6 +169,15 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("CircleShape2D_jma4l")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="dashSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_tvtlu")
+volume_db = -7.0
+
+[node name="beep" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_qp72s")
 
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("4_p17o5")

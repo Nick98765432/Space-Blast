@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4ppiwa3gxtir"]
+[gd_scene load_steps=31 format=3 uid="uid://c4ppiwa3gxtir"]
 
 [ext_resource type="Texture2D" uid="uid://cb5vbn80xhgw7" path="res://Enemies/Sprites and Assets/spade boss.png" id="1_fmwx1"]
 [ext_resource type="Script" path="res://Enemies/ace_man.gd" id="1_qyrfn"]
@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="5_5khm6"]
 [ext_resource type="Texture2D" uid="uid://cl5bttt2lep5d" path="res://Player/sprites and assets/No Life.png" id="6_hqw8h"]
 [ext_resource type="Texture2D" uid="uid://elo6pwe1k81v" path="res://Player/sprites and assets/Life.png" id="7_3l3pj"]
+[ext_resource type="AudioStream" uid="uid://ceq45fr44qmqb" path="res://Sounds/SFX/dash.wav" id="8_qkydr"]
+[ext_resource type="AudioStream" uid="uid://cq5od7p62h3ie" path="res://Sounds/SFX/Shotgun-Clueless79.wav" id="9_v81cx"]
+[ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="10_uk26v"]
+[ext_resource type="AudioStream" uid="uid://dny2jn0axu2qu" path="res://Sounds/SFX/outroelison__teleport.wav" id="11_g6sfb"]
 
 [sub_resource type="Shader" id="Shader_2i7kn"]
 code = "shader_type canvas_item;
@@ -215,6 +219,23 @@ value = 70.0
 texture_under = ExtResource("6_hqw8h")
 texture_progress = ExtResource("7_3l3pj")
 texture_progress_offset = Vector2(1, -1)
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="dashSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_qkydr")
+volume_db = -7.0
+
+[node name="shootSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_v81cx")
+volume_db = -12.0
+pitch_scale = 2.04
+
+[node name="beep" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_uk26v")
+
+[node name="teleportSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("11_g6sfb")
 
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("4_ehyu3")

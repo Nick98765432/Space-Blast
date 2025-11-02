@@ -14,6 +14,10 @@ var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn"
 @onready var parry_tele: GPUParticles2D = $parryTele
 @onready var health_handler: healthHandler = $healthHandler
 @onready var teleport: GPUParticles2D = $Teleport
+@onready var beep: AudioStreamPlayer = $Sounds/beep
+@onready var shoot_sfx: AudioStreamPlayer = $Sounds/shootSFX
+@onready var teleport_sfx: AudioStreamPlayer = $Sounds/teleportSFX
+
 
 
 func _ready() -> void:
@@ -76,6 +80,7 @@ func _on_state_change_timeout() -> void:
 func _on_shot_cool_timeout() -> void:
 	if dead == false:
 		parry_tele.restart()
+		beep.play()
 		await get_tree().create_timer(0.2).timeout
 		if randi_range(0, 1) == 1:
 			tele()
@@ -85,6 +90,7 @@ func _on_shot_cool_timeout() -> void:
 		for i in 2:
 			shoot(1)
 			enemy_sprite.rotate(deg_to_rad(-90))
+		shoot_sfx.play()
 		enemy_sprite.look_at(player.global_position)
 		
 
@@ -96,6 +102,7 @@ func telePart():
 
 func tele():
 	telePart()
+	teleport_sfx.play()
 	global_position = player.global_position
 	enemy_sprite.rotation_degrees = randf_range(-180, 180)
 	velocity = enemy_sprite.transform.x * 6000

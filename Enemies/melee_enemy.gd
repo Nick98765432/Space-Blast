@@ -17,6 +17,8 @@ var pos: Vector2
 @onready var attack_timer: Timer = $attackTimer
 @onready var hitbox: Area2D = $hitbox
 @onready var health_handler: Node2D = $healthHandler
+@onready var dash_sfx: AudioStreamPlayer = $Sounds/dashSFX
+@onready var beep: AudioStreamPlayer = $Sounds/beep
 
 
 
@@ -41,6 +43,7 @@ func _physics_process(delta: float) -> void:
 				if attack_timer.time_left <= 0 and not(isParryable) and not(isAttacking):
 					attack_timer.start()
 					parry_tele.restart()
+					beep.play()
 			
 		else:
 			enemy_sprite.look_at(pathfinding.get_next_path_position())
@@ -73,13 +76,15 @@ func _on_sight_timer_timeout() -> void:
 	makePath()
 
 func _on_attack_timer_timeout() -> void:
-	isAttacking = true
-	damageDone = false
-	isParryable = true
-	attackDir = movementDir
-	pos = player.global_position
-	await get_tree().create_timer(0.5).timeout
-	isAttacking = false
-	isParryable = false
+	if not dead:
+		isAttacking = true
+		damageDone = false
+		isParryable = true
+		attackDir = movementDir
+		pos = player.global_position
+		dash_sfx.play()
+		await get_tree().create_timer(0.5).timeout
+		isAttacking = false
+		isParryable = false
 	
 	

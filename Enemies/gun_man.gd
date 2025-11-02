@@ -26,6 +26,12 @@ var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn"
 @onready var health_handler: healthHandler = $healthHandler
 @onready var unparry_tele: GPUParticles2D = $unparryTele
 @onready var full_charge: GPUParticles2D = $fullCharge
+@onready var beep: AudioStreamPlayer = $Sounds/beep
+@onready var shotgun_sfx: AudioStreamPlayer = $Sounds/shotgunSFX
+@onready var shot_sfx: AudioStreamPlayer = $Sounds/shotSFX
+@onready var shot_sfx_2: AudioStreamPlayer = $Sounds/shotSFX2
+
+
 
 func _ready() -> void:
 	health_handler.connect("hit", _on_hit)
@@ -63,6 +69,7 @@ func makePath():
 	pathfinding.target_position = player.global_position
 
 func shoot():
+	shot_sfx.play()
 	var energy = shot.instantiate()
 	energy.type = 1
 	energy.target = player
@@ -70,6 +77,7 @@ func shoot():
 	energy.global_position = global_position
 	get_tree().get_root().add_child(energy)
 func shoot2():
+	shotgun_sfx.play()
 	for i in 7:
 		var energy = shot.instantiate()
 		energy.type = 3
@@ -78,6 +86,7 @@ func shoot2():
 		energy.global_position = global_position
 		get_tree().get_root().add_child(energy)
 func shoot3():
+	shot_sfx_2.play()
 	var energy = shot.instantiate()
 	energy.type = 4
 	energy.target = player
@@ -85,6 +94,7 @@ func shoot3():
 	energy.global_position = global_position
 	get_tree().get_root().add_child(energy)
 func shoot4():
+	shotgun_sfx.play()
 	for i in 14:
 		var energy = shot.instantiate()
 		energy.type = 3
@@ -125,16 +135,19 @@ func _on_shot_cool_timeout() -> void:
 			num = 0
 		if type == 1:
 			parry_tele.restart()
+			beep.play()
 			for i in 5:
 				await get_tree().create_timer(0.2).timeout
 				if not dead:
 					shoot()
 		elif type == 2:
 			parry_tele.restart()
+			beep.play()
 			await get_tree().create_timer(0.2).timeout
 			shoot2()
 		elif type == 3:
 			unparry_tele.restart()
+			beep.play()
 			await get_tree().create_timer(0.2).timeout
 			for i in 30:
 				if not dead:
@@ -142,6 +155,7 @@ func _on_shot_cool_timeout() -> void:
 					shoot3()
 		elif type == 4:
 			parry_tele.restart()
+			beep.play()
 			await get_tree().create_timer(0.2).timeout
 			for i in 4:
 				shoot4()

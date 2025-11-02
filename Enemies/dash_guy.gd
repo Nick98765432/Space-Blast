@@ -20,6 +20,8 @@ var chosen: bool = false
 @onready var attack_timer: Timer = $attackTimer
 @onready var hitbox: Area2D = $hitbox
 @onready var health_handler: Node2D = $healthHandler
+@onready var dash_sfx: AudioStreamPlayer = $Sounds/dashSFX
+@onready var beep: AudioStreamPlayer = $Sounds/beep
 
 
 
@@ -49,6 +51,7 @@ func _physics_process(delta: float) -> void:
 				else:
 					unparry_tele.restart()
 					attackType = 2
+				beep.play()
 				chosen = false
 			
 		else:
@@ -78,6 +81,7 @@ func _on_attack_timer_timeout() -> void:
 	isParryable = true
 	attackDir = movementDir
 	pos = player.global_position
+	dash_sfx.play()
 	if attackType == 1:
 		await get_tree().create_timer(0.5).timeout
 	if attackType == 2:

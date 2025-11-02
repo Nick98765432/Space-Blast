@@ -19,6 +19,9 @@ var attacking: bool = false
 @onready var parry_tele: GPUParticles2D = $parryTele
 @onready var health_handler: healthHandler = $healthHandler
 @onready var fire_rate: Timer = $fireRate
+@onready var beep: AudioStreamPlayer = $Sounds/Beep
+@onready var shoot_sfx: AudioStreamPlayer = $Sounds/shootSFX
+
 
 
 func _ready() -> void:
@@ -74,6 +77,7 @@ func makePath():
 
 func shoot():
 	var energy = shot.instantiate()
+	shoot_sfx.play()
 	energy.type = 4
 	energy.target = player
 	energy.rotation = enemy_sprite.rotation + deg_to_rad(randf_range(-7, 7))
@@ -103,6 +107,7 @@ func _on_state_change_timeout() -> void:
 func _on_shot_cool_timeout() -> void:
 	if line_of_sight.get_collider() == player and dead == false:
 		parry_tele.emitting = true
+		beep.play()
 		await get_tree().create_timer(2).timeout
 		attacking = false
 
