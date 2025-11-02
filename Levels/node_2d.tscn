@@ -1,12 +1,12 @@
 [gd_scene load_steps=18 format=4 uid="uid://brty50fkbop4r"]
 
-[ext_resource type="AudioStream" uid="uid://df8gh08u32xu6" path="res://Sounds/Music/Taken OverIntro- Infrared Scale.wav" id="1_hc727"]
 [ext_resource type="PackedScene" uid="uid://cqwptbkpsicpn" path="res://UI/Upgrades.tscn" id="1_icrtm"]
+[ext_resource type="AudioStream" uid="uid://kraivs460k02" path="res://Sounds/Music/Beyond Comprehension intro - Infrared Scale.wav" id="1_l51f6"]
 [ext_resource type="PackedScene" uid="uid://cdaielgc0lshr" path="res://Player/player.tscn" id="1_re1we"]
 [ext_resource type="Texture2D" uid="uid://484mit73nl15" path="res://Levels/Sprites and Assets/tile placeholder.png" id="2_gxhbb"]
 [ext_resource type="Script" path="res://Levels/intro.gd" id="2_wckgg"]
-[ext_resource type="AudioStream" uid="uid://b46mr55iao38r" path="res://Sounds/Music/Taken Over - Infrared Scale.wav" id="3_udi2a"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="4_6g4th"]
+[ext_resource type="AudioStream" uid="uid://c4oisdxdslhy0" path="res://Sounds/Music/Beyond Comprehension - Infrared Scale.wav" id="4_giqwg"]
 [ext_resource type="PackedScene" uid="uid://bnhvdwpsykjnm" path="res://Levels/LevelBuilderStuff/Scenes/Spawner.tscn" id="5_mnti6"]
 [ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/roomGate.tscn" id="6_58jge"]
 [ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/nextRoom.tscn" id="7_rod3q"]
@@ -39,13 +39,13 @@ sources/0 = SubResource("TileSetAtlasSource_aghpw")
 [node name="Test" type="Node2D"]
 
 [node name="Intro" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_hc727")
+stream = ExtResource("1_l51f6")
 volume_db = -3.0
 autoplay = true
 script = ExtResource("2_wckgg")
 
 [node name="Music" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("intro")]
-stream = ExtResource("3_udi2a")
+stream = ExtResource("4_giqwg")
 volume_db = -3.0
 script = ExtResource("4_6g4th")
 intro = NodePath("../Intro")
@@ -71,7 +71,7 @@ script = ExtResource("8_lqixe")
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_re1we")]
-position = Vector2(304, 173)
+position = Vector2(255, 185)
 
 [node name="Spawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
 position = Vector2(106, 144)
@@ -188,7 +188,7 @@ encounter = Vector2i(2, 2)
 player = NodePath("../Player")
 
 [node name="Spawner26" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
-position = Vector2(968, -171)
+position = Vector2(982, -154)
 type = 9
 encounter = Vector2i(2, 5)
 player = NodePath("../Player")

@@ -74,6 +74,7 @@ func _on_sight_timer_timeout() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	#combos checks for type and cycles attacks
+	await get_tree().create_timer(0.3).timeout
 	if combo.x == 1:
 		if combo.y == 0:
 			dash(false)

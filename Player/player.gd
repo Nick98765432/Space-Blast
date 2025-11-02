@@ -39,6 +39,10 @@ var current: Vector2
 @onready var health_bar: TextureProgressBar = $HealthBar
 @onready var player_sprite: Sprite2D = $"Player sprite"
 @onready var change_weap: AudioStreamPlayer = $Sounds/ChangeWeap
+@onready var shotgun_sfx: AudioStreamPlayer = $Sounds/shotgunSFX
+@onready var shoot_sfx: AudioStreamPlayer = $Sounds/shootSFX
+@onready var shoot_sfx_2: AudioStreamPlayer = $Sounds/shootSFX2
+
 
 
 
@@ -117,15 +121,18 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("shoot") and ableToShoot:
 			if weapon == 1 and shotCooled:
 				shoot(1, dir.angle())
+				shoot_sfx.play()
 				shotCooled = false
 				shot_cooldown.start()
 			if weapon == 2 and shotCooled2:
 				for i in 7:
 					shoot(2, dir.angle() + deg_to_rad(randf_range(-20, 20)))
+				shotgun_sfx.play()
 				shotCooled2 = false
 				shotgun_cooldown.start()
 			if weapon == 3 and shotCooled3 and ammo > 0:
 				shoot(3, dir.angle() + deg_to_rad(randf_range(-7, 7)))
+				shoot_sfx_2.play()
 				shotCooled3 = false
 				ammo -= 1
 				fullauto_cooldown.start()
@@ -134,8 +141,10 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("alt fire") and parryEnergy >= 100 and weapon != 3:
 				if weapon == 1:
 					Signals.emit_signal("shakeSmall")
-					for i in 18:
-						shoot(1, dir.angle() + deg_to_rad(i * 20))
+					for i in 30:
+						shoot(1, deg_to_rad(i * 12))
+						shoot_sfx.play()
+						await get_tree().create_timer(0.01).timeout
 				if weapon == 2:
 					tripleShotgun()
 				parryEnergy = 0
@@ -210,6 +219,7 @@ func tripleShotgun():
 	for a in 4:
 		for i in 14:
 			shoot(2, dir.angle() + deg_to_rad(randf_range(-40, 40)))
+		shotgun_sfx.play()
 		await get_tree().create_timer(0.2).timeout
 		Signals.emit_signal("shakeSmall")
 
