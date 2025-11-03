@@ -236,6 +236,7 @@ stream = ExtResource("10_uk26v")
 
 [node name="teleportSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("11_g6sfb")
+volume_db = 6.0
 
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("4_ehyu3")

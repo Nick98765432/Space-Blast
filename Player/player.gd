@@ -59,6 +59,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	current = (global_position / screenSize).floor()
+	health_bar.value = move_toward(health_bar.value, health, 7)
 	if not dead:
 		#damage mult for glass cannon
 		PlayerData.mult = 1
@@ -74,7 +75,6 @@ func _physics_process(delta: float) -> void:
 		#cap health
 		if health > PlayerData.maxHealth:
 			health = PlayerData.maxHealth
-		health_bar.value = health
 		if health <= 0:
 			dead = true
 			parryEnergy = 0
@@ -142,7 +142,7 @@ func _physics_process(delta: float) -> void:
 				if weapon == 1:
 					Signals.emit_signal("shakeSmall")
 					for i in 30:
-						shoot(1, deg_to_rad(i * 12))
+						shoot(1, deg_to_rad(i * 24))
 						shoot_sfx.play()
 						await get_tree().create_timer(0.01).timeout
 				if weapon == 2:

@@ -182,6 +182,7 @@ stream = ExtResource("6_2xpvk")
 
 [node name="shootSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("7_jq0lb")
+volume_db = -3.0
 pitch_scale = 1.5
 
 [connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]

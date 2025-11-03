@@ -1,16 +1,16 @@
 [gd_scene load_steps=13 format=3 uid="uid://rvjwk5qxva6b"]
 
-[ext_resource type="AudioStream" uid="uid://df8gh08u32xu6" path="res://Sounds/Music/Taken OverIntro- Infrared Scale.wav" id="1_3856g"]
-[ext_resource type="Script" path="res://Levels/camera_2d.gd" id="1_jrtpg"]
-[ext_resource type="Script" path="res://Levels/intro.gd" id="2_b60ee"]
-[ext_resource type="Texture2D" uid="uid://g1xvkre0j6i5" path="res://Levels/Sprites and Assets/space.png" id="2_kmlwm"]
-[ext_resource type="PackedScene" uid="uid://cdaielgc0lshr" path="res://Player/player.tscn" id="3_1uaqg"]
-[ext_resource type="AudioStream" uid="uid://b46mr55iao38r" path="res://Sounds/Music/Taken Over - Infrared Scale.wav" id="3_5uj54"]
-[ext_resource type="Script" path="res://Levels/music.gd" id="4_hxjxh"]
-[ext_resource type="PackedScene" uid="uid://cqwptbkpsicpn" path="res://UI/Upgrades.tscn" id="4_ye3ys"]
-[ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/roomGate.tscn" id="5_sgo4x"]
-[ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/nextRoom.tscn" id="6_atv8g"]
-[ext_resource type="PackedScene" uid="uid://bnhvdwpsykjnm" path="res://Levels/LevelBuilderStuff/Scenes/Spawner.tscn" id="6_geer1"]
+[ext_resource type="AudioStream" uid="uid://df8gh08u32xu6" path="res://Sounds/Music/Taken OverIntro- Infrared Scale.wav" id="1_36h8v"]
+[ext_resource type="Script" path="res://Levels/intro.gd" id="2_x2r46"]
+[ext_resource type="AudioStream" uid="uid://b46mr55iao38r" path="res://Sounds/Music/Taken Over - Infrared Scale.wav" id="3_y14a1"]
+[ext_resource type="Script" path="res://Levels/music.gd" id="4_ni2gn"]
+[ext_resource type="Script" path="res://Levels/camera_2d.gd" id="5_jajjt"]
+[ext_resource type="Texture2D" uid="uid://g1xvkre0j6i5" path="res://Levels/Sprites and Assets/space.png" id="6_ol1wq"]
+[ext_resource type="PackedScene" uid="uid://cqwptbkpsicpn" path="res://UI/Upgrades.tscn" id="7_k4m7s"]
+[ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/roomGate.tscn" id="8_averx"]
+[ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/nextRoom.tscn" id="9_m864a"]
+[ext_resource type="PackedScene" uid="uid://bnhvdwpsykjnm" path="res://Levels/LevelBuilderStuff/Scenes/Spawner.tscn" id="10_ue1tk"]
+[ext_resource type="PackedScene" uid="uid://cdaielgc0lshr" path="res://Player/player.tscn" id="11_mwtrd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qpdx"]
 size = Vector2(656, 29)
@@ -20,21 +20,21 @@ size = Vector2(656, 29)
 [node name="MusicStuff" type="Node2D" parent="."]
 
 [node name="Intro" type="AudioStreamPlayer" parent="MusicStuff"]
-stream = ExtResource("1_3856g")
+stream = ExtResource("1_36h8v")
 volume_db = -3.0
 autoplay = true
-script = ExtResource("2_b60ee")
+script = ExtResource("2_x2r46")
 
 [node name="Music" type="AudioStreamPlayer" parent="MusicStuff" node_paths=PackedStringArray("intro")]
-stream = ExtResource("3_5uj54")
+stream = ExtResource("3_y14a1")
 volume_db = -3.0
-script = ExtResource("4_hxjxh")
+script = ExtResource("4_ni2gn")
 intro = NodePath("../Intro")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(320, 180)
 position_smoothing_enabled = true
-script = ExtResource("1_jrtpg")
+script = ExtResource("5_jajjt")
 player = NodePath("../Player")
 
 [node name="Border" type="StaticBody2D" parent="."]
@@ -73,23 +73,33 @@ position = Vector2(1280, -167)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_0qpdx")
 
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Border"]
+position = Vector2(1280, -392)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_0qpdx")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Border"]
+position = Vector2(667, -392)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_0qpdx")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 
 [node name="Bg" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(320, 180)
-texture = ExtResource("2_kmlwm")
+texture = ExtResource("6_ol1wq")
 
-[node name="Upgrades" parent="." instance=ExtResource("4_ye3ys")]
+[node name="Upgrades" parent="." instance=ExtResource("7_k4m7s")]
 
-[node name="RoomGate" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_sgo4x")]
+[node name="RoomGate" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_averx")]
 position = Vector2(641, 176)
 scale = Vector2(1, 20)
 player = NodePath("../Player")
 disappearCondition = Vector2i(0, 2)
 appearCondition = Vector2i(1, 0)
 
-[node name="RoomGate2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_sgo4x")]
+[node name="RoomGate2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_averx")]
 position = Vector2(968, 0)
 rotation = 1.5708
 scale = Vector2(1, 30)
@@ -97,7 +107,7 @@ player = NodePath("../Player")
 disappearCondition = Vector2i(1, 3)
 appearCondition = Vector2i(2, 0)
 
-[node name="RoomGate3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_sgo4x")]
+[node name="RoomGate3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_averx")]
 position = Vector2(967, -370)
 rotation = 1.5708
 scale = Vector2(1, 30)
@@ -105,109 +115,114 @@ player = NodePath("../Player")
 disappearCondition = Vector2i(2, 2)
 appearCondition = Vector2i(3, 0)
 
-[node name="NextRoom" parent="." instance=ExtResource("6_atv8g")]
+[node name="NextRoom" parent="." instance=ExtResource("9_m864a")]
 position = Vector2(671, 176)
 scale = Vector2(1, 20)
 
-[node name="NextRoom2" parent="." instance=ExtResource("6_atv8g")]
+[node name="NextRoom2" parent="." instance=ExtResource("9_m864a")]
 position = Vector2(970, -28)
 rotation = -1.57079
 scale = Vector2(1, 29.84)
 
-[node name="Spawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="NextRoom3" parent="." instance=ExtResource("9_m864a")]
+position = Vector2(975, -407)
+rotation = -1.57079
+scale = Vector2(1, 29.84)
+
+[node name="Spawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(131, 73)
 type = 1
 player = NodePath("../Player")
 
-[node name="Spawner8" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner8" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(131, 176)
 type = 1
 encounter = Vector2i(0, 1)
 player = NodePath("../Player")
 
-[node name="Spawner2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(321, 73)
 type = 1
 player = NodePath("../Player")
 
-[node name="Spawner3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(527, 73)
 type = 1
 player = NodePath("../Player")
 
-[node name="Spawner7" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner7" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(527, 179)
 type = 1
 encounter = Vector2i(0, 1)
 player = NodePath("../Player")
 
-[node name="Spawner4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(131, 277)
 type = 1
 player = NodePath("../Player")
 
-[node name="Spawner5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(321, 277)
 type = 1
 player = NodePath("../Player")
 
-[node name="Spawner6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(527, 280)
 type = 1
 player = NodePath("../Player")
 
-[node name="Player" parent="." instance=ExtResource("3_1uaqg")]
+[node name="Player" parent="." instance=ExtResource("11_mwtrd")]
 position = Vector2(220, 176)
 
-[node name="Spawner9" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner9" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(1183, 176)
 type = 2
 encounter = Vector2i(1, 0)
 player = NodePath("../Player")
 
-[node name="Spawner10" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner10" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(1183, 73)
 type = 2
 encounter = Vector2i(1, 1)
 player = NodePath("../Player")
 
-[node name="Spawner14" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner14" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(966, -310)
 type = 3
 encounter = Vector2i(2, 0)
 player = NodePath("../Player")
 
-[node name="Spawner15" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner15" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(765, -71)
 type = 3
 encounter = Vector2i(2, 1)
 player = NodePath("../Player")
 
-[node name="Spawner16" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner16" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(966, -310)
 type = 3
 encounter = Vector2i(2, 1)
 player = NodePath("../Player")
 
-[node name="Spawner17" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner17" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(1208, -59)
 type = 3
 encounter = Vector2i(2, 1)
 player = NodePath("../Player")
 
-[node name="Spawner11" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner11" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(1183, 277)
 type = 2
 encounter = Vector2i(1, 1)
 player = NodePath("../Player")
 
-[node name="Spawner12" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner12" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(765, 73)
 type = 1
 encounter = Vector2i(1, 2)
 player = NodePath("../Player")
 
-[node name="Spawner13" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_geer1")]
+[node name="Spawner13" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
 position = Vector2(765, 277)
 type = 1
 encounter = Vector2i(1, 2)

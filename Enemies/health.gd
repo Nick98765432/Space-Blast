@@ -32,23 +32,27 @@ func _process(_delta: float) -> void:
 
 func parried():
 	parent.isParryable = false
+	hurt(2)
+	Hitstops.shortHitstop()
+	await get_tree().create_timer(0.0011).timeout
 	player.parryCooled = true
 	player.parryEnergy += 24
 	player.ammo = 30
 	player.health += 15
-	hurt(2)
-	Hitstops.shortHitstop()
 	
 func hurt(amount):
 	emit_signal("hit")
+	health -= amount
+	#delay stops crashing if hit on frame one
+	await get_tree().create_timer(0.0011).timeout
 	player.parryEnergy += (amount) * 3
 	player.health += (amount) * 3
-	health -= amount
 	parent.enemy_sprite.material.set_shader_parameter("mixAmount",1.0)
 	await get_tree().create_timer(0.2).timeout
 	parent.enemy_sprite.material.set_shader_parameter("mixAmount",0.0)
 	
 func _on_destroy():
+	await get_tree().create_timer(0.0011).timeout
 	player.enemyCount = 0
 	parent.queue_free()
 	

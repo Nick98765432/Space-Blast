@@ -210,18 +210,6 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[node name="outline" type="Sprite2D" parent="."]
-position = Vector2(2, -31)
-texture = ExtResource("6_bq038")
-
-[node name="outline2" type="Sprite2D" parent="."]
-position = Vector2(0, -31)
-texture = ExtResource("6_bq038")
-
-[node name="outline3" type="Sprite2D" parent="."]
-position = Vector2(2, -29)
-texture = ExtResource("6_bq038")
-
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 offset_left = -24.0
 offset_top = -45.0
@@ -230,7 +218,7 @@ offset_bottom = -13.0
 value = 100.0
 texture_under = ExtResource("6_bq038")
 texture_progress = ExtResource("7_thfcu")
-texture_progress_offset = Vector2(1, -1)
+texture_progress_offset = Vector2(1, 0)
 
 [node name="Sounds" type="Node2D" parent="."]
 
