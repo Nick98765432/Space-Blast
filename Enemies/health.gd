@@ -2,7 +2,7 @@ extends Node2D
 class_name healthHandler
 signal hit
 
-var player
+var player: Player
 var energyGiven = false
 @onready var parent: Node = $".."
 @export var health: float
@@ -34,6 +34,7 @@ func parried():
 	parent.isParryable = false
 	hurt(2)
 	Hitstops.shortHitstop()
+	player.parry_sfx.play()
 	await get_tree().create_timer(0.0011).timeout
 	player.parryCooled = true
 	player.parryEnergy += 24

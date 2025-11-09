@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cdaielgc0lshr"]
+[gd_scene load_steps=29 format=3 uid="uid://cdaielgc0lshr"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_5eh5h"]
 [ext_resource type="Texture2D" uid="uid://b6i1ul2i3y5u7" path="res://Player/sprites and assets/Space Blast man.png" id="2_srdbb"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://c3e8u2jrnxlj1" path="res://Sounds/SFX/Reload GFL7.wav" id="9_t2qnr"]
 [ext_resource type="AudioStream" uid="uid://cq5od7p62h3ie" path="res://Sounds/SFX/Shotgun-Clueless79.wav" id="10_eh1rl"]
 [ext_resource type="AudioStream" uid="uid://bhlrdaxayfawi" path="res://Sounds/SFX/shoot - V-ktor.wav" id="11_fssm7"]
+[ext_resource type="AudioStream" uid="uid://lg5xcnpuarxv" path="res://Sounds/SFX/xenonn__layered-gunshot(parry).wav" id="12_ngwiq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1nxxf"]
 radius = 10.2956
@@ -237,6 +238,10 @@ stream = ExtResource("11_fssm7")
 [node name="shootSFX2" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("11_fssm7")
 pitch_scale = 1.5
+
+[node name="parrySFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("12_ngwiq")
+volume_db = -7.0
 
 [connection signal="timeout" from="parry timer" to="." method="_on_parry_timer_timeout"]
 [connection signal="timeout" from="Shot cooldown" to="." method="_on_shot_cooldown_timeout"]

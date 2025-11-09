@@ -73,7 +73,7 @@ func shoot():
 	var energy = shot.instantiate()
 	energy.type = 1
 	energy.target = player
-	energy.rotation = to_local((player.global_position + (player.velocity * (global_position.distance_to(player.global_position)/11)))).normalized().angle()
+	energy.rotation = to_local((player.global_position + (player.velocity  * get_physics_process_delta_time() * (global_position.distance_to(player.global_position)/10)))).normalized().angle()
 	energy.global_position = global_position
 	get_tree().get_root().add_child(energy)
 func shoot2():
@@ -82,7 +82,7 @@ func shoot2():
 		var energy = shot.instantiate()
 		energy.type = 3
 		energy.target = player
-		energy.rotation = to_local((player.global_position + (player.velocity * (global_position.distance_to(player.global_position)/11)))).normalized().angle() + deg_to_rad(randf_range(-20, 20))
+		energy.rotation = to_local((player.global_position + (player.velocity * get_physics_process_delta_time() * (global_position.distance_to(player.global_position)/10)))).normalized().angle() + deg_to_rad(randf_range(-20, 20))
 		energy.global_position = global_position
 		get_tree().get_root().add_child(energy)
 func shoot3():
@@ -99,7 +99,7 @@ func shoot4():
 		var energy = shot.instantiate()
 		energy.type = 3
 		energy.target = player
-		energy.rotation = to_local((player.global_position + (player.velocity * (global_position.distance_to(player.global_position)/11)))).normalized().angle() + deg_to_rad(randf_range(-40, 40))
+		energy.rotation = to_local((player.global_position + (player.velocity * get_physics_process_delta_time() * (global_position.distance_to(player.global_position)/11)))).normalized().angle() + deg_to_rad(randf_range(-40, 40))
 		energy.global_position = global_position
 		get_tree().get_root().add_child(energy)
 		

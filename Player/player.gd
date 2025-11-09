@@ -42,10 +42,7 @@ var current: Vector2
 @onready var shotgun_sfx: AudioStreamPlayer = $Sounds/shotgunSFX
 @onready var shoot_sfx: AudioStreamPlayer = $Sounds/shootSFX
 @onready var shoot_sfx_2: AudioStreamPlayer = $Sounds/shootSFX2
-
-
-
-
+@onready var parry_sfx: AudioStreamPlayer = $Sounds/parrySFX
 
 
 
@@ -107,6 +104,7 @@ func _physics_process(delta: float) -> void:
 				if i.is_in_group("enemyProj"):
 					if i.ifParried == false and i.isParriable:
 						Hitstops.shortHitstop()
+						parry_sfx.play()
 						i.parried()
 						health += 15
 						parryEnergy += 30
