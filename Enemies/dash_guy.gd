@@ -45,14 +45,14 @@ func _physics_process(delta: float) -> void:
 				chosen = true
 				await get_tree().create_timer(0.2).timeout
 				attack_timer.start()
-				if global_position.distance_to(player.global_position) <= 150:
-					parry_tele.restart()
-					attackType = 1
-				else:
-					unparry_tele.restart()
-					attackType = 2
-				beep.play()
-				chosen = false
+				if not dead:
+					if global_position.distance_to(player.global_position) <= 150:
+						parry_tele.restart()
+						attackType = 1
+					else:
+						unparry_tele.restart()
+						attackType = 2
+					beep.play()
 			
 		else:
 			enemy_sprite.look_at(pathfinding.get_next_path_position())
@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 			velocity += (speed) * dir * delta
 		#attack
 		if isAttacking:
-			#attack code
+			#attack code for the acutal dash
 			if attackType == 1:
 				attack(true)
 			elif attackType == 2:
@@ -76,20 +76,24 @@ func _on_sight_timer_timeout() -> void:
 	makePath()
 
 func _on_attack_timer_timeout() -> void:
+	#acutal attack
 	isAttacking = true
 	damageDone = false
 	isParryable = true
 	attackDir = movementDir
 	pos = player.global_position
 	dash_sfx.play()
+	#signals to attack in process and turns it off after timer
 	if attackType == 1:
 		await get_tree().create_timer(0.5).timeout
 	if attackType == 2:
 		await get_tree().create_timer(1).timeout
+	chosen = false
 	isAttacking = false
 	isParryable = false
 
 func attack(parry):
+	#tells how to dash
 	velocity = attackDir * 24000 * 0.016667
 	enemy_sprite.look_at(to_global(velocity))
 	for i in hitbox.get_overlapping_bodies():
