@@ -198,15 +198,22 @@ one_shot = true
 shape = SubResource("CircleShape2D_ik1pq")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
-offset_left = -24.0
-offset_top = -45.0
-offset_right = 24.0
-offset_bottom = -13.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -47.0
+offset_right = 33.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
 max_value = 70.0
 value = 70.0
 texture_under = ExtResource("6_hqw8h")
 texture_progress = ExtResource("7_3l3pj")
-texture_progress_offset = Vector2(1, 0)
+texture_progress_offset = Vector2(33, 0)
 
 [node name="Sounds" type="Node2D" parent="."]
 
