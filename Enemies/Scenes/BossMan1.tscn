@@ -1,8 +1,8 @@
 [gd_scene load_steps=25 format=3 uid="uid://baf18w7dapdcd"]
 
 [ext_resource type="Script" path="res://Enemies/boss_man_1.gd" id="1_2or2x"]
-[ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="2_b26iq"]
 [ext_resource type="Texture2D" uid="uid://b3ct4sarc83iu" path="res://Enemies/attacks/Sprites and assets/parriable.png" id="2_px7im"]
+[ext_resource type="Texture2D" uid="uid://ccaw0kv4536d1" path="res://Enemies/Sprites and Assets/bossMan1.png" id="2_rf22h"]
 [ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="3_ultkt"]
 [ext_resource type="Script" path="res://Enemies/health.gd" id="4_03edg"]
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="5_4osuj"]
@@ -106,8 +106,7 @@ script = ExtResource("1_2or2x")
 
 [node name="enemySprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_j6leu")
-scale = Vector2(0.28125, 0.265625)
-texture = ExtResource("2_b26iq")
+texture = ExtResource("2_rf22h")
 
 [node name="wall collisions" type="CollisionShape2D" parent="."]
 scale = Vector2(0.21875, 0.21875)
