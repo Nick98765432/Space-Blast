@@ -14,8 +14,8 @@ var state = 1
 var isParryable: bool = false
 var paths: Array
 var center: Vector2
-var num: int = 0
 var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn")
+var last: int
 @export var player: Player
 @onready var pathfinding: NavigationAgent2D = $pathfinding
 @onready var sight_timer: Timer = $sightTimer
@@ -25,7 +25,6 @@ var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn"
 @onready var parry_tele: GPUParticles2D = $parryTele
 @onready var health_handler: healthHandler = $healthHandler
 @onready var unparry_tele: GPUParticles2D = $unparryTele
-@onready var full_charge: GPUParticles2D = $fullCharge
 @onready var beep: AudioStreamPlayer = $Sounds/beep
 @onready var shotgun_sfx: AudioStreamPlayer = $Sounds/shotgunSFX
 @onready var shot_sfx: AudioStreamPlayer = $Sounds/shotSFX
@@ -126,17 +125,15 @@ func _on_dir_timer_timeout() -> void:
 func _on_shot_cool_timeout() -> void:
 	if dead == false:
 		attacking = true
-		num += 1
-		if num == 3:
-			full_charge.emitting = true
 		var type = randi_range(1, 3)
-		if num >= 4:
-			type = 4
-			num = 0
+		if last != null:
+			if type == last:
+				type = randi_range(1, 3)
+		last = type
 		if type == 1:
 			parry_tele.restart()
 			beep.play()
-			for i in 5:
+			for i in 3:
 				await get_tree().create_timer(0.2).timeout
 				if not dead:
 					shoot()
@@ -153,15 +150,6 @@ func _on_shot_cool_timeout() -> void:
 				if not dead:
 					await get_tree().create_timer(0.05).timeout
 					shoot3()
-		elif type == 4:
-			parry_tele.restart()
-			beep.play()
-			await get_tree().create_timer(0.2).timeout
-			for i in 4:
-				shoot4()
-				await get_tree().create_timer(0.2).timeout
-				Signals.emit_signal("shakeSmall")
-		full_charge.emitting = false
 		attacking = false
 func findPath(dir: float):
 	var highest: choice
@@ -172,13 +160,21 @@ func findPath(dir: float):
 		if paths[i].is_colliding():
 			if i - 1 >= 0:
 				paths[i - 1].weight -= 3
+			else:
+				paths[paths.size() - 1].weight -= 3
+			if i - 2 >= 0:
+				paths[i - 2].weight -= 3
+			else:
+				paths[paths.size() - 2].weight -= 3
 			paths[i].weight -= 5
-			if paths[i].get_collider() is v2:
-				if paths[i].get_collider().sideDir == sideDir:
-					if randi_range(0, 1) == 1:
-						changeDir()
 			if i + 1 < paths.size():
 				paths[i + 1].weight -= 3
+			else:
+				paths[0].weight -= 3
+			if i + 2 < paths.size():
+				paths[i + 2].weight -= 3
+			else:
+				paths[1].weight -= 3
 		if highest == null or paths[i].weight > highest.weight:
 			highest = paths[i]
 	velocity  += highest.target_position.normalized() * speed * get_physics_process_delta_time()
