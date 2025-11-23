@@ -16,6 +16,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if health <= 0:
 		if not energyGiven:
+			player.targeted = false
 			Signals.emit_signal("shakeSmall")
 			player.parryEnergy += 10
 			energyGiven = true
@@ -53,7 +54,9 @@ func hurt(amount):
 	parent.enemy_sprite.material.set_shader_parameter("mixAmount",0.0)
 	
 func _on_destroy():
+	player.targeted = false
 	await get_tree().create_timer(0.0011).timeout
 	player.enemyCount = 0
+	player.targeted = false
 	parent.queue_free()
 	

@@ -79,9 +79,13 @@ func _on_state_change_timeout() -> void:
 
 func _on_shot_cool_timeout() -> void:
 	if dead == false:
+		while player.targeted:
+			await get_tree().create_timer(0.25).timeout
+		player.targeted = true
 		parry_tele.restart()
 		beep.play()
 		await get_tree().create_timer(0.2).timeout
+		player.targeted = false
 		if randi_range(0, 1) == 1:
 			tele()
 			await get_tree().create_timer(0.5).timeout

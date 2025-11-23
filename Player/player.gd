@@ -6,14 +6,15 @@ var dead
 var damageMult: float = 1
 var parryEnergy: float = 100
 var health: float = 100
-var speed = 3600
+var speed: float = 3600
 var parry: bool = false
 var parryCooled: bool = true
 var shotCooled: bool = true
 var shotCooled2: bool = true
 var shotCooled3: bool = true
-var weapon = 1
-var ammo = 30
+var targeted: bool = false
+var weapon: int = 1
+var ammo: int = 30
 var enemyCount := 0
 var encounter: Vector2i = Vector2i(0, 0) 
 var dir

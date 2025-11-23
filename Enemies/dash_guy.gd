@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var dead = false
 var speed = 1000
+var sideDir: float
 var movementDir
 var attackDir
 var isParryable: bool = false
@@ -28,6 +29,7 @@ var chosen: bool = false
 func _ready() -> void:
 	$spawnPart.emitting = true
 	makePath()
+	changeDir()
 
 
 func _physics_process(delta: float) -> void:
@@ -41,11 +43,12 @@ func _physics_process(delta: float) -> void:
 		line_of_sight.force_raycast_update()
 		#checks for line of sight. if not, pathfind until line of sight is achieved, otherwise movetoward player
 		if line_of_sight.get_collider() == player:
-			if attack_timer.time_left <= 0 and not(isAttacking) and not(chosen):
+			if attack_timer.time_left <= 0 and not(isAttacking) and not(chosen) and (not player.targeted):
 				chosen = true
-				await get_tree().create_timer(0.2).timeout
-				attack_timer.start()
-				if not dead:
+				player.targeted = true
+				await get_tree().create_timer(0.5).timeout
+				if (not dead):
+					attack_timer.start()
 					if global_position.distance_to(player.global_position) <= 150:
 						parry_tele.restart()
 						attackType = 1
@@ -53,6 +56,9 @@ func _physics_process(delta: float) -> void:
 						unparry_tele.restart()
 						attackType = 2
 					beep.play()
+			else:
+				velocity += -enemy_sprite.transform.x * speed * delta
+				velocity += enemy_sprite.transform.x.rotated(deg_to_rad(sideDir)) * speed * delta
 			
 		else:
 			enemy_sprite.look_at(pathfinding.get_next_path_position())
@@ -77,6 +83,7 @@ func _on_sight_timer_timeout() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	#acutal attack
+	player.targeted = false
 	isAttacking = true
 	damageDone = false
 	isParryable = true
@@ -89,6 +96,7 @@ func _on_attack_timer_timeout() -> void:
 	if attackType == 2:
 		await get_tree().create_timer(1).timeout
 	chosen = false
+	changeDir()
 	isAttacking = false
 	isParryable = false
 
@@ -115,3 +123,8 @@ func attack(parry):
 					
 			break
 	
+func changeDir():
+	if randi_range(0, 1) == 1:
+		sideDir = 90
+	else:
+		sideDir = 270

@@ -94,9 +94,13 @@ func _on_state_change_timeout() -> void:
 
 func _on_shot_cool_timeout() -> void:
 	if line_of_sight.get_collider() == player and dead == false:
+		while player.targeted:
+			await get_tree().create_timer(0.25).timeout
+		player.targeted = true
 		parry_tele.emitting = true
 		beep.play()
 		await get_tree().create_timer(0.2).timeout
+		player.targeted = false
 		shoot()
 		velocity = (movementDir * 1000).rotated(deg_to_rad(sideDir + 180))
 		

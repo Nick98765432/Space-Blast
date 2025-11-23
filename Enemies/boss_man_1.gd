@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 		line_of_sight.force_raycast_update()
 		#checks for line of sight. if not, pathfind until line of sight is achieved, otherwise movetoward player
 		if line_of_sight.get_collider() == player:
-			if not chosen:
+			if (not chosen):
 				combo.x = randi_range(1, 2)
 				if combo.x == last and last:
 					combo.x = randi_range(1, 2)
