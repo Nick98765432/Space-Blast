@@ -77,7 +77,7 @@ func shoot():
 	get_tree().get_root().add_child(energy)
 func shoot2():
 	shotgun_sfx.play()
-	for i in 7:
+	for i in 8:
 		var energy = shot.instantiate()
 		energy.type = 3
 		energy.target = player

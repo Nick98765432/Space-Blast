@@ -43,10 +43,9 @@ func _physics_process(delta: float) -> void:
 		line_of_sight.force_raycast_update()
 		#checks for line of sight. if not, pathfind until line of sight is achieved, otherwise movetoward player
 		if line_of_sight.get_collider() == player:
-			if attack_timer.time_left <= 0 and not(isAttacking) and not(chosen) and (not player.targeted):
+			if attack_timer.time_left <= 0 and not(isAttacking) and not(chosen) and (not player.targeted) and not(dead):
 				chosen = true
 				player.targeted = true
-				await get_tree().create_timer(0.5).timeout
 				if (not dead):
 					attack_timer.start()
 					if global_position.distance_to(player.global_position) <= 150:
@@ -95,10 +94,11 @@ func _on_attack_timer_timeout() -> void:
 		await get_tree().create_timer(0.5).timeout
 	if attackType == 2:
 		await get_tree().create_timer(1).timeout
-	chosen = false
 	changeDir()
 	isAttacking = false
 	isParryable = false
+	await get_tree().create_timer(0.5).timeout
+	chosen = false
 
 func attack(parry):
 	#tells how to dash

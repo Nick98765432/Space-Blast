@@ -17,7 +17,7 @@ func _on_area_entered(area: Area2D) -> void:
 			if type == 1:
 				area.get_parent().health_handler.hurt(1 * damageMult)
 			elif type == 2:
-				area.get_parent().health_handler.hurt(0.5 * damageMult)
+				area.get_parent().health_handler.hurt(0.4375 * damageMult)
 			elif type == 3:
 				area.get_parent().health_handler.hurt(0.4 * damageMult)
 			queue_free()

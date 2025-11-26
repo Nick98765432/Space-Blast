@@ -124,7 +124,7 @@ func _physics_process(delta: float) -> void:
 				shotCooled = false
 				shot_cooldown.start()
 			if weapon == 2 and shotCooled2:
-				for i in 7:
+				for i in 8:
 					shoot(2, dir.angle() + deg_to_rad(randf_range(-20, 20)))
 				shotgun_sfx.play()
 				shotCooled2 = false
@@ -216,7 +216,7 @@ func shoot(type, deg):
 func tripleShotgun():
 	Signals.emit_signal("shakeSmall")
 	for a in 4:
-		for i in 14:
+		for i in 16:
 			shoot(2, dir.angle() + deg_to_rad(randf_range(-40, 40)))
 		shotgun_sfx.play()
 		await get_tree().create_timer(0.2).timeout

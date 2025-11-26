@@ -18,7 +18,7 @@ func _ready() -> void:
 	elif type == 3:
 		isParriable = true
 		speed = 600
-		damage = 7
+		damage = 12
 	elif type == 4:
 		isParriable = false
 		speed = 1000

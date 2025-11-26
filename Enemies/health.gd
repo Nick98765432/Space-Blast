@@ -16,6 +16,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if health <= 0:
 		if not energyGiven:
+			player.ammo = 30
 			player.targeted = false
 			Signals.emit_signal("shakeSmall")
 			player.parryEnergy += 10
@@ -29,6 +30,7 @@ func _process(_delta: float) -> void:
 			$"../Explode2".emitting = true
 			parent.enemy_sprite.hide()
 			await get_tree().create_timer(1).timeout
+			player.targeted = false
 			parent.queue_free()
 
 func parried():

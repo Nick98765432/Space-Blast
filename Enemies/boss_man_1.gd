@@ -167,7 +167,7 @@ func shoot(type):
 func shotgun():
 	var orig = enemy_sprite.rotation_degrees
 	shoot_sfx.play()
-	for i in 7:
+	for i in 8:
 		enemy_sprite.rotation_degrees += randf_range(-20, 20)
 		shoot(3)
 		enemy_sprite.rotation_degrees = orig
