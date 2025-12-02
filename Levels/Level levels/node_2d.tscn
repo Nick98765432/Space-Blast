@@ -311,7 +311,15 @@ player = NodePath("../Player")
 
 [node name="Spawner41" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
 position = Vector2(-168, 216)
-type = 7
+bar = true
+type = 6
+player = NodePath("../Player")
+
+[node name="Spawner42" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
+position = Vector2(-501, 132)
+extraHealth = true
+bar = true
+type = 6
 player = NodePath("../Player")
 
 [node name="Spawner15" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
@@ -351,7 +359,6 @@ scale = Vector2(16.68, 1)
 
 [node name="Spawner21" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
 position = Vector2(980, -246)
-isBoss = true
 type = 6
 encounter = Vector2i(2, 0)
 player = NodePath("../Player")

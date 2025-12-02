@@ -41,7 +41,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not dead:
-		$HealthBar.value = health_handler.health
 		await get_tree().create_timer(0.5).timeout
 		movementDir = to_local(player.global_position).normalized()
 		enemy_sprite.look_at(player.global_position)

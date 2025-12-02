@@ -15,6 +15,7 @@ var shotCooled3: bool = true
 var targeted: bool = false
 var weapon: int = 1
 var ammo: int = 30
+var bossBarCount: int = 0
 var enemyCount := 0
 var encounter: Vector2i = Vector2i(0, 0) 
 var dir

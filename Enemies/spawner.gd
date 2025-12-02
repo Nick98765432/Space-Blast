@@ -9,7 +9,8 @@ var bossMan1: PackedScene = preload("res://Enemies/Scenes/BossMan1.tscn")
 var aceMan: PackedScene = preload("res://Enemies/Scenes/AceMan.tscn")
 var sentryMan: PackedScene = preload("res://Enemies/Scenes/sentryMan.tscn")
 var gunMan: PackedScene = preload("res://Enemies/Scenes/GunMan.tscn")
-@export var isBoss: bool
+@export var extraHealth: bool
+@export var bar: bool
 @export var type: int
 @export var encounter: Vector2i
 @export var player: Player
@@ -45,5 +46,7 @@ func spawn(kind: PackedScene):
 	enemy.global_position = global_position
 	enemy.player = player
 	get_tree().get_root().add_child(enemy)
-	if isBoss:
+	if extraHealth:
 		enemy.health_handler.health *= 2
+	if bar:
+		enemy.health_handler.isBoss = true

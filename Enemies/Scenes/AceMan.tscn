@@ -6,12 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="3_mya2x"]
 [ext_resource type="Script" path="res://Enemies/health.gd" id="4_ehyu3"]
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="5_5khm6"]
-[ext_resource type="Texture2D" uid="uid://cl5bttt2lep5d" path="res://Player/sprites and assets/No Life.png" id="6_hqw8h"]
-[ext_resource type="Texture2D" uid="uid://elo6pwe1k81v" path="res://Player/sprites and assets/Life.png" id="7_3l3pj"]
 [ext_resource type="AudioStream" uid="uid://ceq45fr44qmqb" path="res://Sounds/SFX/dash.wav" id="8_qkydr"]
 [ext_resource type="AudioStream" uid="uid://cq5od7p62h3ie" path="res://Sounds/SFX/Shotgun-Clueless79.wav" id="9_v81cx"]
 [ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="10_uk26v"]
 [ext_resource type="AudioStream" uid="uid://dny2jn0axu2qu" path="res://Sounds/SFX/outroelison__teleport.wav" id="11_g6sfb"]
+[ext_resource type="Texture2D" uid="uid://dkjx8jcdvrsbc" path="res://Enemies/Sprites and Assets/Boss Bar.png" id="11_w315e"]
+[ext_resource type="Texture2D" uid="uid://bdg3en600yk0y" path="res://Enemies/Sprites and Assets/Boss Life.png" id="12_3yeuw"]
 
 [sub_resource type="Shader" id="Shader_2i7kn"]
 code = "shader_type canvas_item;
@@ -197,24 +197,6 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("CircleShape2D_ik1pq")
 
-[node name="HealthBar" type="TextureProgressBar" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -45.0
-offset_right = 25.0
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
-max_value = 70.0
-value = 70.0
-texture_under = ExtResource("6_hqw8h")
-texture_progress = ExtResource("7_3l3pj")
-texture_progress_offset = Vector2(1, 0)
-
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="dashSFX" type="AudioStreamPlayer" parent="Sounds"]
@@ -233,9 +215,29 @@ stream = ExtResource("10_uk26v")
 stream = ExtResource("11_g6sfb")
 volume_db = 6.0
 
-[node name="healthHandler" type="Node2D" parent="."]
+[node name="healthHandler" type="Node2D" parent="." node_paths=PackedStringArray("bossBar")]
 script = ExtResource("4_ehyu3")
 health = 70.0
+bossBar = NodePath("../boss bar/TextureProgressBar")
+
+[node name="boss bar" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="boss bar"]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -305.0
+offset_top = 15.0
+offset_right = 305.0
+offset_bottom = 47.0
+grow_horizontal = 2
+max_value = 70.0
+value = 70.0
+texture_under = ExtResource("11_w315e")
+texture_progress = ExtResource("12_3yeuw")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
