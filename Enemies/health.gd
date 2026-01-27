@@ -50,7 +50,7 @@ func _process(_delta: float) -> void:
 			parent.queue_free()
 
 func parried():
-	parent.isParryable = false
+	parent.attacks.isParryable = false
 	hurt(2)
 	Hitstops.shortHitstop()
 	player.parry_sfx.play()

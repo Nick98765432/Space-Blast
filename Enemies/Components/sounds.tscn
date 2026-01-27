@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://c06hquc6cp2ot"]
+
+[ext_resource type="Script" path="res://Enemies/Components/sounds.gd" id="1_efd3b"]
+[ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="1_xy5cy"]
+[ext_resource type="AudioStream" uid="uid://cq5od7p62h3ie" path="res://Sounds/SFX/Shotgun-Clueless79.wav" id="2_26q5a"]
+[ext_resource type="AudioStream" uid="uid://bhlrdaxayfawi" path="res://Sounds/SFX/shoot - V-ktor.wav" id="3_1yaxe"]
+[ext_resource type="AudioStream" uid="uid://dny2jn0axu2qu" path="res://Sounds/SFX/outroelison__teleport.wav" id="4_n1v2w"]
+[ext_resource type="AudioStream" uid="uid://ceq45fr44qmqb" path="res://Sounds/SFX/dash.wav" id="5_xlggb"]
+
+[node name="Sounds" type="Node2D"]
+script = ExtResource("1_efd3b")
+
+[node name="beep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_xy5cy")
+
+[node name="shotgunSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_26q5a")
+volume_db = -12.0
+pitch_scale = 2.04
+
+[node name="shotSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1yaxe")
+
+[node name="shotSFX2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1yaxe")
+pitch_scale = 1.5
+
+[node name="teleportSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_n1v2w")
+volume_db = 6.0
+
+[node name="dashSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_xlggb")
+volume_db = -7.0

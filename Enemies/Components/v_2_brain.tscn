@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfdw1m722hj0g"]
+
+[ext_resource type="Script" path="res://Enemies/Components/v_2_brain.gd" id="1_2kauu"]
+[ext_resource type="Script" path="res://Enemies/line_of_sight.gd" id="1_u332i"]
+
+[node name="v2Brain" type="Node2D"]
+script = ExtResource("1_2kauu")
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="lineOfSight" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight2" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight3" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight4" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight5" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight6" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight7" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight8" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight9" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight10" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight11" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight12" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight13" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight14" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight15" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="lineOfSight16" type="RayCast2D" parent="Paths"]
+collision_mask = 5
+script = ExtResource("1_u332i")
+
+[node name="dirTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="dirTimer" to="." method="_on_dir_timer_timeout"]

@@ -1,34 +1,16 @@
-[gd_scene load_steps=32 format=3 uid="uid://dxh3f8dmbtts7"]
+[gd_scene load_steps=14 format=3 uid="uid://dxh3f8dmbtts7"]
 
 [ext_resource type="Script" path="res://Enemies/gun_man.gd" id="1_jniij"]
 [ext_resource type="Texture2D" uid="uid://nvxfte3traah" path="res://Enemies/Sprites and Assets/evil Space Blast man.png" id="2_xjowx"]
-[ext_resource type="Texture2D" uid="uid://b3ct4sarc83iu" path="res://Enemies/attacks/Sprites and assets/parriable.png" id="3_634cj"]
-[ext_resource type="Script" path="res://Enemies/line_of_sight.gd" id="3_fs2v0"]
-[ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_prswo"]
-[ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="5_45j5v"]
+[ext_resource type="PackedScene" uid="uid://c06hquc6cp2ot" path="res://Enemies/Components/sounds.tscn" id="4_tukoq"]
 [ext_resource type="Script" path="res://Enemies/health.gd" id="5_465hg"]
-[ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="7_do5wx"]
-[ext_resource type="AudioStream" uid="uid://cq5od7p62h3ie" path="res://Sounds/SFX/Shotgun-Clueless79.wav" id="8_5jd03"]
-[ext_resource type="AudioStream" uid="uid://bhlrdaxayfawi" path="res://Sounds/SFX/shoot - V-ktor.wav" id="9_3pdv1"]
+[ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="5_b2m3o"]
+[ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="6_3emvg"]
+[ext_resource type="PackedScene" uid="uid://dfdw1m722hj0g" path="res://Enemies/Components/v_2_brain.tscn" id="6_aw67n"]
 [ext_resource type="Texture2D" uid="uid://dkjx8jcdvrsbc" path="res://Enemies/Sprites and Assets/Boss Bar.png" id="11_qgidi"]
 [ext_resource type="Texture2D" uid="uid://bdg3en600yk0y" path="res://Enemies/Sprites and Assets/Boss Life.png" id="12_ijhlf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tt43m"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1hlno"]
-particle_flag_disable_z = true
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 40.0
-emission_ring_radius = 40.0
-emission_ring_inner_radius = 40.0
-spread = 0.0
-orbit_velocity_min = -1.212
-orbit_velocity_max = 1.212
-radial_velocity_min = -100.0
-radial_velocity_max = -100.0
-scale_min = 3.0
-scale_max = 3.0
 
 [sub_resource type="Shader" id="Shader_n1ync"]
 code = "shader_type canvas_item;
@@ -52,77 +34,6 @@ shader = SubResource("Shader_n1ync")
 shader_parameter/flashColour = Vector4(1, 1, 1, 1)
 shader_parameter/mixAmount = 0.0
 
-[sub_resource type="Curve" id="Curve_16nmr"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.288732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_rqpqc"]
-curve = SubResource("Curve_16nmr")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ytuoc"]
-particle_flag_disable_z = true
-emission_shape_offset = Vector3(10, -3, 0)
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_rqpqc")
-
-[sub_resource type="Curve" id="Curve_m6uir"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.288732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_veuqq"]
-curve = SubResource("Curve_m6uir")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1idl0"]
-particle_flag_disable_z = true
-emission_shape_offset = Vector3(10, -3, 0)
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_veuqq")
-
-[sub_resource type="Curve" id="Curve_ibebj"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_g4c20"]
-curve = SubResource("Curve_ibebj")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13pdn"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
-scale_min = 100.0
-scale_max = 100.0
-scale_curve = SubResource("CurveTexture_g4c20")
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ga6su"]
-particles_animation = true
-particles_anim_h_frames = 12
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Curve" id="Curve_pevlc"]
-_data = [Vector2(0.028169, 1), 0.0, 0.0, 0, 0, Vector2(0.535211, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_qje1b"]
-curve = SubResource("Curve_pevlc")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fovjo"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 45.0
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_qje1b")
-anim_speed_min = 1.0
-anim_speed_max = 1.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4m4bo"]
-particle_flag_disable_z = true
-spread = 180.0
-initial_velocity_min = 484.85
-initial_velocity_max = 621.21
-gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 5.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_uo43w"]
 radius = 19.0
 
@@ -137,133 +48,14 @@ script = ExtResource("1_jniij")
 [node name="wall collisions" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tt43m")
 
-[node name="Paths" type="Node2D" parent="."]
-
-[node name="lineOfSight" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight2" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight3" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight4" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight5" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight6" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight7" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight8" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight9" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight10" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight11" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight12" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight13" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight14" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight15" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
-[node name="lineOfSight16" type="RayCast2D" parent="Paths"]
-collision_mask = 5
-script = ExtResource("3_fs2v0")
-
 [node name="pathfinding" type="NavigationAgent2D" parent="."]
-
-[node name="fullCharge" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_1hlno")
-local_coords = true
 
 [node name="enemySprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_5j6hf")
 texture = ExtResource("2_xjowx")
 
-[node name="parryTele" type="GPUParticles2D" parent="."]
-z_index = 1
-emitting = false
-amount = 1
-process_material = SubResource("ParticleProcessMaterial_ytuoc")
-texture = ExtResource("3_634cj")
-lifetime = 0.2
-one_shot = true
-
-[node name="unparryTele" type="GPUParticles2D" parent="."]
-z_index = 1
-emitting = false
-amount = 1
-process_material = SubResource("ParticleProcessMaterial_1idl0")
-texture = ExtResource("5_45j5v")
-lifetime = 0.2
-one_shot = true
-
-[node name="spawnPart" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 1
-process_material = SubResource("ParticleProcessMaterial_13pdn")
-lifetime = 0.5
-one_shot = true
-
-[node name="Explode1" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_ga6su")
-emitting = false
-amount = 3
-process_material = SubResource("ParticleProcessMaterial_fovjo")
-texture = ExtResource("4_prswo")
-one_shot = true
-explosiveness = 1.0
-
-[node name="Explode2" type="GPUParticles2D" parent="."]
-self_modulate = Color(1, 0.760784, 0, 1)
-emitting = false
-amount = 40
-process_material = SubResource("ParticleProcessMaterial_4m4bo")
-one_shot = true
-explosiveness = 1.0
-
 [node name="sightTimer" type="Timer" parent="."]
 wait_time = 0.1
-autostart = true
-
-[node name="dirTimer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
 autostart = true
 
 [node name="shotCool" type="Timer" parent="."]
@@ -275,22 +67,13 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("CircleShape2D_uo43w")
 
-[node name="Sounds" type="Node2D" parent="."]
+[node name="Sounds" parent="." instance=ExtResource("4_tukoq")]
 
-[node name="beep" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("7_do5wx")
+[node name="Attacks" parent="." instance=ExtResource("5_b2m3o")]
 
-[node name="shotgunSFX" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("8_5jd03")
-volume_db = -12.0
-pitch_scale = 2.04
+[node name="Particles" parent="." instance=ExtResource("6_3emvg")]
 
-[node name="shotSFX" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("9_3pdv1")
-
-[node name="shotSFX2" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("9_3pdv1")
-pitch_scale = 1.5
+[node name="v2Brain" parent="." instance=ExtResource("6_aw67n")]
 
 [node name="healthHandler" type="Node2D" parent="." node_paths=PackedStringArray("bossBar")]
 script = ExtResource("5_465hg")
@@ -316,5 +99,4 @@ texture_progress = ExtResource("12_ijhlf")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]
-[connection signal="timeout" from="dirTimer" to="." method="_on_dir_timer_timeout"]
 [connection signal="timeout" from="shotCool" to="." method="_on_shot_cool_timeout"]
