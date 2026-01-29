@@ -9,6 +9,7 @@ var center: Vector2
 var state = 1
 var parent: CharacterBody2D
 var player: Player
+@export var distance: float = 120
 @export var speed: float = 3600
 @onready var paths: = $Paths.get_children()
 @onready var dir_timer: Timer = $dirTimer
@@ -23,17 +24,16 @@ func _ready() -> void:
 	for i in paths.size():
 		paths[i].target_position = paths[i].target_position.rotated(deg_to_rad(i * (360/paths.size())))
 
-func _physics_process(delta: float) -> void:
-	await get_tree().create_timer(0.01).timeout
+func move():
 	center = player.current + player.screenSize * 0.5
 	movementDir = to_local(player.global_position).normalized()
 	if state == 1:
-		if parent.global_position.distance_to(player.global_position) < 120:
+		if parent.global_position.distance_to(player.global_position) < distance:
 			findPath(180)
 		else:
 			findPath(0)
 	if state == 2:
-		parent.velocity += dir * speed * 1.25 * delta
+		parent.velocity += dir * speed * 1.25 * get_physics_process_delta_time()
 	parent.velocity *= 0.7225
 	parent.move_and_slide()
 
@@ -42,7 +42,7 @@ func findPath(dir: float):
 	for i in paths.size():
 		paths[i].weight = cos(paths[i].target_position.normalized().angle_to(movementDir.rotated(deg_to_rad(dir))))
 		paths[i].weight += cos(paths[i].target_position.normalized().angle_to(movementDir.rotated(deg_to_rad(sideDir))))
-		paths[i].weight += cos(paths[i].target_position.normalized().angle_to(movementDir.rotated(to_local(center).angle())))
+		paths[i].weight += cos(paths[i].target_position.normalized().angle_to((to_local(center)))) * 0.5
 		if paths[i].is_colliding():
 			if i - 1 >= 0:
 				paths[i - 1].weight -= 3

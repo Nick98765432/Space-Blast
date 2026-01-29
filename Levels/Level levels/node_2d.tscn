@@ -311,8 +311,7 @@ player = NodePath("../Player")
 
 [node name="Spawner41" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
 position = Vector2(-168, 216)
-bar = true
-type = 9
+type = 5
 player = NodePath("../Player")
 
 [node name="Spawner42" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]

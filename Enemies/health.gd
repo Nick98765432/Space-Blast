@@ -40,8 +40,8 @@ func _process(_delta: float) -> void:
 			if player.enemyCount == 0:
 				player.encounter.y += 1
 				Signals.change.emit()
-			$"../Explode1".emitting = true
-			$"../Explode2".emitting = true
+			get_parent().particles.death.emitting = true
+			get_parent().particles.explode_2.emitting = true
 			parent.enemy_sprite.hide()
 			await get_tree().create_timer(1).timeout
 			player.bossBarCount -= 1

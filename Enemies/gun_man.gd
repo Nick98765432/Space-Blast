@@ -18,14 +18,12 @@ var last: int
 @onready var sounds: Node2D = $Sounds
 @onready var attacks: AttacksComp = $Attacks
 @onready var particles: Particles = $Particles
-@onready var brain: v2Brain = $v2Brain
 @onready var hitbox: Area2D = $hitbox
-
+@onready var brain: v2Brain = $v2Brain
 
 
 func _ready() -> void:
 	particles.spawn_part.emitting = true
-	makePath()
 
 
 func _physics_process(delta: float) -> void:
@@ -35,14 +33,8 @@ func _physics_process(delta: float) -> void:
 		particles.parry_tele.rotation = enemy_sprite.rotation
 		if shot_cool.time_left <= 0 and not attacking:
 			shot_cool.start()
-		#outside of the line of sight code cause it has to override pathfinding
+		brain.move()
 		move_and_slide()
-
-func makePath():
-	pathfinding.target_position = player.global_position
-
-func _on_sight_timer_timeout() -> void:
-	makePath()
 
 func _on_shot_cool_timeout() -> void:
 	if dead == false:
