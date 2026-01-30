@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4ppiwa3gxtir"]
+[gd_scene load_steps=15 format=3 uid="uid://c4ppiwa3gxtir"]
 
 [ext_resource type="Texture2D" uid="uid://cb5vbn80xhgw7" path="res://Enemies/Sprites and Assets/spade boss.png" id="1_fmwx1"]
 [ext_resource type="Script" path="res://Enemies/ace_man.gd" id="1_qyrfn"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://Enemies/health.gd" id="4_ehyu3"]
 [ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="5_j7rat"]
 [ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="6_y7puy"]
+[ext_resource type="PackedScene" uid="uid://cenknsm871ybr" path="res://Enemies/Components/pathfinding_brain.tscn" id="8_036vt"]
+[ext_resource type="PackedScene" uid="uid://dfdw1m722hj0g" path="res://Enemies/Components/v_2_brain.tscn" id="9_xa4gx"]
 [ext_resource type="Texture2D" uid="uid://dkjx8jcdvrsbc" path="res://Enemies/Sprites and Assets/Boss Bar.png" id="11_w315e"]
 [ext_resource type="Texture2D" uid="uid://bdg3en600yk0y" path="res://Enemies/Sprites and Assets/Boss Life.png" id="12_3yeuw"]
 
@@ -51,14 +53,6 @@ texture = ExtResource("1_fmwx1")
 scale = Vector2(0.21875, 0.21875)
 shape = SubResource("CircleShape2D_uypm2")
 
-[node name="pathfinding" type="NavigationAgent2D" parent="."]
-
-[node name="lineOfSight" type="RayCast2D" parent="."]
-
-[node name="sightTimer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
-
 [node name="attackTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
@@ -75,6 +69,11 @@ bossBar = NodePath("../boss bar/TextureProgressBar")
 [node name="Attacks" parent="." instance=ExtResource("5_j7rat")]
 
 [node name="Particles" parent="." instance=ExtResource("6_y7puy")]
+
+[node name="pathfindingBrain" parent="." instance=ExtResource("8_036vt")]
+speed = 2000.0
+
+[node name="v2Brain" parent="." instance=ExtResource("9_xa4gx")]
 
 [node name="boss bar" type="CanvasLayer" parent="."]
 layer = 0
@@ -95,5 +94,4 @@ texture_under = ExtResource("11_w315e")
 texture_progress = ExtResource("12_3yeuw")
 metadata/_edit_use_anchors_ = true
 
-[connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

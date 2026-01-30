@@ -9,6 +9,7 @@ var center: Vector2
 var state = 1
 var parent: CharacterBody2D
 var player: Player
+var attacks: AttacksComp
 @export var distance: float = 120
 @export var speed: float = 3600
 @onready var paths: = $Paths.get_children()
@@ -19,23 +20,25 @@ func _ready() -> void:
 	await get_tree().create_timer(0.01).timeout
 	parent = get_parent()
 	player = get_parent().player
+	attacks = get_parent().attacks
 	changeDir()
 	parent.health_handler.connect("hit", _on_hit)
 	for i in paths.size():
 		paths[i].target_position = paths[i].target_position.rotated(deg_to_rad(i * (360/paths.size())))
 
 func move():
-	center = player.current + player.screenSize * 0.5
-	movementDir = to_local(player.global_position).normalized()
-	if state == 1:
-		if parent.global_position.distance_to(player.global_position) < distance:
-			findPath(180)
-		else:
-			findPath(0)
-	if state == 2:
-		parent.velocity += dir * speed * 1.25 * get_physics_process_delta_time()
-	parent.velocity *= 0.7225
-	parent.move_and_slide()
+	if not attacks.isAttacking:
+		center = player.current + player.screenSize * 0.5
+		movementDir = to_local(player.global_position).normalized()
+		if state == 1:
+			if parent.global_position.distance_to(player.global_position) < distance:
+				findPath(180)
+			else:
+				findPath(0)
+		if state == 2:
+			parent.velocity += dir * speed * 1.25 * get_physics_process_delta_time()
+		parent.velocity *= 0.7225
+		parent.move_and_slide()
 
 func findPath(dir: float):
 	var highest: choice

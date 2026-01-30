@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cenknsm871ybr"]
+
+[ext_resource type="Script" path="res://Enemies/Components/pathfinding_brain.gd" id="1_3v3kq"]
+
+[node name="pathfindingBrain" type="Node2D"]
+script = ExtResource("1_3v3kq")
+
+[node name="lineOfSight" type="RayCast2D" parent="."]
+
+[node name="pathfinding" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="sightTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]

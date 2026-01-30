@@ -19,7 +19,6 @@ func _ready() -> void:
 	sounds = parent.sounds
 	particles = parent.particles
 	player = parent.player
-	print(get_parent().particles)
 
 func _physics_process(delta: float) -> void:
 	if isAttacking:

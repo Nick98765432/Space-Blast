@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dlsq1o0y6vrt"]
+[gd_scene load_steps=16 format=3 uid="uid://dlsq1o0y6vrt"]
 
 [ext_resource type="Script" path="res://Enemies/dash_guy.gd" id="1_fmvda"]
 [ext_resource type="Texture2D" uid="uid://cxyqnx6xehoc5" path="res://Enemies/Sprites and Assets/DashGuy.png" id="2_tmatv"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="4_w0h5t"]
 [ext_resource type="PackedScene" uid="uid://c06hquc6cp2ot" path="res://Enemies/Components/sounds.tscn" id="5_gqyek"]
 [ext_resource type="PackedScene" uid="uid://dfdw1m722hj0g" path="res://Enemies/Components/v_2_brain.tscn" id="6_037e2"]
+[ext_resource type="PackedScene" uid="uid://cenknsm871ybr" path="res://Enemies/Components/pathfinding_brain.tscn" id="7_5eyw8"]
 
 [sub_resource type="Shader" id="Shader_cb8et"]
 code = "shader_type canvas_item;
@@ -66,20 +67,12 @@ texture = ExtResource("2_tmatv")
 scale = Vector2(0.21875, 0.21875)
 shape = SubResource("CircleShape2D_04dwh")
 
-[node name="pathfinding" type="NavigationAgent2D" parent="."]
-
 [node name="spawnPart" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_e5hyn")
 lifetime = 0.5
 one_shot = true
-
-[node name="lineOfSight" type="RayCast2D" parent="."]
-
-[node name="sightTimer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
 
 [node name="attackTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -100,9 +93,10 @@ shape = SubResource("CircleShape2D_jma4l")
 distance = 100.0
 speed = 2400.0
 
+[node name="pathfindingBrain" parent="." instance=ExtResource("7_5eyw8")]
+
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("4_p17o5")
 health = 12.0
 
-[connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

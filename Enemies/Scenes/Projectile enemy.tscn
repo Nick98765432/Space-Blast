@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ci60x2iasc3fy"]
+[gd_scene load_steps=24 format=3 uid="uid://ci60x2iasc3fy"]
 
 [ext_resource type="Script" path="res://Enemies/projectile_enemy.gd" id="1_phsj8"]
 [ext_resource type="Texture2D" uid="uid://dq8eqdkltadel" path="res://Enemies/Sprites and Assets/proj.png" id="2_8at0m"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_lyjrs"]
 [ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="5_gt1r2"]
 [ext_resource type="AudioStream" uid="uid://bhlrdaxayfawi" path="res://Sounds/SFX/shoot - V-ktor.wav" id="6_np14p"]
+[ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="7_0vgq4"]
 
 [sub_resource type="Shader" id="Shader_ghj7i"]
 code = "shader_type canvas_item;
@@ -173,6 +174,8 @@ stream = ExtResource("5_gt1r2")
 
 [node name="shootSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("6_np14p")
+
+[node name="Particles" parent="." instance=ExtResource("7_0vgq4")]
 
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("4_cj8ft")

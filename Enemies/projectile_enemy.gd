@@ -14,7 +14,6 @@ var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn"
 @onready var enemy_sprite: Sprite2D = $enemySprite
 @onready var dir_timer: Timer = $dirTimer
 @onready var shot_cool: Timer = $shotCool
-@onready var parry_tele: GPUParticles2D = $parryTele
 @onready var health_handler: healthHandler = $healthHandler
 @onready var beep: AudioStreamPlayer = $Sounds/beep
 @onready var shoot_sfx: AudioStreamPlayer = $Sounds/shootSFX
@@ -30,7 +29,6 @@ func _physics_process(delta: float) -> void:
 		await get_tree().create_timer(0.5).timeout
 		movementDir = to_local(player.global_position).normalized()
 		enemy_sprite.look_at(player.global_position)
-		parry_tele.rotation = enemy_sprite.rotation
 		line_of_sight.target_position = to_local(player.global_position)
 		line_of_sight.force_raycast_update()
 		#checks for line of sight. if not, pathfind until line of sight is achieved, otherwise movetoward player and retreat if too close in circle motion
@@ -97,7 +95,6 @@ func _on_shot_cool_timeout() -> void:
 		while player.targeted:
 			await get_tree().create_timer(0.25).timeout
 		player.targeted = true
-		parry_tele.emitting = true
 		beep.play()
 		await get_tree().create_timer(0.2).timeout
 		player.targeted = false

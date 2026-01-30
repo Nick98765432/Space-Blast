@@ -21,11 +21,6 @@ var last: int
 @onready var hitbox: Area2D = $hitbox
 @onready var brain: v2Brain = $v2Brain
 
-
-func _ready() -> void:
-	particles.spawn_part.emitting = true
-
-
 func _physics_process(delta: float) -> void:
 	if not dead:
 		await get_tree().create_timer(0.5).timeout

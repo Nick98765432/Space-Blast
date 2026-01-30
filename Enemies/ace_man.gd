@@ -2,14 +2,10 @@ extends CharacterBody2D
 
 var last: int
 var dead = false
-var speed = 2000
 var movementDir
 var pos: Vector2
 var combo: Vector2i
 @export var player: Player
-@onready var pathfinding: NavigationAgent2D = $pathfinding
-@onready var line_of_sight: RayCast2D = $lineOfSight
-@onready var sight_timer: Timer = $sightTimer
 @onready var enemy_sprite: Sprite2D = $enemySprite
 @onready var attack_timer: Timer = $attackTimer
 @onready var hitbox: Area2D = $hitbox
@@ -17,14 +13,8 @@ var combo: Vector2i
 @onready var attacks: AttacksComp = $Attacks
 @onready var sounds: Sounds = $Sounds
 @onready var particles: Particles = $Particles
-
-
-
-
-func _ready() -> void:
-	particles.teleport.set_as_top_level(true)
-	particles.spawn_part.emitting = true
-	makePath()
+@onready var pathfinding_brain: pathfinding = $pathfindingBrain
+@onready var v_2_brain: v2Brain = $v2Brain
 
 
 func _physics_process(delta: float) -> void:
@@ -33,12 +23,9 @@ func _physics_process(delta: float) -> void:
 		movementDir = to_local(player.global_position).normalized()
 		if not attacks.isAttacking:
 			enemy_sprite.look_at(player.global_position)
-		particles.parry_tele.rotation = enemy_sprite.rotation
-		particles.unparry_tele.rotation = enemy_sprite.rotation
-		line_of_sight.target_position = to_local(player.global_position)
-		line_of_sight.force_raycast_update()
 		#checks for line of sight. if not, pathfind until line of sight is achieved, otherwise movetoward player
-		if line_of_sight.get_collider() == player:
+		if pathfinding_brain.lineOfSight():
+			v_2_brain.move()
 			if not attacks.chosen:
 				combo.x = randi_range(1, 4)
 				if combo.x == last and last:
@@ -47,19 +34,9 @@ func _physics_process(delta: float) -> void:
 				attack_timer.start()
 				attacks.chosen = true
 		else:
-			enemy_sprite.look_at(pathfinding.get_next_path_position())
-			var dir = to_local(pathfinding.get_next_path_position()).normalized()
-			velocity += (speed) * dir * delta
-			if global_position.distance_to(player.global_position) < 3:
-				velocity += (speed) * dir * delta * 50
+			pathfinding_brain.moveTowardsPath()
 		velocity *= 0.85
 		move_and_slide()
-
-func makePath():
-	pathfinding.target_position = player.global_position
-
-func _on_sight_timer_timeout() -> void:
-	makePath()
 
 func _on_attack_timer_timeout() -> void:
 	#combos checks for type and cycles attacks
