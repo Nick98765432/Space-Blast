@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbu1xieqaka4t"]
+
+[ext_resource type="Script" path="res://Enemies/Components/proj_brain.gd" id="1_egj0v"]
+
+[node name="projBrain" type="Node2D"]
+script = ExtResource("1_egj0v")
+
+[node name="dirTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="stateChange" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="dirTimer" to="." method="_on_dir_timer_timeout"]
+[connection signal="timeout" from="stateChange" to="." method="_on_state_change_timeout"]

@@ -97,6 +97,10 @@ func preSingleShot():
 	preShoot(1)
 	sounds.shot_sfx.play()
 
+func homingShot():
+	preShoot(2)
+	sounds.shot_sfx.play()
+
 func shotgun():
 	sounds.shotgun_sfx.play()
 	var orig = parent.enemy_sprite.rotation_degrees

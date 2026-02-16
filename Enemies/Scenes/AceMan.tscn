@@ -69,6 +69,7 @@ bossBar = NodePath("../boss bar/TextureProgressBar")
 [node name="Attacks" parent="." instance=ExtResource("5_j7rat")]
 
 [node name="Particles" parent="." instance=ExtResource("6_y7puy")]
+texture = ExtResource("1_fmwx1")
 
 [node name="pathfindingBrain" parent="." instance=ExtResource("8_036vt")]
 speed = 2000.0

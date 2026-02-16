@@ -1,13 +1,12 @@
-[gd_scene load_steps=27 format=3 uid="uid://besa8sh5wvqpr"]
+[gd_scene load_steps=12 format=3 uid="uid://besa8sh5wvqpr"]
 
 [ext_resource type="Script" path="res://Enemies/tele_guy.gd" id="1_a0x31"]
 [ext_resource type="Texture2D" uid="uid://ic5rmg46vvx2" path="res://Enemies/Sprites and Assets/teleGuy.png" id="2_y7c74"]
+[ext_resource type="PackedScene" uid="uid://c06hquc6cp2ot" path="res://Enemies/Components/sounds.tscn" id="3_0dtta"]
 [ext_resource type="Script" path="res://Enemies/health.gd" id="3_73vox"]
-[ext_resource type="Texture2D" uid="uid://b3ct4sarc83iu" path="res://Enemies/attacks/Sprites and assets/parriable.png" id="3_kavix"]
-[ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_yao72"]
-[ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="5_2a8xu"]
-[ext_resource type="AudioStream" uid="uid://bhlrdaxayfawi" path="res://Sounds/SFX/shoot - V-ktor.wav" id="6_yxst8"]
-[ext_resource type="AudioStream" uid="uid://dny2jn0axu2qu" path="res://Sounds/SFX/outroelison__teleport.wav" id="7_rx4yk"]
+[ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="4_5sh86"]
+[ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="6_nsamm"]
+[ext_resource type="PackedScene" uid="uid://cbu1xieqaka4t" path="res://Enemies/Components/proj_brain.tscn" id="9_j3stn"]
 
 [sub_resource type="Shader" id="Shader_u0n1h"]
 code = "shader_type canvas_item;
@@ -33,80 +32,6 @@ shader_parameter/mixAmount = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lkgh1"]
 
-[sub_resource type="Curve" id="Curve_60t4k"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.56338, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_oaupe"]
-curve = SubResource("Curve_60t4k")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_acgrp"]
-particle_flag_disable_z = true
-emission_shape_offset = Vector3(10, -3, 0)
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_oaupe")
-
-[sub_resource type="Curve" id="Curve_c462u"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_mdccn"]
-curve = SubResource("Curve_c462u")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fk58s"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
-scale_min = 100.0
-scale_max = 100.0
-scale_curve = SubResource("CurveTexture_mdccn")
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m4vkd"]
-particles_animation = true
-particles_anim_h_frames = 12
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Curve" id="Curve_qlotv"]
-_data = [Vector2(0.028169, 1), 0.0, 0.0, 0, 0, Vector2(0.535211, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_w4yih"]
-curve = SubResource("Curve_qlotv")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y6144"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 45.0
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_w4yih")
-anim_speed_min = 1.0
-anim_speed_max = 1.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vhear"]
-particle_flag_disable_z = true
-spread = 180.0
-initial_velocity_min = 484.85
-initial_velocity_max = 621.21
-gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 5.0
-
-[sub_resource type="Curve" id="Curve_24kuk"]
-_data = [Vector2(0.056338, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_gf77r"]
-curve = SubResource("Curve_24kuk")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o4ovt"]
-particle_flag_disable_z = true
-angle_min = 1.07288e-05
-angle_max = 1.07288e-05
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_gf77r")
-hue_variation_min = -2.23517e-08
-hue_variation_max = -2.23517e-08
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_3oae3"]
 radius = 19.0
 
@@ -125,54 +50,6 @@ texture = ExtResource("2_y7c74")
 [node name="wall collisions" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lkgh1")
 
-[node name="parryTele" type="GPUParticles2D" parent="."]
-z_index = 1
-emitting = false
-amount = 1
-process_material = SubResource("ParticleProcessMaterial_acgrp")
-texture = ExtResource("3_kavix")
-lifetime = 0.5
-one_shot = true
-
-[node name="spawnPart" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 1
-process_material = SubResource("ParticleProcessMaterial_fk58s")
-lifetime = 0.5
-one_shot = true
-
-[node name="Explode1" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_m4vkd")
-emitting = false
-amount = 3
-process_material = SubResource("ParticleProcessMaterial_y6144")
-texture = ExtResource("4_yao72")
-one_shot = true
-explosiveness = 1.0
-
-[node name="Explode2" type="GPUParticles2D" parent="."]
-self_modulate = Color(1, 0.760784, 0, 1)
-emitting = false
-amount = 40
-process_material = SubResource("ParticleProcessMaterial_vhear")
-one_shot = true
-explosiveness = 1.0
-
-[node name="Teleport" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 1
-process_material = SubResource("ParticleProcessMaterial_o4ovt")
-texture = ExtResource("2_y7c74")
-one_shot = true
-
-[node name="dirTimer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
-
-[node name="stateChange" type="Timer" parent="."]
-wait_time = 1.5
-one_shot = true
-
 [node name="shotCool" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
@@ -182,22 +59,17 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("CircleShape2D_3oae3")
 
-[node name="Sounds" type="Node2D" parent="."]
+[node name="Sounds" parent="." instance=ExtResource("3_0dtta")]
 
-[node name="beep" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("5_2a8xu")
-
-[node name="shootSFX" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("6_yxst8")
-
-[node name="teleportSFX" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("7_rx4yk")
-volume_db = 6.0
+[node name="Particles" parent="." instance=ExtResource("4_5sh86")]
+texture = ExtResource("2_y7c74")
 
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("3_73vox")
 health = 8.0
 
-[connection signal="timeout" from="dirTimer" to="." method="_on_dir_timer_timeout"]
-[connection signal="timeout" from="stateChange" to="." method="_on_state_change_timeout"]
+[node name="Attacks" parent="." instance=ExtResource("6_nsamm")]
+
+[node name="projBrain" parent="." instance=ExtResource("9_j3stn")]
+
 [connection signal="timeout" from="shotCool" to="." method="_on_shot_cool_timeout"]

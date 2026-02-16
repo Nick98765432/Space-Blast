@@ -2,6 +2,7 @@ extends Node2D
 class_name Particles
 
 var parent
+@export var texture: Texture2D
 @onready var parry_tele: GPUParticles2D = $parryTele
 @onready var unparry_tele: GPUParticles2D = $unparryTele
 @onready var spawn_part: GPUParticles2D = $spawnPart
@@ -10,6 +11,7 @@ var parent
 @onready var explode_2: GPUParticles2D = $Explode2
 
 func _ready() -> void:
+	teleport.texture = texture
 	parent = get_parent()
 	teleport.set_as_top_level(true)
 	spawn_part.emitting = true

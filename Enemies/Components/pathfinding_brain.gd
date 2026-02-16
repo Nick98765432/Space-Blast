@@ -6,6 +6,7 @@ var player
 @export var speed: float = 1000
 @onready var line_of_sight: RayCast2D = $lineOfSight
 @onready var sight_timer: Timer = $sightTimer
+@onready var path_finding: NavigationAgent2D = $pathfinding
 
 
 func _ready() -> void:
@@ -19,14 +20,14 @@ func _physics_process(delta: float) -> void:
 	line_of_sight.force_raycast_update()
 	
 func makePath():
-	$pathfinding.target_position = player.global_position
+	path_finding.target_position = player.global_position
 
 func _on_sight_timer_timeout() -> void:
 	makePath()
 
 func moveTowardsPath():
-	parent.enemy_sprite.look_at($pathfinding.get_next_path_position())
-	var dir = to_local($pathfinding.get_next_path_position()).normalized()
+	parent.enemy_sprite.look_at(path_finding.get_next_path_position())
+	var dir = to_local(path_finding.get_next_path_position()).normalized()
 	parent.velocity += (speed) * dir * get_physics_process_delta_time()
 	if parent.global_position.distance_to(player.global_position) < 3:
 		parent.velocity += (speed) * dir * get_physics_process_delta_time() * 50
