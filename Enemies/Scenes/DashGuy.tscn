@@ -84,6 +84,7 @@ one_shot = true
 shape = SubResource("CircleShape2D_jma4l")
 
 [node name="Attacks" parent="." instance=ExtResource("3_8p0md")]
+dashSpeed = 24000.0
 
 [node name="Particles" parent="." instance=ExtResource("4_w0h5t")]
 

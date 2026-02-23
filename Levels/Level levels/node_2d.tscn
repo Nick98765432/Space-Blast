@@ -71,7 +71,7 @@ script = ExtResource("8_lqixe")
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_re1we")]
-position = Vector2(-388, 208)
+position = Vector2(266, 162)
 
 [node name="Spawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
 position = Vector2(106, 144)
@@ -301,12 +301,6 @@ player = NodePath("../Player")
 position = Vector2(178, 172)
 type = 4
 encounter = Vector2i(0, 3)
-player = NodePath("../Player")
-
-[node name="Spawner41" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
-position = Vector2(-144, 177)
-extraHealth = true
-type = 4
 player = NodePath("../Player")
 
 [node name="Spawner14" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]

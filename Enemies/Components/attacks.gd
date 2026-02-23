@@ -12,6 +12,7 @@ var parent := get_parent()
 var sounds: Sounds
 var particles: Particles
 var player: Player
+@export var dashSpeed: float = 36000
 
 func _ready() -> void:
 	await get_tree().create_timer(0.01).timeout
@@ -29,7 +30,7 @@ func _physics_process(delta: float) -> void:
 			attack(false)
 
 func attack(parry):
-	parent.velocity = attackDir * 36000 * 0.016667
+	parent.velocity = attackDir * dashSpeed * 0.016667
 	parent.enemy_sprite.look_at(parent.to_global(parent.velocity))
 	for i in parent.hitbox.get_overlapping_bodies():
 		if i is Player:
@@ -56,7 +57,7 @@ func comboDone():
 	isParryable = false
 	chosen = false
 
-func dash(parriable, predict):
+func dash(parriable: bool, predict: bool):
 	if parriable:
 		telegraph()
 	else:
@@ -68,7 +69,7 @@ func dash(parriable, predict):
 	isParryable = parriable
 	attackDir = parent.movementDir
 	if predict:
-		attackDir = parent.to_local((player.global_position + (player.velocity * (parent.global_position.distance_to(player.global_position)/600)))).normalized()
+		attackDir = parent.to_local((player.global_position + (player.velocity * (parent.global_position.distance_to(player.global_position)/(dashSpeed/60))))).normalized()
 	if parriable:
 		attackType = 1
 	else:
@@ -82,6 +83,10 @@ func shoot(type):
 		energy.rotation = parent.enemy_sprite.rotation
 		energy.global_position = parent.global_position
 		get_tree().get_root().add_child(energy)
+
+func singleShot():
+	shoot(1)
+	sounds.shot_sfx.play()
 
 func preShoot(type):
 	var energy = shot.instantiate()

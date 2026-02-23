@@ -3,27 +3,22 @@ extends CharacterBody2D
 var dead = false
 var speed = 1000
 var movementDir
-var attackDir
-var isParryable: bool = false
-var isAttacking: bool = false
-var damageDone: bool = false
 var pos: Vector2
 @export var player: Node
 @onready var pathfinding: NavigationAgent2D = $pathfinding
 @onready var line_of_sight: RayCast2D = $lineOfSight
 @onready var sight_timer: Timer = $sightTimer
 @onready var enemy_sprite: Sprite2D = $enemySprite
-@onready var parry_tele: GPUParticles2D = $parryTele
 @onready var attack_timer: Timer = $attackTimer
 @onready var hitbox: Area2D = $hitbox
 @onready var health_handler: Node2D = $healthHandler
-@onready var dash_sfx: AudioStreamPlayer = $Sounds/dashSFX
-@onready var beep: AudioStreamPlayer = $Sounds/beep
+@onready var particles: Particles = $Particles
+@onready var attacks: AttacksComp = $Attacks
+@onready var sounds: Sounds = $Sounds
 
 
 
 func _ready() -> void:
-	$spawnPart.emitting = true
 	makePath()
 
 
@@ -31,8 +26,8 @@ func _physics_process(delta: float) -> void:
 	if not dead:
 		await get_tree().create_timer(0.5).timeout
 		movementDir = to_local(player.global_position).normalized()
-		enemy_sprite.look_at(player.global_position)
-		parry_tele.rotation = enemy_sprite.rotation
+		if not attacks.isAttacking:
+			enemy_sprite.look_at(player.global_position)
 		line_of_sight.target_position = to_local(player.global_position)
 		line_of_sight.force_raycast_update()
 		#checks for line of sight. if not, pathfind until line of sight is achieved, otherwise movetoward player
@@ -40,32 +35,13 @@ func _physics_process(delta: float) -> void:
 			if global_position.distance_to(player.global_position) > 70:
 				velocity += movementDir * speed * delta
 			else:
-				if attack_timer.time_left <= 0 and not(isParryable) and not(isAttacking):
+				if attack_timer.time_left <= 0 and not(attacks.chosen):
+					attacks.chosen = true
 					attack_timer.start()
-					parry_tele.restart()
-					beep.play()
-			
 		else:
 			enemy_sprite.look_at(pathfinding.get_next_path_position())
 			var dir = to_local(pathfinding.get_next_path_position()).normalized()
 			velocity += (speed) * dir * delta
-		#attack
-		if isAttacking:
-			velocity = attackDir * 18000 * delta
-			enemy_sprite.look_at(to_global(velocity))
-			#parrible
-			for i in hitbox.get_overlapping_bodies():
-				if i is Player:
-					if not dead:
-						if i.parry:
-							if isParryable:
-								health_handler.parried()
-								damageDone = true
-						else:
-							if not(damageDone):
-								i.damage(30)
-								damageDone = true
-					break
 		velocity *= 0.85
 		move_and_slide()
 
@@ -77,14 +53,9 @@ func _on_sight_timer_timeout() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	if not dead:
-		isAttacking = true
-		damageDone = false
-		isParryable = true
-		attackDir = movementDir
-		pos = player.global_position
-		dash_sfx.play()
+		attacks.dash(false, false)
 		await get_tree().create_timer(0.5).timeout
-		isAttacking = false
-		isParryable = false
+		attacks.done()
+		attacks.comboDone()
 	
 	
