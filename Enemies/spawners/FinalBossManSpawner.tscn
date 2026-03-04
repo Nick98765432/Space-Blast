@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd40b2hfwiidv"]
+
+[ext_resource type="Texture2D" uid="uid://cb5vbn80xhgw7" path="res://Enemies/Sprites and Assets/spade boss.png" id="1_4x3t2"]
+[ext_resource type="Script" path="res://Enemies/spawners/enemy_spawner.gd" id="1_retkx"]
+[ext_resource type="PackedScene" uid="uid://c4ppiwa3gxtir" path="res://Enemies/Scenes/AceMan.tscn" id="2_n0cge"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qvroy"]
+radius = 33.0606
+
+[node name="FinalBossManSpawner" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_retkx")
+guy = ExtResource("2_n0cge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qvroy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4x3t2")

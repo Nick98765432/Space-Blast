@@ -98,12 +98,22 @@ func preShoot(type):
 	energy.global_position = parent.global_position
 	get_tree().get_root().add_child(energy)
 
+func normalShoot(type):
+	var energy = shot.instantiate()
+	energy.type = type
+	energy.target = player
+	energy.rotation = parent.enemy_sprite.rotation
+	if type == 3:
+		energy.rotation_degrees += randf_range(-20, 20)
+	energy.global_position = parent.global_position
+	get_tree().get_root().add_child(energy)
+	
 func preSingleShot():
 	preShoot(1)
 	sounds.shot_sfx.play()
 
 func homingShot():
-	preShoot(2)
+	normalShoot(2)
 	sounds.shot_sfx.play()
 
 func shotgun():

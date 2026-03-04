@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0tlo2ft5d445"]
+
+[ext_resource type="Texture2D" uid="uid://nvxfte3traah" path="res://Enemies/Sprites and Assets/evil Space Blast man.png" id="1_tun82"]
+[ext_resource type="Script" path="res://Enemies/spawners/enemy_spawner.gd" id="1_w2m0t"]
+[ext_resource type="PackedScene" uid="uid://dxh3f8dmbtts7" path="res://Enemies/Scenes/GunMan.tscn" id="2_hn5ha"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ldbqq"]
+radius = 33.0606
+
+[node name="GunManSpawner" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_w2m0t")
+guy = ExtResource("2_hn5ha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ldbqq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tun82")

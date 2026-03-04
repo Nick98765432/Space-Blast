@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2ibhn8rcdb1e"]
+
+[ext_resource type="Script" path="res://Enemies/spawners/enemy_spawner.gd" id="1_sru2a"]
+[ext_resource type="Texture2D" uid="uid://decqqpikrw5fl" path="res://Enemies/Sprites and Assets/Melee.png" id="1_vq3yn"]
+[ext_resource type="PackedScene" uid="uid://csiqn5fgo30nh" path="res://Enemies/Scenes/melee enemy.tscn" id="2_xt8ui"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tugby"]
+radius = 33.0606
+
+[node name="meleeSpawner" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_sru2a")
+guy = ExtResource("2_xt8ui")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tugby")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vq3yn")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt5edhor2d5qh"]
+
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/rooms.gd" id="1_6uqbu"]
+
+[node name="Rooms" type="Node2D"]
+script = ExtResource("1_6uqbu")

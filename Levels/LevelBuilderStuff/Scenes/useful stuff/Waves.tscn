@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c010tag2g5f0o"]
+
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/waves.gd" id="1_04dqg"]
+
+[node name="Waves" type="Node2D"]
+script = ExtResource("1_04dqg")

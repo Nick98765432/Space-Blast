@@ -8,11 +8,11 @@
 [ext_resource type="AudioStream" uid="uid://bi20r3lox2aba" path="res://Sounds/Music/Another Chance - Infrared Scale.wav" id="3_wb4fq"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="4_6g4th"]
 [ext_resource type="PackedScene" uid="uid://bnhvdwpsykjnm" path="res://Levels/LevelBuilderStuff/Scenes/Spawner.tscn" id="5_mnti6"]
-[ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/roomGate.tscn" id="6_58jge"]
-[ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/nextRoom.tscn" id="7_rod3q"]
+[ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/roomGate.tscn" id="6_58jge"]
+[ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/nextRoom.tscn" id="7_rod3q"]
 [ext_resource type="Script" path="res://Levels/camera_2d.gd" id="8_lqixe"]
 [ext_resource type="PackedScene" uid="uid://dtfsaa7v8aerr" path="res://Levels/LevelBuilderStuff/Scenes/upgradeTower.tscn" id="9_busbi"]
-[ext_resource type="PackedScene" uid="uid://hx5hf1kujilx" path="res://Levels/LevelBuilderStuff/Scenes/nextEncounter.tscn" id="10_mkktg"]
+[ext_resource type="PackedScene" uid="uid://hx5hf1kujilx" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/nextEncounter.tscn" id="10_mkktg"]
 [ext_resource type="Texture2D" uid="uid://g1xvkre0j6i5" path="res://Levels/Sprites and Assets/space.png" id="10_w2tp5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3rxq0"]
@@ -70,8 +70,8 @@ position_smoothing_enabled = true
 script = ExtResource("8_lqixe")
 player = NodePath("../Player")
 
-[node name="Player" parent="." instance=ExtResource("1_re1we")]
-position = Vector2(266, 162)
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_re1we")]
+position = Vector2(-410, 195)
 
 [node name="Spawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_mnti6")]
 position = Vector2(106, 144)
