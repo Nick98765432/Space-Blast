@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="6_nsamm"]
 [ext_resource type="PackedScene" uid="uid://cbu1xieqaka4t" path="res://Enemies/Components/proj_brain.tscn" id="9_j3stn"]
 
-[sub_resource type="Shader" id="Shader_u0n1h"]
+[sub_resource type="Shader" id="Shader_8q8p2"]
 code = "shader_type canvas_item;
 uniform vec4 flashColour = vec4(1.0);
 uniform float mixAmount = 0.9;
@@ -26,7 +26,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_af3la"]
 resource_local_to_scene = true
-shader = SubResource("Shader_u0n1h")
+shader = SubResource("Shader_8q8p2")
 shader_parameter/flashColour = Vector4(1, 1, 1, 1)
 shader_parameter/mixAmount = 0.0
 

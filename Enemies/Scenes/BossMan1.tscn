@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://b3ct4sarc83iu" path="res://Enemies/attacks/Sprites and assets/parriable.png" id="2_px7im"]
 [ext_resource type="Texture2D" uid="uid://ccaw0kv4536d1" path="res://Enemies/Sprites and Assets/bossMan1.png" id="2_rf22h"]
 [ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="3_ultkt"]
-[ext_resource type="Script" path="res://Enemies/health.gd" id="4_03edg"]
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="5_4osuj"]
 [ext_resource type="AudioStream" uid="uid://ceq45fr44qmqb" path="res://Sounds/SFX/dash.wav" id="6_gjq6p"]
 [ext_resource type="AudioStream" uid="uid://cq5od7p62h3ie" path="res://Sounds/SFX/Shotgun-Clueless79.wav" id="7_svclv"]
 [ext_resource type="AudioStream" uid="uid://bqc34322q7ufl" path="res://Sounds/SFX/beep.wav" id="8_khxfb"]
+[ext_resource type="PackedScene" uid="uid://b5iytktg3b2ac" path="res://Enemies/Components/health_handler.tscn" id="9_1kgpp"]
 [ext_resource type="Texture2D" uid="uid://dkjx8jcdvrsbc" path="res://Enemies/Sprites and Assets/Boss Bar.png" id="10_1po1a"]
 [ext_resource type="Texture2D" uid="uid://bdg3en600yk0y" path="res://Enemies/Sprites and Assets/Boss Life.png" id="11_0umyc"]
 
@@ -187,10 +187,7 @@ pitch_scale = 2.04
 [node name="beep" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("8_khxfb")
 
-[node name="healthHandler" type="Node2D" parent="." node_paths=PackedStringArray("bossBar")]
-script = ExtResource("4_03edg")
-health = 15.0
-bossBar = NodePath("../boss bar/TextureProgressBar")
+[node name="healthHandler" parent="." instance=ExtResource("9_1kgpp")]
 
 [node name="boss bar" type="CanvasLayer" parent="."]
 layer = 0

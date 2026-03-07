@@ -12,7 +12,7 @@ var player
 func _ready() -> void:
 	await get_tree().create_timer(0.01).timeout
 	parent = get_parent()
-	player = parent.player
+	player = get_parent().player
 
 func _physics_process(delta: float) -> void:
 	await get_tree().create_timer(0.01).timeout

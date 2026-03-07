@@ -37,8 +37,7 @@ func move():
 				findPath(0)
 		if state == 2:
 			parent.velocity += dir * speed * 1.25 * get_physics_process_delta_time()
-		parent.velocity *= 0.7225
-		parent.move_and_slide()
+		parent.velocity *= 0.85
 
 func findPath(dir: float):
 	var highest: choice

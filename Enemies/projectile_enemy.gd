@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			pathfinding_brain.moveTowardsPath()
 			velocity *= 0.85
-			move_and_slide()
+		move_and_slide()
 
 
 func _on_shot_cool_timeout() -> void:

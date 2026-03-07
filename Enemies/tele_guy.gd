@@ -1,8 +1,6 @@
 extends CharacterBody2D
 
 var dead = false
-var isParryable: bool = false
-var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn")
 @export var player: Player
 @onready var enemy_sprite: Sprite2D = $enemySprite
 @onready var shot_cool: Timer = $shotCool
@@ -22,16 +20,7 @@ func _physics_process(delta: float) -> void:
 		if shot_cool.time_left <= 0:
 			shot_cool.start()
 		proj_brain.move()
-
-
-func shoot(type):
-	if not dead:
-		var energy = shot.instantiate()
-		energy.type = type
-		energy.target = player
-		energy.rotation = enemy_sprite.rotation
-		energy.global_position = global_position
-		get_tree().get_root().add_child(energy)
+		move_and_slide()
 
 
 

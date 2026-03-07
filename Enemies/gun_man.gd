@@ -3,8 +3,6 @@ class_name v2
 
 var dead = false
 var attacking: bool = false
-#movement
-#used for dash
 var isParryable: bool = false
 var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn")
 var last: int

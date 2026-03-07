@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://u517u5q5jdrt"]
+
+[ext_resource type="Script" path="res://Enemies/Scenes/dashy_proj_guy.gd" id="1_vodce"]
+[ext_resource type="Texture2D" uid="uid://ic5rmg46vvx2" path="res://Enemies/Sprites and Assets/teleGuy.png" id="2_f257o"]
+[ext_resource type="PackedScene" uid="uid://du1ro4us48i83" path="res://Enemies/Components/hurtbox.tscn" id="3_0ilk7"]
+[ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="4_x3agq"]
+[ext_resource type="PackedScene" uid="uid://b5iytktg3b2ac" path="res://Enemies/Components/health_handler.tscn" id="5_eqbi4"]
+[ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="6_q5bvx"]
+[ext_resource type="PackedScene" uid="uid://cenknsm871ybr" path="res://Enemies/Components/pathfinding_brain.tscn" id="7_2brvm"]
+[ext_resource type="PackedScene" uid="uid://cbu1xieqaka4t" path="res://Enemies/Components/proj_brain.tscn" id="8_joclr"]
+[ext_resource type="PackedScene" uid="uid://c06hquc6cp2ot" path="res://Enemies/Components/sounds.tscn" id="9_ud5q3"]
+
+[sub_resource type="Shader" id="Shader_u0n1h"]
+code = "shader_type canvas_item;
+uniform vec4 flashColour = vec4(1.0);
+uniform float mixAmount = 0.9;
+void fragment() {
+	vec4 colour = texture(TEXTURE, UV);
+	colour.rgb = mix(colour.rgb,flashColour.rgb,mixAmount);
+	COLOR = colour;
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0grxr"]
+resource_local_to_scene = true
+shader = SubResource("Shader_u0n1h")
+shader_parameter/flashColour = Vector4(1, 1, 1, 1)
+shader_parameter/mixAmount = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_88upw"]
+
+[node name="DashyProjGuy" type="CharacterBody2D" groups=["enemies"]]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 6
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_vodce")
+
+[node name="enemySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_0grxr")
+texture = ExtResource("2_f257o")
+
+[node name="wall collisions" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_88upw")
+
+[node name="shotCool" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="sideDash" type="Timer" parent="."]
+autostart = true
+
+[node name="hitbox" parent="." instance=ExtResource("3_0ilk7")]
+
+[node name="Attacks" parent="." instance=ExtResource("4_x3agq")]
+
+[node name="healthHandler" parent="." instance=ExtResource("5_eqbi4")]
+health = 5.0
+
+[node name="Particles" parent="." instance=ExtResource("6_q5bvx")]
+
+[node name="projBrain" parent="." instance=ExtResource("8_joclr")]
+
+[node name="Sounds" parent="." instance=ExtResource("9_ud5q3")]
+
+[node name="pathfindingBrain" parent="." instance=ExtResource("7_2brvm")]
+speed = 500.0
+
+[connection signal="timeout" from="shotCool" to="." method="_on_shot_cool_timeout"]
+[connection signal="timeout" from="sideDash" to="." method="_on_side_dash_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dxh3f8dmbtts7"]
+[gd_scene load_steps=15 format=3 uid="uid://dxh3f8dmbtts7"]
 
 [ext_resource type="Script" path="res://Enemies/gun_man.gd" id="1_jniij"]
 [ext_resource type="Texture2D" uid="uid://nvxfte3traah" path="res://Enemies/Sprites and Assets/evil Space Blast man.png" id="2_xjowx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="5_b2m3o"]
 [ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="6_3emvg"]
 [ext_resource type="PackedScene" uid="uid://dfdw1m722hj0g" path="res://Enemies/Components/v_2_brain.tscn" id="6_aw67n"]
+[ext_resource type="PackedScene" uid="uid://cye7mxblquxyt" path="res://Enemies/Components/hitstopFix.tscn" id="8_s0mo2"]
 [ext_resource type="Texture2D" uid="uid://dkjx8jcdvrsbc" path="res://Enemies/Sprites and Assets/Boss Bar.png" id="11_qgidi"]
 [ext_resource type="Texture2D" uid="uid://bdg3en600yk0y" path="res://Enemies/Sprites and Assets/Boss Life.png" id="12_ijhlf"]
 
@@ -79,6 +80,8 @@ shape = SubResource("CircleShape2D_uo43w")
 script = ExtResource("5_465hg")
 health = 100.0
 bossBar = NodePath("../boss bar/TextureProgressBar")
+
+[node name="HitstopFix" parent="." instance=ExtResource("8_s0mo2")]
 
 [node name="boss bar" type="CanvasLayer" parent="."]
 layer = 0

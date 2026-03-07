@@ -29,10 +29,9 @@ func move():
 				$stateChange.start()
 		
 	parent.velocity *= 0.85
-	parent.move_and_slide()
 
 func dash():
-	parent.velocity = (movementDir * 1000).rotated(deg_to_rad(sideDir + 180))
+	parent.velocity = (movementDir * 700).rotated(deg_to_rad(randi_range(0, 360)))
 
 func _on_dir_timer_timeout() -> void:
 	changeDir()
