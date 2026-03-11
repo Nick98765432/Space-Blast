@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ly8tu4r8ls8n"]
 
 [ext_resource type="Script" path="res://Enemies/spawners/enemy_spawner.gd" id="1_26mxq"]
-[ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="1_mngrl"]
 [ext_resource type="PackedScene" uid="uid://u517u5q5jdrt" path="res://Enemies/Scenes/dashyProjGuy.tscn" id="2_qbkil"]
+[ext_resource type="Texture2D" uid="uid://ccaw0kv4536d1" path="res://Enemies/Sprites and Assets/bossMan1.png" id="3_3bety"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rege8"]
 radius = 33.0606
@@ -16,5 +16,4 @@ guy = ExtResource("2_qbkil")
 shape = SubResource("CircleShape2D_rege8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.265625, 0.265625)
-texture = ExtResource("1_mngrl")
+texture = ExtResource("3_3bety")

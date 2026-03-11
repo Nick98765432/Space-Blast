@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://u517u5q5jdrt"]
 
 [ext_resource type="Script" path="res://Enemies/Scenes/dashy_proj_guy.gd" id="1_vodce"]
-[ext_resource type="Texture2D" uid="uid://ic5rmg46vvx2" path="res://Enemies/Sprites and Assets/teleGuy.png" id="2_f257o"]
+[ext_resource type="Texture2D" uid="uid://ccaw0kv4536d1" path="res://Enemies/Sprites and Assets/bossMan1.png" id="2_60j1r"]
 [ext_resource type="PackedScene" uid="uid://du1ro4us48i83" path="res://Enemies/Components/hurtbox.tscn" id="3_0ilk7"]
 [ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="4_x3agq"]
 [ext_resource type="PackedScene" uid="uid://b5iytktg3b2ac" path="res://Enemies/Components/health_handler.tscn" id="5_eqbi4"]
@@ -44,7 +44,7 @@ script = ExtResource("1_vodce")
 
 [node name="enemySprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_0grxr")
-texture = ExtResource("2_f257o")
+texture = ExtResource("2_60j1r")
 
 [node name="wall collisions" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_88upw")
@@ -61,7 +61,7 @@ autostart = true
 [node name="Attacks" parent="." instance=ExtResource("4_x3agq")]
 
 [node name="healthHandler" parent="." instance=ExtResource("5_eqbi4")]
-health = 5.0
+health = 6.0
 
 [node name="Particles" parent="." instance=ExtResource("6_q5bvx")]
 
