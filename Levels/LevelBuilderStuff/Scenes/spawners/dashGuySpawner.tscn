@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://chgxv86w7uwq3"]
 
-[ext_resource type="Script" path="res://Enemies/spawners/enemy_spawner.gd" id="1_jut2x"]
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/Scenes/spawners/enemy_spawner.gd" id="1_jut2x"]
 [ext_resource type="PackedScene" uid="uid://dlsq1o0y6vrt" path="res://Enemies/Scenes/DashGuy.tscn" id="2_b4dd5"]
 [ext_resource type="Texture2D" uid="uid://cxyqnx6xehoc5" path="res://Enemies/Sprites and Assets/DashGuy.png" id="2_e01ci"]
 

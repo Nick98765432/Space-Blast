@@ -11,6 +11,7 @@ var energyGiven = false
 
 func _ready() -> void:
 	await get_tree().create_timer(0.001).timeout
+	Signals.lock.emit()
 	Signals.connect("bossDeath", _on_death)
 	player = parent.player
 	player.enemyCount += 1
@@ -39,6 +40,7 @@ func _process(_delta: float) -> void:
 			parent.dead = true
 			if player.enemyCount == 0:
 				player.encounter.y += 1
+				Signals.unlock.emit()
 				Signals.change.emit()
 			get_parent().particles.death.emitting = true
 			get_parent().particles.explode_2.emitting = true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ly8tu4r8ls8n"]
 
-[ext_resource type="Script" path="res://Enemies/spawners/enemy_spawner.gd" id="1_26mxq"]
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/Scenes/spawners/enemy_spawner.gd" id="1_26mxq"]
 [ext_resource type="PackedScene" uid="uid://u517u5q5jdrt" path="res://Enemies/Scenes/dashyProjGuy.tscn" id="2_qbkil"]
 [ext_resource type="Texture2D" uid="uid://ccaw0kv4536d1" path="res://Enemies/Sprites and Assets/bossMan1.png" id="3_3bety"]
 

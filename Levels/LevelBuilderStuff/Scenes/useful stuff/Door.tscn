@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlvxlfrxyvtrx"]
+
+[ext_resource type="Texture2D" uid="uid://dow7unihfwthl" path="res://Levels/Sprites and Assets/placeholder door.png" id="1_22xjl"]
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/door.gd" id="1_613gm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjbc1"]
+size = Vector2(38, 60)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nrv2r"]
+radius = 60.0
+height = 120.0
+
+[node name="Door" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_613gm")
+
+[node name="upper" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="upper"]
+position = Vector2(0, -30)
+texture = ExtResource("1_22xjl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="upper"]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_yjbc1")
+
+[node name="lower" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D2" type="Sprite2D" parent="lower"]
+position = Vector2(0, 30)
+texture = ExtResource("1_22xjl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="lower"]
+position = Vector2(0, 30)
+shape = SubResource("RectangleShape2D_yjbc1")
+
+[node name="open_close area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="open_close area"]
+shape = SubResource("CapsuleShape2D_nrv2r")
+
+[connection signal="body_entered" from="open_close area" to="." method="_on_open_close_area_body_entered"]
+[connection signal="body_exited" from="open_close area" to="." method="_on_open_close_area_body_exited"]

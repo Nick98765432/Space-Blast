@@ -1,16 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://rvjwk5qxva6b"]
+[gd_scene load_steps=11 format=3 uid="uid://rvjwk5qxva6b"]
 
 [ext_resource type="AudioStream" uid="uid://df8gh08u32xu6" path="res://Sounds/Music/Taken OverIntro- Infrared Scale.wav" id="1_36h8v"]
 [ext_resource type="Script" path="res://Levels/intro.gd" id="2_x2r46"]
 [ext_resource type="AudioStream" uid="uid://b46mr55iao38r" path="res://Sounds/Music/Taken Over - Infrared Scale.wav" id="3_y14a1"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="4_ni2gn"]
-[ext_resource type="Script" path="res://Levels/camera_2d.gd" id="5_jajjt"]
 [ext_resource type="Texture2D" uid="uid://g1xvkre0j6i5" path="res://Levels/Sprites and Assets/space.png" id="6_ol1wq"]
 [ext_resource type="PackedScene" uid="uid://cqwptbkpsicpn" path="res://UI/Upgrades.tscn" id="7_k4m7s"]
 [ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/roomGate.tscn" id="8_averx"]
 [ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/nextRoom.tscn" id="9_m864a"]
 [ext_resource type="PackedScene" uid="uid://bnhvdwpsykjnm" path="res://Levels/LevelBuilderStuff/Scenes/Spawner.tscn" id="10_ue1tk"]
-[ext_resource type="PackedScene" uid="uid://cdaielgc0lshr" path="res://Player/player.tscn" id="11_mwtrd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qpdx"]
 size = Vector2(656, 29)
@@ -25,15 +23,6 @@ position = Vector2(320, 180)
 texture = ExtResource("6_ol1wq")
 
 [node name="Upgrades" parent="." instance=ExtResource("7_k4m7s")]
-
-[node name="Player" parent="." instance=ExtResource("11_mwtrd")]
-position = Vector2(220, 176)
-
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(320, 180)
-position_smoothing_enabled = true
-script = ExtResource("5_jajjt")
-player = NodePath("../Player")
 
 [node name="MusicStuff" type="Node2D" parent="."]
 
@@ -101,54 +90,45 @@ shape = SubResource("RectangleShape2D_0qpdx")
 
 [node name="Wave1" type="Node2D" parent="Enemies/Room1"]
 
-[node name="Spawner" parent="Enemies/Room1/Wave1" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner" parent="Enemies/Room1/Wave1" instance=ExtResource("10_ue1tk")]
 position = Vector2(131, 73)
 type = 1
-player = NodePath("../../../../Player")
 
-[node name="Spawner2" parent="Enemies/Room1/Wave1" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner2" parent="Enemies/Room1/Wave1" instance=ExtResource("10_ue1tk")]
 position = Vector2(321, 73)
 type = 1
-player = NodePath("../../../../Player")
 
-[node name="Spawner3" parent="Enemies/Room1/Wave1" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner3" parent="Enemies/Room1/Wave1" instance=ExtResource("10_ue1tk")]
 position = Vector2(527, 73)
 type = 1
-player = NodePath("../../../../Player")
 
-[node name="Spawner4" parent="Enemies/Room1/Wave1" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner4" parent="Enemies/Room1/Wave1" instance=ExtResource("10_ue1tk")]
 position = Vector2(131, 277)
 type = 1
-player = NodePath("../../../../Player")
 
-[node name="Spawner5" parent="Enemies/Room1/Wave1" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner5" parent="Enemies/Room1/Wave1" instance=ExtResource("10_ue1tk")]
 position = Vector2(321, 277)
 type = 1
-player = NodePath("../../../../Player")
 
-[node name="Spawner6" parent="Enemies/Room1/Wave1" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner6" parent="Enemies/Room1/Wave1" instance=ExtResource("10_ue1tk")]
 position = Vector2(527, 280)
 type = 1
-player = NodePath("../../../../Player")
 
 [node name="Wave2" type="Node2D" parent="Enemies/Room1"]
 
-[node name="Spawner8" parent="Enemies/Room1/Wave2" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner8" parent="Enemies/Room1/Wave2" instance=ExtResource("10_ue1tk")]
 position = Vector2(131, 176)
 type = 1
 encounter = Vector2i(0, 1)
-player = NodePath("../../../../Player")
 
-[node name="Spawner7" parent="Enemies/Room1/Wave2" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner7" parent="Enemies/Room1/Wave2" instance=ExtResource("10_ue1tk")]
 position = Vector2(527, 179)
 type = 1
 encounter = Vector2i(0, 1)
-player = NodePath("../../../../Player")
 
-[node name="RoomGate" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_averx")]
+[node name="RoomGate" parent="Enemies" instance=ExtResource("8_averx")]
 position = Vector2(641, 176)
 scale = Vector2(1, 20)
-player = NodePath("../../Player")
 disappearCondition = Vector2i(0, 2)
 appearCondition = Vector2i(1, 0)
 
@@ -160,45 +140,39 @@ scale = Vector2(1, 20)
 
 [node name="Wave1" type="Node2D" parent="Enemies/Room2"]
 
-[node name="Spawner9" parent="Enemies/Room2/Wave1" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner9" parent="Enemies/Room2/Wave1" instance=ExtResource("10_ue1tk")]
 position = Vector2(1183, 176)
 type = 2
 encounter = Vector2i(1, 0)
-player = NodePath("../../../../Player")
 
 [node name="Wave2" type="Node2D" parent="Enemies/Room2"]
 
-[node name="Spawner10" parent="Enemies/Room2/Wave2" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner10" parent="Enemies/Room2/Wave2" instance=ExtResource("10_ue1tk")]
 position = Vector2(1183, 73)
 type = 2
 encounter = Vector2i(1, 1)
-player = NodePath("../../../../Player")
 
-[node name="Spawner11" parent="Enemies/Room2/Wave2" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner11" parent="Enemies/Room2/Wave2" instance=ExtResource("10_ue1tk")]
 position = Vector2(1183, 277)
 type = 2
 encounter = Vector2i(1, 1)
-player = NodePath("../../../../Player")
 
 [node name="Wave3" type="Node2D" parent="Enemies/Room2"]
 
-[node name="Spawner12" parent="Enemies/Room2/Wave3" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner12" parent="Enemies/Room2/Wave3" instance=ExtResource("10_ue1tk")]
 position = Vector2(765, 73)
 type = 1
 encounter = Vector2i(1, 2)
-player = NodePath("../../../../Player")
 
-[node name="Spawner13" parent="Enemies/Room2/Wave3" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner13" parent="Enemies/Room2/Wave3" instance=ExtResource("10_ue1tk")]
 position = Vector2(765, 277)
 type = 1
 encounter = Vector2i(1, 2)
-player = NodePath("../../../../Player")
 
-[node name="RoomGate2" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_averx")]
+[node name="RoomGate2" parent="Enemies" instance=ExtResource("8_averx")]
 position = Vector2(968, 0)
 rotation = 1.5708
 scale = Vector2(1, 30)
-player = NodePath("../../Player")
 disappearCondition = Vector2i(1, 3)
 appearCondition = Vector2i(2, 0)
 
@@ -211,37 +185,32 @@ scale = Vector2(1, 29.84)
 
 [node name="Wave1" type="Node2D" parent="Enemies/Room3"]
 
-[node name="Spawner14" parent="Enemies/Room3/Wave1" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner14" parent="Enemies/Room3/Wave1" instance=ExtResource("10_ue1tk")]
 position = Vector2(966, -310)
 type = 3
 encounter = Vector2i(2, 0)
-player = NodePath("../../../../Player")
 
 [node name="Wave2" type="Node2D" parent="Enemies/Room3"]
 
-[node name="Spawner15" parent="Enemies/Room3/Wave2" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner15" parent="Enemies/Room3/Wave2" instance=ExtResource("10_ue1tk")]
 position = Vector2(765, -71)
 type = 3
 encounter = Vector2i(2, 1)
-player = NodePath("../../../../Player")
 
-[node name="Spawner16" parent="Enemies/Room3/Wave2" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner16" parent="Enemies/Room3/Wave2" instance=ExtResource("10_ue1tk")]
 position = Vector2(966, -310)
 type = 3
 encounter = Vector2i(2, 1)
-player = NodePath("../../../../Player")
 
-[node name="Spawner17" parent="Enemies/Room3/Wave2" node_paths=PackedStringArray("player") instance=ExtResource("10_ue1tk")]
+[node name="Spawner17" parent="Enemies/Room3/Wave2" instance=ExtResource("10_ue1tk")]
 position = Vector2(1208, -59)
 type = 3
 encounter = Vector2i(2, 1)
-player = NodePath("../../../../Player")
 
-[node name="RoomGate3" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_averx")]
+[node name="RoomGate3" parent="Enemies" instance=ExtResource("8_averx")]
 position = Vector2(967, -370)
 rotation = 1.5708
 scale = Vector2(1, 30)
-player = NodePath("../../Player")
 disappearCondition = Vector2i(2, 2)
 appearCondition = Vector2i(3, 0)
 

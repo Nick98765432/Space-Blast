@@ -8,7 +8,6 @@ script = ExtResource("1_3v3kq")
 [node name="lineOfSight" type="RayCast2D" parent="."]
 
 [node name="pathfinding" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="sightTimer" type="Timer" parent="."]
 wait_time = 0.1

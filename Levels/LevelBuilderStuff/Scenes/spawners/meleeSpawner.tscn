@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2ibhn8rcdb1e"]
 
-[ext_resource type="Script" path="res://Enemies/spawners/enemy_spawner.gd" id="1_sru2a"]
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/Scenes/spawners/enemy_spawner.gd" id="1_sru2a"]
 [ext_resource type="Texture2D" uid="uid://decqqpikrw5fl" path="res://Enemies/Sprites and Assets/Melee.png" id="1_vq3yn"]
 [ext_resource type="PackedScene" uid="uid://csiqn5fgo30nh" path="res://Enemies/Scenes/melee enemy.tscn" id="2_xt8ui"]
 
