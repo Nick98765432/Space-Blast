@@ -11,6 +11,7 @@ var energyGiven = false
 
 func _ready() -> void:
 	await get_tree().create_timer(0.001).timeout
+	get_parent().z_index = 1
 	Signals.lock.emit()
 	Signals.connect("bossDeath", _on_death)
 	player = parent.player

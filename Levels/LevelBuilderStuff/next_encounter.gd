@@ -15,6 +15,6 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		player = body
 		player.encounter.y += 1
-		Signals.emit_signal("change")
+		Signals.change.emit()
 		await get_tree().create_timer(0.01).timeout
 		monitoring = false
