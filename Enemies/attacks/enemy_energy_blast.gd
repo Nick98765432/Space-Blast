@@ -4,7 +4,7 @@ var speed = 300
 var isParriable: bool
 var ifParried: bool = false
 var type: int
-var damage: float = 30
+var damage: float = 35
 var target: Player
 var deflect: bool = false
 

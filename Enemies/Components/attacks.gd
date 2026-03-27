@@ -12,6 +12,7 @@ var parent := get_parent()
 var sounds: Sounds
 var particles: Particles
 var player: Player
+@export var dashDamage: float = 35
 @export var dashSpeed: float = 36000
 
 func _ready() -> void:
@@ -41,7 +42,7 @@ func attack(parry):
 						damageDone = true
 				else:
 					if not(damageDone):
-						i.damage(35)
+						i.damage(dashDamage)
 						damageDone = true
 					
 			break

@@ -67,6 +67,7 @@ bossBar = NodePath("../boss bar/TextureProgressBar")
 [node name="Sounds" parent="." instance=ExtResource("4_003xu")]
 
 [node name="Attacks" parent="." instance=ExtResource("5_j7rat")]
+dashDamage = 40.0
 
 [node name="Particles" parent="." instance=ExtResource("6_y7puy")]
 texture = ExtResource("1_fmwx1")

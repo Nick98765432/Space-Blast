@@ -185,7 +185,7 @@ one_shot = true
 explosiveness = 1.0
 
 [node name="parry timer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.22
 one_shot = true
 
 [node name="Shot cooldown" type="Timer" parent="."]

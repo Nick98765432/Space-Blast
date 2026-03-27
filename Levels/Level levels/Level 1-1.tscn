@@ -44,7 +44,6 @@ stream = ExtResource("1_xgu5s")
 volume_db = -3.0
 autoplay = true
 script = ExtResource("2_q7nqy")
-intro = true
 
 [node name="Music" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("intro")]
 stream = ExtResource("3_0f2sw")
@@ -104,10 +103,10 @@ position = Vector2(320, 595)
 waveNum = 1
 
 [node name="ProjGuySpawner2" parent="Enemies/Room 2/Wave 2" instance=ExtResource("7_wut71")]
-position = Vector2(521, 595)
+position = Vector2(520, 472)
 
 [node name="ProjGuySpawner3" parent="Enemies/Room 2/Wave 2" instance=ExtResource("7_wut71")]
-position = Vector2(140, 595)
+position = Vector2(139, 472)
 
 [node name="Door2" parent="Enemies" instance=ExtResource("9_lfx80")]
 position = Vector2(300, 720)

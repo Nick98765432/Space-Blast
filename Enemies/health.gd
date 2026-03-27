@@ -36,6 +36,7 @@ func _process(_delta: float) -> void:
 			player.targeted = false
 			Signals.emit_signal("shakeSmall")
 			player.parryEnergy += 10
+			player.health += 10
 			energyGiven = true
 			player.enemyCount -= 1
 			parent.dead = true
@@ -61,7 +62,7 @@ func parried():
 	player.parryCooled = true
 	player.parryEnergy += 24
 	player.ammo = 30
-	player.health += 15
+	player.health += player.parryHeal
 	
 func hurt(amount):
 	emit_signal("hit")

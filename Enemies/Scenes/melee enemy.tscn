@@ -76,7 +76,8 @@ health = 2.0
 [node name="Particles" parent="." instance=ExtResource("8_kufqm")]
 
 [node name="Attacks" parent="." instance=ExtResource("7_i00vs")]
-dashSpeed = 18000.0
+dashDamage = 45.0
+dashSpeed = 24000.0
 
 [node name="Sounds" parent="." instance=ExtResource("8_li8li")]
 

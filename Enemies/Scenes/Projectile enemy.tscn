@@ -56,7 +56,6 @@ shape = SubResource("CircleShape2D_mr82h")
 [node name="lineOfSight" type="RayCast2D" parent="."]
 
 [node name="shotCool" type="Timer" parent="."]
-wait_time = 1.5
 one_shot = true
 
 [node name="hitbox" type="Area2D" parent="." groups=["enemies"]]

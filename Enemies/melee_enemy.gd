@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var dead = false
-var speed = 1000
+var speed = 2000
 var movementDir
 var pos: Vector2
 @export var player: Node
@@ -53,8 +53,8 @@ func _on_sight_timer_timeout() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	if not dead:
-		attacks.dash(false, false)
-		await get_tree().create_timer(0.5).timeout
+		attacks.dash(false, true)
+		await get_tree().create_timer(0.6).timeout
 		attacks.done()
 		attacks.comboDone()
 	

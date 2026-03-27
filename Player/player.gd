@@ -16,6 +16,7 @@ var targeted: bool = false
 var weapon: int = 1
 var ammo: int = 30
 var bossBarCount: int = 0
+var parryHeal: float = 25
 var enemyCount := 0
 var encounter: Vector2i = Vector2i(0, 0) 
 var dir
@@ -101,14 +102,14 @@ func _physics_process(delta: float) -> void:
 			parryCooled = true
 		#parry parrying
 		if parry:
-			player_sprite.rotate(deg_to_rad(22))
+			player_sprite.rotate(deg_to_rad(360/(parry_timer.wait_time)))
 			for i in parry_hurt_box.get_overlapping_areas():
 				if i.is_in_group("enemyProj"):
 					if i.ifParried == false and i.isParriable:
 						Hitstops.shortHitstop()
 						parry_sfx.play()
 						i.parried()
-						health += 15
+						health += parryHeal
 						parryEnergy += 30
 						parryCooled = true
 						ammo = 30

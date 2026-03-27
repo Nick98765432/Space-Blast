@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 		#checks for line of sight. if not, pathfind until line of sight is achieved, otherwise movetoward player and retreat if too close in circle motion
 		#delay in between so the enemy does just circle strafe
 		if line_of_sight.get_collider() == player:
-			if global_position.distance_to(player.global_position) > 100:
+			if global_position.distance_to(player.global_position) > 110:
 				if shot_cool.time_left <= 0:
 					shot_cool.start()
 			proj_brain.move()
@@ -44,5 +44,5 @@ func _on_shot_cool_timeout() -> void:
 		attacks.telegraph()
 		await get_tree().create_timer(0.2).timeout
 		player.targeted = false
-		attacks.singleShot()
+		attacks.preSingleShot()
 		
