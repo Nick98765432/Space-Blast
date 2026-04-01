@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		line_of_sight.force_raycast_update()
 		#checks for line of sight. if not, pathfind until line of sight is achieved, otherwise movetoward player
 		if line_of_sight.get_collider() == player:
-			if global_position.distance_to(player.global_position) > 70:
+			if global_position.distance_to(player.global_position) > 80:
 				velocity += movementDir * speed * delta
 			else:
 				if attack_timer.time_left <= 0 and not(attacks.chosen):

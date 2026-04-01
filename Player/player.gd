@@ -25,10 +25,10 @@ var resist = 0
 var powerup = PlayerData.playerSuper
 var beserkModifier = 0
 var powerupMult = 1
-var spawnLocation: Vector2
 var ableToShoot: bool = true
 var direction: float
 var current: Vector2
+@onready var spawnLocation: Vector2 = global_position
 @onready var parry_timer: Timer = $"parry timer"
 @onready var shot_cooldown: Timer = $"Shot cooldown"
 @onready var parry_particles: GPUParticles2D = $"parry particles"
