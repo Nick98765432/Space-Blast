@@ -7,13 +7,13 @@
 [ext_resource type="Script" path="res://Levels/intro.gd" id="2_wckgg"]
 [ext_resource type="AudioStream" uid="uid://bi20r3lox2aba" path="res://Sounds/Music/Another Chance - Infrared Scale.wav" id="3_wb4fq"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="4_6g4th"]
-[ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/roomGate.tscn" id="6_58jge"]
-[ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/nextRoom.tscn" id="7_rod3q"]
+[ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/obsolete/roomGate.tscn" id="6_58jge"]
+[ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/encounterTransitions/nextRoom.tscn" id="7_rod3q"]
 [ext_resource type="Script" path="res://Levels/camera_2d.gd" id="8_lqixe"]
-[ext_resource type="PackedScene" uid="uid://hx5hf1kujilx" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/nextEncounter.tscn" id="10_mkktg"]
+[ext_resource type="PackedScene" uid="uid://hx5hf1kujilx" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/encounterTransitions/nextEncounter.tscn" id="10_mkktg"]
 [ext_resource type="Texture2D" uid="uid://g1xvkre0j6i5" path="res://Levels/Sprites and Assets/space.png" id="10_w2tp5"]
-[ext_resource type="PackedScene" uid="uid://dt5edhor2d5qh" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/Rooms.tscn" id="13_ywboc"]
-[ext_resource type="PackedScene" uid="uid://c010tag2g5f0o" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/Waves.tscn" id="14_ol85r"]
+[ext_resource type="PackedScene" uid="uid://dt5edhor2d5qh" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/Rooms.tscn" id="13_ywboc"]
+[ext_resource type="PackedScene" uid="uid://c010tag2g5f0o" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/Waves.tscn" id="14_ol85r"]
 [ext_resource type="PackedScene" uid="uid://b2ibhn8rcdb1e" path="res://Levels/LevelBuilderStuff/Scenes/spawners/meleeSpawner.tscn" id="15_q20t5"]
 [ext_resource type="PackedScene" uid="uid://ly8tu4r8ls8n" path="res://Levels/LevelBuilderStuff/Scenes/spawners/scatterShotGuySpawner.tscn" id="15_w1io5"]
 [ext_resource type="PackedScene" uid="uid://ca3yhjtp63qow" path="res://Levels/LevelBuilderStuff/Scenes/spawners/projGuySpawner.tscn" id="16_g7p25"]
@@ -75,7 +75,7 @@ script = ExtResource("8_lqixe")
 player = NodePath("../Player")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_re1we")]
-position = Vector2(172, 165)
+position = Vector2(162, 169)
 
 [node name="RoomGate" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_58jge")]
 position = Vector2(637, 162)

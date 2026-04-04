@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl3av0h2o7153"]
+
+[ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="1_cpvws"]
+[ext_resource type="PackedScene" uid="uid://c7far6oiso75b" path="res://Levels/LevelBuilderStuff/Scenes/keycard.tscn" id="2_bl7wq"]
+
+[node name="BlueKey" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.796875, 0.453125)
+texture = ExtResource("1_cpvws")
+
+[node name="Keycard" parent="." instance=ExtResource("2_bl7wq")]
+blue = true

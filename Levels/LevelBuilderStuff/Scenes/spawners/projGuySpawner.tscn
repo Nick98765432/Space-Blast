@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ca3yhjtp63qow"]
 
 [ext_resource type="Texture2D" uid="uid://dq8eqdkltadel" path="res://Enemies/Sprites and Assets/proj.png" id="1_2xueg"]
-[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/Scenes/spawners/enemy_spawner.gd" id="1_3vb85"]
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/enemy_spawner.gd" id="1_3vb85"]
 [ext_resource type="PackedScene" uid="uid://ci60x2iasc3fy" path="res://Enemies/Scenes/Projectile enemy.tscn" id="2_hhhbu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4dlsb"]

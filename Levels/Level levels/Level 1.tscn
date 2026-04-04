@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://Levels/music.gd" id="4_ni2gn"]
 [ext_resource type="Texture2D" uid="uid://g1xvkre0j6i5" path="res://Levels/Sprites and Assets/space.png" id="6_ol1wq"]
 [ext_resource type="PackedScene" uid="uid://cqwptbkpsicpn" path="res://UI/Upgrades.tscn" id="7_k4m7s"]
-[ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/roomGate.tscn" id="8_averx"]
-[ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/nextRoom.tscn" id="9_m864a"]
+[ext_resource type="PackedScene" uid="uid://dsyhccs874dfd" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/obsolete/roomGate.tscn" id="8_averx"]
+[ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/encounterTransitions/nextRoom.tscn" id="9_m864a"]
 [ext_resource type="PackedScene" uid="uid://bnhvdwpsykjnm" path="res://Levels/LevelBuilderStuff/Scenes/Spawner.tscn" id="10_ue1tk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qpdx"]

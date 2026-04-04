@@ -28,6 +28,7 @@ var powerupMult = 1
 var ableToShoot: bool = true
 var direction: float
 var current: Vector2
+var keycards: Array = []
 @onready var spawnLocation: Vector2 = global_position
 @onready var parry_timer: Timer = $"parry timer"
 @onready var shot_cooldown: Timer = $"Shot cooldown"

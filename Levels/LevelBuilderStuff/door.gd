@@ -3,8 +3,11 @@ extends Node2D
 var opened: bool = false
 var locked: bool = false
 @export var speed: float = 10
+@export var red: bool = false
+@export var blue: bool = false
 @onready var upper: StaticBody2D = $upper
 @onready var lower: StaticBody2D = $lower
+@onready var player: Player = get_tree().get_first_node_in_group("player")
 
 func _ready() -> void:
 	Signals.connect("lock", _on_lock)
@@ -16,6 +19,12 @@ func _process(delta: float) -> void:
 		close()
 	else:
 		open()
+	if red:
+		if not player.keycards.has("red"):
+			locked = true
+	if blue:
+		if not player.keycards.has("blue"):
+			locked = true
 
 func open():
 	var delta = get_process_delta_time()
