@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Levels/LevelBuilderStuff/keycard.gd" id="1_b14da"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_unhnn"]
-size = Vector2(98, 62)
+size = Vector2(50, 28)
 
 [node name="Keycard" type="Node2D"]
 script = ExtResource("1_b14da")

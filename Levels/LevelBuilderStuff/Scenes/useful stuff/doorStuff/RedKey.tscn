@@ -7,7 +7,7 @@
 texture_filter = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.8125, 0.515625)
+scale = Vector2(0.359375, 0.234375)
 texture = ExtResource("1_y5wr5")
 
 [node name="Keycard" parent="." instance=ExtResource("2_kg3c2")]
