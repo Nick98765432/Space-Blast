@@ -6,7 +6,6 @@ var player: Player
 func _ready() -> void:
 	Signals.connect("destroy", _on_destroy)
 	
-	
 func _on_destroy():
 	if player != null:
 		if returnCond == player.encounter:
