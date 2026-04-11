@@ -29,7 +29,7 @@ var ableToShoot: bool = true
 var isDashing: bool = false
 var dashAgain: bool = true
 var dashDir: Vector2
-var dashSpeed = 50000
+var dashSpeed = 35000
 var direction: float
 var current: Vector2
 var keycards: Array = []
@@ -54,6 +54,9 @@ var dashes: int = 2
 @onready var parry_sfx: AudioStreamPlayer = $Sounds/parrySFX
 @onready var dash_cool: Timer = $dashCool
 @onready var dash_part: GPUParticles2D = $dashPart
+@onready var dash_part_2: GPUParticles2D = $dashPart2
+@onready var dash_part_3: GPUParticles2D = $dashPart3
+
 
 
 
@@ -259,28 +262,24 @@ func dash():
 			dashDir = dir
 		else:
 			dashDir = Vector2(1, 0)
-		dash_part.rotation = dashDir.angle()
-		print(rad_to_deg(dashDir.angle()))
-		dash_part.process_material.angle_min = -(rad_to_deg(dashDir.angle()))
-		dash_part.process_material.angle_max = -(rad_to_deg(dashDir.angle()))
-		dash_part.process_material.angle_min += 90
-		var newGrav = Vector2(dash_part.process_material.gravity.x, dash_part.process_material.gravity.y).rotated((dashDir.angle()))
-		dash_part.process_material.gravity.x = round(newGrav.x)
-		dash_part.process_material.gravity.y = round(newGrav.y)
-		print(dash_part.process_material.gravity)
-		dash_part.restart()
 		dashes -= 1
-		await get_tree().create_timer(0.15).timeout
+		dash_part.restart()
+		player_sprite.hide()
+		dash_part_3.restart()
+		await get_tree().create_timer(0.3).timeout
+		dash_part_2.restart()
+		player_sprite.show()
 		isDashing = false
 		if dashes <= 0:
 			dashAgain = false
 		if dash_cool.time_left <= 0:
 			dash_cool.start()
+		
 
 
 func _on_dash_cool_timeout() -> void:
-	dashes += 1
 	if dashes < 2:
+		dashes += 1
 		dash_cool.start()
 	else:
 		dashAgain = true

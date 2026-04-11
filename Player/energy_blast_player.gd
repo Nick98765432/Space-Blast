@@ -5,6 +5,10 @@ var speed = 1000
 var type = 1
 var damageMult: float
 
+func _ready() -> void:
+	if type == 2:
+		await get_tree().create_timer(0.12).timeout
+		queue_free()
 func _physics_process(delta: float) -> void:
 	global_position += transform.x.normalized() * speed * delta
 	

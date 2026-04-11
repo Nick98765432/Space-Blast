@@ -44,15 +44,17 @@ func _on_body_entered(body: Node2D) -> void:
 			#parriable
 			if body is Player:
 				if body.parry == false:
-					body.damage(damage)
-					queue_free()
+					if not body.isDashing:
+						body.damage(damage)
+						queue_free()
 			if not body.is_in_group("enemies"):
 				queue_free()
 		else:
 			#unparriable
 			if body is Player:
-				body.damage(damage)
-				queue_free()
+				if not body.isDashing:
+					body.damage(damage)
+					queue_free()
 			elif not body.is_in_group("enemies"):
 				queue_free()
 	if ifParried:

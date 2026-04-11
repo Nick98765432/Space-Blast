@@ -23,7 +23,7 @@ alpha_curve = SubResource("CurveTexture_5vwps")
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_e81nx"]
+[sub_resource type="CurveTexture" id="CurveTexture_srx8o"]
 curve = SubResource("Curve_mmmu7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r0bxi"]
@@ -31,7 +31,7 @@ particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 scale_min = 100.0
 scale_max = 100.0
-scale_curve = SubResource("CurveTexture_e81nx")
+scale_curve = SubResource("CurveTexture_srx8o")
 
 [sub_resource type="Curve" id="Curve_f8lg0"]
 _data = [Vector2(0.056338, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

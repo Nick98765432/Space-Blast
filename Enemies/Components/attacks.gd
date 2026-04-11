@@ -42,7 +42,8 @@ func attack(parry):
 						damageDone = true
 				else:
 					if not(damageDone):
-						i.damage(dashDamage)
+						if not i.isDashing:
+							i.damage(dashDamage)
 						damageDone = true
 					
 			break
