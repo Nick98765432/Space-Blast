@@ -27,6 +27,7 @@ var beserkModifier = 0
 var powerupMult = 1
 var ableToShoot: bool = true
 var isDashing: bool = false
+var trailState: int = -1
 var dashAgain: bool = true
 var dashDir: Vector2
 var dashSpeed = 35000
@@ -56,6 +57,7 @@ var dashes: int = 2
 @onready var dash_part: GPUParticles2D = $dashPart
 @onready var dash_part_2: GPUParticles2D = $dashPart2
 @onready var dash_part_3: GPUParticles2D = $dashPart3
+@onready var dash_trail: Line2D = $dashTrail
 
 
 
@@ -107,6 +109,15 @@ func _physics_process(delta: float) -> void:
 			dash()
 		if isDashing:
 			velocity = dashSpeed * dashDir * delta
+			dash_trail.points[1] = global_position
+		match trailState:
+			0:
+				dash_trail.width = lerpf(dash_trail.width, 15, 15 * delta)
+			1:
+				dash_trail.width = lerpf(dash_trail.width, 0.1, 15 * delta)
+				if is_equal_approx(dash_trail.width, 3):
+					dash_trail.hide()
+					trailState = -1
 		#parry code
 		#parry colldown
 		if parryCooled and Input.is_action_just_pressed("parry"):
@@ -266,7 +277,11 @@ func dash():
 		dash_part.restart()
 		player_sprite.hide()
 		dash_part_3.restart()
+		dash_trail.points[0] = global_position
+		dash_trail.show()
+		trailState = 0
 		await get_tree().create_timer(0.3).timeout
+		trailState = 1
 		dash_part_2.restart()
 		player_sprite.show()
 		isDashing = false

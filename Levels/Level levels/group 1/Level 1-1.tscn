@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bxxwp0jnp4mca"]
+[gd_scene load_steps=20 format=4 uid="uid://bxxwp0jnp4mca"]
 
 [ext_resource type="AudioStream" uid="uid://df8gh08u32xu6" path="res://Sounds/Music/Taken OverIntro- Infrared Scale.wav" id="1_nhtxx"]
 [ext_resource type="Script" path="res://Levels/intro.gd" id="2_v16v0"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://ca3yhjtp63qow" path="res://Levels/LevelBuilderStuff/Scenes/spawners/projGuySpawner.tscn" id="13_4tytm"]
 [ext_resource type="PackedScene" uid="uid://ly8tu4r8ls8n" path="res://Levels/LevelBuilderStuff/Scenes/spawners/scatterShotGuySpawner.tscn" id="14_0h4vs"]
 [ext_resource type="PackedScene" uid="uid://c6nybe6m7akgp" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/LevelEnd.tscn" id="15_8ggu1"]
+[ext_resource type="PackedScene" uid="uid://c4hpuj7u71hah" path="res://Levels/Level levels/group 1/Level 1-2.tscn" id="16_dtq4g"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2f3ce"]
 vertices = PackedVector2Array(20, 20, -20, 20, -20, -20, 20, -20)
@@ -271,5 +272,6 @@ extraHealth = true
 [node name="LevelEnd" parent="Enemies" instance=ExtResource("15_8ggu1")]
 position = Vector2(1620, 360)
 rotation = 1.57079
+next_level = ExtResource("16_dtq4g")
 
 [connection signal="finished" from="Intro" to="Intro" method="_on_finished"]

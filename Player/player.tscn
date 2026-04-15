@@ -88,24 +88,26 @@ curve = SubResource("Curve_6248k")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_psvp7"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-scale_min = 100.0
-scale_max = 100.0
+scale_min = 75.0
+scale_max = 75.0
 scale_curve = SubResource("CurveTexture_e81nx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r5i1a"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-scale_min = 100.0
-scale_max = 100.0
+scale_min = 75.0
+scale_max = 75.0
 scale_curve = SubResource("CurveTexture_e81nx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iygcf"]
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 35.0
+orbit_velocity_min = -0.34
+orbit_velocity_max = 0.233
 gravity = Vector3(0, 0, 0)
-scale_min = 35.0
-scale_max = 35.0
+scale_min = 3.0
+scale_max = 3.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xwsg4"]
 particles_animation = true
@@ -192,6 +194,7 @@ texture = ExtResource("5_f3aua")
 one_shot = true
 
 [node name="dashPart" type="GPUParticles2D" parent="."]
+visible = false
 top_level = true
 z_index = 2
 emitting = false
@@ -202,6 +205,7 @@ one_shot = true
 explosiveness = 0.35
 
 [node name="dashPart2" type="GPUParticles2D" parent="."]
+visible = false
 z_index = 2
 emitting = false
 amount = 1
@@ -213,9 +217,19 @@ local_coords = true
 [node name="dashPart3" type="GPUParticles2D" parent="."]
 z_index = 2
 emitting = false
+amount = 32
 process_material = SubResource("ParticleProcessMaterial_iygcf")
 lifetime = 0.3
 one_shot = true
+
+[node name="dashTrail" type="Line2D" parent="."]
+visible = false
+top_level = true
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0.0930073, 0.330486, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="Player sprite" type="Sprite2D" parent="."]
 modulate = Color(1.1, 1, 1, 1)
