@@ -65,6 +65,9 @@ func parried():
 	player.health += player.parryHeal
 	
 func hurt(amount):
+	if parent.has_node("phaseDash"):
+		if (parent.phase_dash.isDashing):
+			return
 	emit_signal("hit")
 	health -= amount
 	#delay stops crashing if hit on frame one

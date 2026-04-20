@@ -72,7 +72,8 @@ dashDamage = 40.0
 [node name="Particles" parent="." instance=ExtResource("6_y7puy")]
 texture = ExtResource("1_fmwx1")
 
-[node name="pathfindingBrain" parent="." instance=ExtResource("8_036vt")]
+[node name="pathfindingBrain" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_036vt")]
+parent = NodePath("..")
 speed = 2000.0
 
 [node name="v2Brain" parent="." instance=ExtResource("9_xa4gx")]

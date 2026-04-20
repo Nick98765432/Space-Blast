@@ -115,7 +115,7 @@ func _physics_process(delta: float) -> void:
 				dash_trail.width = lerpf(dash_trail.width, 15, 15 * delta)
 			1:
 				dash_trail.width = lerpf(dash_trail.width, 0.1, 15 * delta)
-				if is_equal_approx(dash_trail.width, 3):
+				if dash_trail.width < 3:
 					dash_trail.hide()
 					trailState = -1
 		#parry code

@@ -94,7 +94,8 @@ dashSpeed = 24000.0
 distance = 100.0
 speed = 2400.0
 
-[node name="pathfindingBrain" parent="." instance=ExtResource("7_5eyw8")]
+[node name="pathfindingBrain" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("7_5eyw8")]
+parent = NodePath("..")
 
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("4_p17o5")

@@ -1,0 +1,92 @@
+[gd_scene load_steps=15 format=3 uid="uid://bjl7n7oio8wmj"]
+
+[ext_resource type="Script" path="res://Enemies/Scenes/spectre.gd" id="1_c80yy"]
+[ext_resource type="Texture2D" uid="uid://ccaw0kv4536d1" path="res://Enemies/Sprites and Assets/bossMan1.png" id="1_v85x2"]
+[ext_resource type="PackedScene" uid="uid://du1ro4us48i83" path="res://Enemies/Components/hurtbox.tscn" id="2_emx48"]
+[ext_resource type="Material" uid="uid://bwjafp8uf3uh3" path="res://Player/new_particle_process_material.tres" id="3_8lbl0"]
+[ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="3_hx21r"]
+[ext_resource type="PackedScene" uid="uid://b5iytktg3b2ac" path="res://Enemies/Components/health_handler.tscn" id="4_3b237"]
+[ext_resource type="PackedScene" uid="uid://0ngg4iikui15" path="res://Enemies/Components/phase_dash.tscn" id="4_32a7r"]
+[ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="5_kieh4"]
+[ext_resource type="PackedScene" uid="uid://cbu1xieqaka4t" path="res://Enemies/Components/proj_brain.tscn" id="6_g8pam"]
+[ext_resource type="PackedScene" uid="uid://c06hquc6cp2ot" path="res://Enemies/Components/sounds.tscn" id="7_xirbi"]
+[ext_resource type="PackedScene" uid="uid://cenknsm871ybr" path="res://Enemies/Components/pathfinding_brain.tscn" id="8_g4ivx"]
+
+[sub_resource type="Shader" id="Shader_u0n1h"]
+code = "shader_type canvas_item;
+uniform vec4 flashColour = vec4(1.0);
+uniform float mixAmount = 0.9;
+void fragment() {
+	vec4 colour = texture(TEXTURE, UV);
+	colour.rgb = mix(colour.rgb,flashColour.rgb,mixAmount);
+	COLOR = colour;
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vyvvj"]
+resource_local_to_scene = true
+shader = SubResource("Shader_u0n1h")
+shader_parameter/flashColour = Vector4(1, 1, 1, 1)
+shader_parameter/mixAmount = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knqma"]
+
+[node name="Spectre" type="CharacterBody2D" groups=["enemies"]]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 6
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_c80yy")
+
+[node name="enemySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vyvvj")
+texture = ExtResource("1_v85x2")
+
+[node name="wall collisions" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_knqma")
+
+[node name="shotCool" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="sideDash" type="Timer" parent="."]
+autostart = true
+
+[node name="dashPart3" type="GPUParticles2D" parent="."]
+z_index = 2
+emitting = false
+amount = 32
+process_material = ExtResource("3_8lbl0")
+lifetime = 0.3
+one_shot = true
+
+[node name="hitbox" parent="." instance=ExtResource("2_emx48")]
+
+[node name="phaseDash" parent="." instance=ExtResource("4_32a7r")]
+stamina = 999999999
+maxStamina = 999999999
+
+[node name="Attacks" parent="." instance=ExtResource("3_hx21r")]
+
+[node name="healthHandler" parent="." instance=ExtResource("4_3b237")]
+health = 10.0
+
+[node name="Particles" parent="." instance=ExtResource("5_kieh4")]
+
+[node name="projBrain" parent="." instance=ExtResource("6_g8pam")]
+speed = 1500
+
+[node name="Sounds" parent="." instance=ExtResource("7_xirbi")]
+
+[node name="pathfindingBrain" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_g4ivx")]
+parent = NodePath("..")
+speed = 1500.0
+
+[connection signal="timeout" from="shotCool" to="." method="_on_shot_cool_timeout"]
+[connection signal="timeout" from="sideDash" to="." method="_on_side_dash_timeout"]

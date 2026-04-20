@@ -1,8 +1,8 @@
 extends Node2D
 class_name pathfinding
 
-var parent
 var player
+@export var parent: CharacterBody2D
 @export var speed: float = 1000
 @onready var line_of_sight: RayCast2D = $lineOfSight
 @onready var sight_timer: Timer = $sightTimer
@@ -11,8 +11,7 @@ var player
 
 func _ready() -> void:
 	await get_tree().create_timer(0.01).timeout
-	parent = get_parent()
-	player = get_parent().player
+	player = parent.player
 
 func _physics_process(delta: float) -> void:
 	await get_tree().create_timer(0.01).timeout
@@ -20,6 +19,7 @@ func _physics_process(delta: float) -> void:
 	line_of_sight.force_raycast_update()
 	
 func makePath():
+	player = parent.player
 	path_finding.target_position = player.global_position
 
 func _on_sight_timer_timeout() -> void:

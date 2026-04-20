@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://u517u5q5jdrt"]
 
-[ext_resource type="Script" path="res://Enemies/Scenes/dashy_proj_guy.gd" id="1_vodce"]
+[ext_resource type="Script" path="res://Enemies/dashy_proj_guy.gd" id="1_vodce"]
 [ext_resource type="Texture2D" uid="uid://ccaw0kv4536d1" path="res://Enemies/Sprites and Assets/bossMan1.png" id="2_60j1r"]
 [ext_resource type="PackedScene" uid="uid://du1ro4us48i83" path="res://Enemies/Components/hurtbox.tscn" id="3_0ilk7"]
 [ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="4_x3agq"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cbu1xieqaka4t" path="res://Enemies/Components/proj_brain.tscn" id="8_joclr"]
 [ext_resource type="PackedScene" uid="uid://c06hquc6cp2ot" path="res://Enemies/Components/sounds.tscn" id="9_ud5q3"]
 
-[sub_resource type="Shader" id="Shader_u0n1h"]
+[sub_resource type="Shader" id="Shader_a0csp"]
 code = "shader_type canvas_item;
 uniform vec4 flashColour = vec4(1.0);
 uniform float mixAmount = 0.9;
@@ -28,7 +28,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0grxr"]
 resource_local_to_scene = true
-shader = SubResource("Shader_u0n1h")
+shader = SubResource("Shader_a0csp")
 shader_parameter/flashColour = Vector4(1, 1, 1, 1)
 shader_parameter/mixAmount = 0.0
 
@@ -69,7 +69,8 @@ health = 6.0
 
 [node name="Sounds" parent="." instance=ExtResource("9_ud5q3")]
 
-[node name="pathfindingBrain" parent="." instance=ExtResource("7_2brvm")]
+[node name="pathfindingBrain" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("7_2brvm")]
+parent = NodePath("..")
 speed = 500.0
 
 [connection signal="timeout" from="shotCool" to="." method="_on_shot_cool_timeout"]

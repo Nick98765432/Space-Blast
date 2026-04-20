@@ -9,6 +9,7 @@ var parent
 @onready var teleport: GPUParticles2D = $Teleport
 @onready var death: GPUParticles2D = $Explode1
 @onready var explode_2: GPUParticles2D = $Explode2
+@onready var dash_part: GPUParticles2D = $dashPart
 
 func _ready() -> void:
 	teleport.texture = texture

@@ -73,7 +73,8 @@ health = 3.0
 
 [node name="projBrain" parent="." instance=ExtResource("6_iqr18")]
 
-[node name="pathfindingBrain" parent="." instance=ExtResource("7_d1po3")]
+[node name="pathfindingBrain" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("7_d1po3")]
+parent = NodePath("..")
 speed = 500.0
 
 [node name="Attacks" parent="." instance=ExtResource("8_3niex")]
