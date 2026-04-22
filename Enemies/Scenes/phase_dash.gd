@@ -8,6 +8,7 @@ var player: Player
 var trailState: int = -1
 var dashDir: Vector2 = Vector2.ZERO
 var isDashing: bool = false
+
 @onready var dash_trail: Line2D = $dashTrail
 @export var stamina: int = 3
 @export var maxStamina: int = 3
@@ -39,11 +40,12 @@ func _physics_process(delta: float) -> void:
 func dash(direction: Vector2):
 	particles.dash_part.global_position = parent.global_position
 	if stamina > 0 and not isDashing:
+		parent.enemy_sprite.show()
 		var dir = -1
 		dashDir = direction
 		isDashing = true
 		stamina -= 1
-		parent.enemy_sprite.hide()
+		glitch()
 		particles.dash_part.restart()
 		dash_trail.points[0] = parent.global_position
 		dash_trail.points[1] = parent.global_position
@@ -51,5 +53,18 @@ func dash(direction: Vector2):
 		trailState = 0
 		await get_tree().create_timer(dashDur).timeout
 		trailState = 1
-		parent.enemy_sprite.show()
+		glitchIn()
 		isDashing = false
+		parent.enemy_sprite.show()
+		
+func glitch():
+	parent.enemy_sprite.material.set_shader_parameter("shake_rate", 1.0)
+	await get_tree().create_timer(0.15).timeout
+	parent.enemy_sprite.hide()
+	parent.enemy_sprite.material.set_shader_parameter("shake_rate", 0.0)
+
+func glitchIn():
+	parent.enemy_sprite.material.set_shader_parameter("shake_rate", 1.0)
+	parent.enemy_sprite.show()
+	await get_tree().create_timer(0.1).timeout
+	parent.enemy_sprite.material.set_shader_parameter("shake_rate", 0.0)

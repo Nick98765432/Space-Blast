@@ -9,3 +9,4 @@ orbit_velocity_max = 0.233
 gravity = Vector3(0, 0, 0)
 scale_min = 3.0
 scale_max = 3.0
+color = Color(0.635294, 1, 0.976471, 1)

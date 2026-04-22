@@ -58,6 +58,7 @@ var dashes: int = 2
 @onready var dash_part_2: GPUParticles2D = $dashPart2
 @onready var dash_part_3: GPUParticles2D = $dashPart3
 @onready var dash_trail: Line2D = $dashTrail
+@onready var glitch_effect: ColorRect = $glitchEffect
 
 
 
@@ -275,22 +276,32 @@ func dash():
 			dashDir = Vector2(1, 0)
 		dashes -= 1
 		dash_part.restart()
-		player_sprite.hide()
+		glitch()
 		dash_part_3.restart()
 		dash_trail.points[0] = global_position
-		dash_trail.show()
+		#dash_trail.show()
 		trailState = 0
 		await get_tree().create_timer(0.3).timeout
 		trailState = 1
 		dash_part_2.restart()
-		player_sprite.show()
+		glitchIn()
 		isDashing = false
 		if dashes <= 0:
 			dashAgain = false
 		if dash_cool.time_left <= 0:
 			dash_cool.start()
 		
+func glitch():
+	glitch_effect.material.set_shader_parameter("shake_rate", 1.0)
+	await get_tree().create_timer(0.15).timeout
+	player_sprite.hide()
+	glitch_effect.material.set_shader_parameter("shake_rate", 0.0)
 
+func glitchIn():
+	glitch_effect.material.set_shader_parameter("shake_rate", 1.0)
+	player_sprite.show()
+	await get_tree().create_timer(0.1).timeout
+	glitch_effect.material.set_shader_parameter("shake_rate", 0.0)
 
 func _on_dash_cool_timeout() -> void:
 	if dashes < 2:
