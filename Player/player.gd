@@ -59,6 +59,9 @@ var dashes: int = 2
 @onready var dash_part_3: GPUParticles2D = $dashPart3
 @onready var dash_trail: Line2D = $dashTrail
 @onready var glitch_effect: ColorRect = $glitchEffect
+@onready var glitch_sfx: AudioStreamPlayer = $Sounds/glitchSFX
+
+
 
 
 
@@ -293,13 +296,16 @@ func dash():
 		
 func glitch():
 	glitch_effect.material.set_shader_parameter("shake_rate", 1.0)
-	await get_tree().create_timer(0.15).timeout
+	glitch_sfx.play()
+	await get_tree().create_timer(0.1).timeout
 	player_sprite.hide()
+	health_bar.hide()
 	glitch_effect.material.set_shader_parameter("shake_rate", 0.0)
 
 func glitchIn():
 	glitch_effect.material.set_shader_parameter("shake_rate", 1.0)
 	player_sprite.show()
+	health_bar.show()
 	await get_tree().create_timer(0.1).timeout
 	glitch_effect.material.set_shader_parameter("shake_rate", 0.0)
 

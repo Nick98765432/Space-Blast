@@ -10,6 +10,9 @@ var dashDir: Vector2 = Vector2.ZERO
 var isDashing: bool = false
 
 @onready var dash_trail: Line2D = $dashTrail
+@onready var glitch_sfx: AudioStreamPlayer = $glitchSFX
+
+@export var glitchEffect: ColorRect
 @export var stamina: int = 3
 @export var maxStamina: int = 3
 @export var dashDur: float = 0.3
@@ -49,7 +52,7 @@ func dash(direction: Vector2):
 		particles.dash_part.restart()
 		dash_trail.points[0] = parent.global_position
 		dash_trail.points[1] = parent.global_position
-		dash_trail.show()
+		#dash_trail.show()
 		trailState = 0
 		await get_tree().create_timer(dashDur).timeout
 		trailState = 1
@@ -58,13 +61,14 @@ func dash(direction: Vector2):
 		parent.enemy_sprite.show()
 		
 func glitch():
-	parent.enemy_sprite.material.set_shader_parameter("shake_rate", 1.0)
-	await get_tree().create_timer(0.15).timeout
+	glitchEffect.material.set_shader_parameter("shake_rate", 1.0)
+	glitch_sfx.play()
+	await get_tree().create_timer(0.1).timeout
 	parent.enemy_sprite.hide()
-	parent.enemy_sprite.material.set_shader_parameter("shake_rate", 0.0)
+	glitchEffect.material.set_shader_parameter("shake_rate", 0.0)
 
 func glitchIn():
-	parent.enemy_sprite.material.set_shader_parameter("shake_rate", 1.0)
+	glitchEffect.material.set_shader_parameter("shake_rate", 1.0)
 	parent.enemy_sprite.show()
 	await get_tree().create_timer(0.1).timeout
-	parent.enemy_sprite.material.set_shader_parameter("shake_rate", 0.0)
+	glitchEffect.material.set_shader_parameter("shake_rate", 0.0)

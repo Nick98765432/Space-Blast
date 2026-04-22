@@ -79,6 +79,16 @@ player = NodePath("../Player")
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_re1we")]
 position = Vector2(-555, 203)
 
+[node name="Spectre" parent="." node_paths=PackedStringArray("player") instance=ExtResource("19_0tcus")]
+z_index = 1
+position = Vector2(-240, 229)
+player = NodePath("../Player")
+
+[node name="Spectre2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("19_0tcus")]
+z_index = 1
+position = Vector2(-427, 99)
+player = NodePath("../Player")
+
 [node name="RoomGate" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_58jge")]
 position = Vector2(637, 162)
 scale = Vector2(1, 16.2535)
@@ -164,14 +174,6 @@ position = Vector2(737, 191)
 
 [node name="DashGuySpawner" parent="Enemies/Room 2/Wave 3" instance=ExtResource("18_ujo0w")]
 position = Vector2(937, 271)
-
-[node name="Spectre" parent="." node_paths=PackedStringArray("player") instance=ExtResource("19_0tcus")]
-position = Vector2(-240, 229)
-player = NodePath("../Player")
-
-[node name="Spectre2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("19_0tcus")]
-position = Vector2(-427, 99)
-player = NodePath("../Player")
 
 [node name="MeleeEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("20_ybps2")]
 position = Vector2(-446, 296)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bjl7n7oio8wmj"]
+[gd_scene load_steps=17 format=3 uid="uid://bjl7n7oio8wmj"]
 
 [ext_resource type="Script" path="res://Enemies/Scenes/spectre.gd" id="1_c80yy"]
 [ext_resource type="Texture2D" uid="uid://ccaw0kv4536d1" path="res://Enemies/Sprites and Assets/bossMan1.png" id="1_v85x2"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cbu1xieqaka4t" path="res://Enemies/Components/proj_brain.tscn" id="6_g8pam"]
 [ext_resource type="PackedScene" uid="uid://c06hquc6cp2ot" path="res://Enemies/Components/sounds.tscn" id="7_xirbi"]
 [ext_resource type="PackedScene" uid="uid://cenknsm871ybr" path="res://Enemies/Components/pathfinding_brain.tscn" id="8_g4ivx"]
+[ext_resource type="Shader" path="res://Player/glitch.gdshader" id="12_5d64o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_knqma"]
 
@@ -64,7 +65,17 @@ shader_parameter/shake_color_rate = 0.0
 shader_parameter/flashColour = Color(1, 1, 1, 1)
 shader_parameter/mixAmount = 0.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qm6la"]
+resource_local_to_scene = true
+shader = ExtResource("12_5d64o")
+shader_parameter/shake_power = 0.035
+shader_parameter/shake_rate = 0.0
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.05
+
 [node name="Spectre" type="CharacterBody2D" groups=["enemies"]]
+z_index = 1
 texture_filter = 1
 collision_layer = 4
 collision_mask = 6
@@ -96,7 +107,19 @@ one_shot = true
 material = SubResource("ShaderMaterial_vyvvj")
 texture = ExtResource("1_v85x2")
 
-[node name="phaseDash" parent="." instance=ExtResource("4_32a7r")]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+scale = Vector2(0.25, 0.25)
+copy_mode = 2
+
+[node name="glitchEffect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_qm6la")
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+
+[node name="phaseDash" parent="." node_paths=PackedStringArray("glitchEffect") instance=ExtResource("4_32a7r")]
+glitchEffect = NodePath("../glitchEffect")
 stamina = 999999999
 maxStamina = 999999999
 
