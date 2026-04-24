@@ -280,7 +280,6 @@ func dash():
 		dashes -= 1
 		dash_part.restart()
 		glitch()
-		dash_part_3.restart()
 		dash_trail.points[0] = global_position
 		#dash_trail.show()
 		trailState = 0
@@ -298,6 +297,7 @@ func glitch():
 	glitch_effect.material.set_shader_parameter("shake_rate", 1.0)
 	glitch_sfx.play()
 	await get_tree().create_timer(0.1).timeout
+	dash_part_3.restart()
 	player_sprite.hide()
 	health_bar.hide()
 	glitch_effect.material.set_shader_parameter("shake_rate", 0.0)

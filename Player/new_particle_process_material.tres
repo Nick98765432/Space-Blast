@@ -4,9 +4,9 @@
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 35.0
-orbit_velocity_min = -0.34
-orbit_velocity_max = 0.233
 gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 3.0
-color = Color(0.635294, 1, 0.976471, 1)
+scale_min = 2.0
+scale_max = 2.0
+color = Color(1, 1, 1, 0.501961)
+anim_speed_min = 1.0
+anim_speed_max = 1.0

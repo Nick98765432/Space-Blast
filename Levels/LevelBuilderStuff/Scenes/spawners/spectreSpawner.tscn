@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://2jopgibauwk5"]
+
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/enemy_spawner.gd" id="1_1x7sd"]
+[ext_resource type="PackedScene" uid="uid://bjl7n7oio8wmj" path="res://Enemies/Scenes/Spectre.tscn" id="2_vcn8w"]
+[ext_resource type="Texture2D" uid="uid://b6i1ul2i3y5u7" path="res://Player/sprites and assets/Space Blast man.png" id="3_q2lgm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xr8e3"]
+radius = 33.0606
+
+[node name="SpectreSpawner" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_1x7sd")
+guy = ExtResource("2_vcn8w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xr8e3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_q2lgm")

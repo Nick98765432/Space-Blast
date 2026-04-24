@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cp1xd2tlpbi6t"]
+[gd_scene load_steps=23 format=3 uid="uid://cp1xd2tlpbi6t"]
 
 [ext_resource type="Script" path="res://Enemies/Components/particles.gd" id="1_6untt"]
 [ext_resource type="Texture2D" uid="uid://b3ct4sarc83iu" path="res://Enemies/attacks/Sprites and assets/parriable.png" id="1_grjfk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cb5vbn80xhgw7" path="res://Enemies/Sprites and Assets/spade boss.png" id="3_ag7gx"]
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_mrt38"]
 [ext_resource type="Material" uid="uid://bwjafp8uf3uh3" path="res://Player/new_particle_process_material.tres" id="6_jd3q5"]
+[ext_resource type="Texture2D" uid="uid://bg6ctog4hman0" path="res://Player/sprites and assets/white glitch VFX.png" id="7_7yd6d"]
 
 [sub_resource type="Curve" id="Curve_kojmx"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.288732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -81,6 +82,12 @@ gravity = Vector3(0, 0, 0)
 scale_min = 3.0
 scale_max = 5.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5qclt"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [node name="Particles" type="Node2D"]
 script = ExtResource("1_6untt")
 
@@ -135,8 +142,10 @@ explosiveness = 1.0
 
 [node name="dashPart" type="GPUParticles2D" parent="."]
 z_index = 2
+material = SubResource("CanvasItemMaterial_5qclt")
 emitting = false
 amount = 32
 process_material = ExtResource("6_jd3q5")
+texture = ExtResource("7_7yd6d")
 lifetime = 0.3
 one_shot = true

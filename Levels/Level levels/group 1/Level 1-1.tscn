@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dlvxlfrxyvtrx" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/doorStuff/Door.tscn" id="11_h7dci"]
 [ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/encounterTransitions/nextRoom.tscn" id="12_7asca"]
 [ext_resource type="PackedScene" uid="uid://ca3yhjtp63qow" path="res://Levels/LevelBuilderStuff/Scenes/spawners/projGuySpawner.tscn" id="13_4tytm"]
-[ext_resource type="PackedScene" uid="uid://ly8tu4r8ls8n" path="res://Levels/LevelBuilderStuff/Scenes/spawners/scatterShotGuySpawner.tscn" id="14_0h4vs"]
+[ext_resource type="PackedScene" uid="uid://2jopgibauwk5" path="res://Levels/LevelBuilderStuff/Scenes/spawners/spectreSpawner.tscn" id="14_ktdst"]
 [ext_resource type="PackedScene" uid="uid://c6nybe6m7akgp" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/LevelEnd.tscn" id="15_8ggu1"]
 [ext_resource type="PackedScene" uid="uid://c4hpuj7u71hah" path="res://Levels/Level levels/group 1/Level 1-2.tscn" id="16_dtq4g"]
 
@@ -265,9 +265,8 @@ position = Vector2(1813, 551)
 [node name="Wave 3" parent="Enemies/Room 7" instance=ExtResource("9_5b0dj")]
 waveNum = 2
 
-[node name="ScatterShotGuySpawner" parent="Enemies/Room 7/Wave 3" instance=ExtResource("14_0h4vs")]
+[node name="SpectreSpawner" parent="Enemies/Room 7/Wave 3" instance=ExtResource("14_ktdst")]
 position = Vector2(1612, 552)
-extraHealth = true
 
 [node name="LevelEnd" parent="Enemies" instance=ExtResource("15_8ggu1")]
 position = Vector2(1620, 360)

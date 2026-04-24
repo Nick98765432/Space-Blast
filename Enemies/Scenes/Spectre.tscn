@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bjl7n7oio8wmj"]
+[gd_scene load_steps=18 format=3 uid="uid://bjl7n7oio8wmj"]
 
 [ext_resource type="Script" path="res://Enemies/Scenes/spectre.gd" id="1_c80yy"]
 [ext_resource type="Texture2D" uid="uid://ccaw0kv4536d1" path="res://Enemies/Sprites and Assets/bossMan1.png" id="1_v85x2"]
 [ext_resource type="PackedScene" uid="uid://du1ro4us48i83" path="res://Enemies/Components/hurtbox.tscn" id="2_emx48"]
 [ext_resource type="Material" uid="uid://bwjafp8uf3uh3" path="res://Player/new_particle_process_material.tres" id="3_8lbl0"]
+[ext_resource type="Texture2D" uid="uid://cbobm6w3fudwx" path="res://Player/sprites and assets/glitchVFX.png" id="3_cjwat"]
 [ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="3_hx21r"]
 [ext_resource type="PackedScene" uid="uid://b5iytktg3b2ac" path="res://Enemies/Components/health_handler.tscn" id="4_3b237"]
 [ext_resource type="PackedScene" uid="uid://0ngg4iikui15" path="res://Enemies/Components/phase_dash.tscn" id="4_32a7r"]
@@ -98,6 +99,7 @@ z_index = 2
 emitting = false
 amount = 32
 process_material = ExtResource("3_8lbl0")
+texture = ExtResource("3_cjwat")
 lifetime = 0.3
 one_shot = true
 

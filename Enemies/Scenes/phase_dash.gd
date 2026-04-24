@@ -49,7 +49,6 @@ func dash(direction: Vector2):
 		isDashing = true
 		stamina -= 1
 		glitch()
-		particles.dash_part.restart()
 		dash_trail.points[0] = parent.global_position
 		dash_trail.points[1] = parent.global_position
 		#dash_trail.show()
@@ -64,6 +63,7 @@ func glitch():
 	glitchEffect.material.set_shader_parameter("shake_rate", 1.0)
 	glitch_sfx.play()
 	await get_tree().create_timer(0.1).timeout
+	particles.dash_part.restart()
 	parent.enemy_sprite.hide()
 	glitchEffect.material.set_shader_parameter("shake_rate", 0.0)
 
