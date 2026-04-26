@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://besa8sh5wvqpr"]
+[gd_scene load_steps=13 format=3 uid="uid://besa8sh5wvqpr"]
 
 [ext_resource type="Script" path="res://Enemies/tele_guy.gd" id="1_a0x31"]
 [ext_resource type="Texture2D" uid="uid://ic5rmg46vvx2" path="res://Enemies/Sprites and Assets/teleGuy.png" id="2_y7c74"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Enemies/health.gd" id="3_73vox"]
 [ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="4_5sh86"]
 [ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="6_nsamm"]
+[ext_resource type="PackedScene" uid="uid://eg7v201kri7n" path="res://Enemies/Components/death_beam.tscn" id="8_4ttst"]
 [ext_resource type="PackedScene" uid="uid://cbu1xieqaka4t" path="res://Enemies/Components/proj_brain.tscn" id="9_j3stn"]
 
 [sub_resource type="Shader" id="Shader_8q8p2"]
@@ -51,7 +52,7 @@ texture = ExtResource("2_y7c74")
 shape = SubResource("CircleShape2D_lkgh1")
 
 [node name="shotCool" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 3.0
 one_shot = true
 
 [node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
@@ -71,5 +72,8 @@ health = 8.0
 [node name="Attacks" parent="." instance=ExtResource("6_nsamm")]
 
 [node name="projBrain" parent="." instance=ExtResource("9_j3stn")]
+
+[node name="deathBeam" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_4ttst")]
+parent = NodePath("..")
 
 [connection signal="timeout" from="shotCool" to="." method="_on_shot_cool_timeout"]

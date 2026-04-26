@@ -256,7 +256,8 @@ func tripleShotgun():
 		Signals.emit_signal("shakeSmall")
 
 func damage(amount):
-	health -= amount * (1 - resist)
+	if not isDashing:
+		health -= amount * (1 - resist)
 
 
 func _on_beserk_duration_timeout() -> void:

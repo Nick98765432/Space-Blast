@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://eg7v201kri7n"]
+
+[ext_resource type="Script" path="res://Enemies/Components/death_beam.gd" id="1_j8eom"]
+
+[sub_resource type="Gradient" id="Gradient_5oux5"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_ohxqn"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_rimsl"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
+
+[node name="deathBeam" type="Node2D"]
+script = ExtResource("1_j8eom")
+colourOne = SubResource("Gradient_5oux5")
+colourTwo = SubResource("Gradient_ohxqn")
+colourThree = SubResource("Gradient_rimsl")
+
+[node name="beam" type="Line2D" parent="."]
+visible = false
+top_level = true
+points = PackedVector2Array(0, 0, 0, 0)
+width = 6.0
+gradient = SubResource("Gradient_ohxqn")
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 128

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cb5vbn80xhgw7" path="res://Enemies/Sprites and Assets/spade boss.png" id="3_ag7gx"]
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_mrt38"]
 [ext_resource type="Material" uid="uid://bwjafp8uf3uh3" path="res://Player/new_particle_process_material.tres" id="6_jd3q5"]
-[ext_resource type="Texture2D" uid="uid://bg6ctog4hman0" path="res://Player/sprites and assets/white glitch VFX.png" id="7_7yd6d"]
+[ext_resource type="Texture2D" uid="uid://cbobm6w3fudwx" path="res://Player/sprites and assets/glitchVFX.png" id="7_nbe0n"]
 
 [sub_resource type="Curve" id="Curve_kojmx"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.288732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -146,6 +146,6 @@ material = SubResource("CanvasItemMaterial_5qclt")
 emitting = false
 amount = 32
 process_material = ExtResource("6_jd3q5")
-texture = ExtResource("7_7yd6d")
+texture = ExtResource("7_nbe0n")
 lifetime = 0.3
 one_shot = true
