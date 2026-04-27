@@ -8,6 +8,7 @@ var isAttacking: bool = false
 var chosen: bool = false
 var attackType: int
 var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn")
+var rocket : PackedScene = preload("res://Enemies/attacks/EnemyRocket.tscn")
 var parent := get_parent()
 var sounds: Sounds
 var particles: Particles
@@ -110,6 +111,14 @@ func normalShoot(type):
 	energy.global_position = parent.global_position
 	get_tree().get_root().add_child(energy)
 	
+func shootRocket():
+	var missile = rocket.instantiate()
+	missile.target = player
+	missile.rotation = parent.enemy_sprite.rotation
+	missile.global_position = parent.global_position
+	get_tree().get_root().add_child(missile)
+	
+
 func preSingleShot():
 	preShoot(1)
 	sounds.shot_sfx.play()

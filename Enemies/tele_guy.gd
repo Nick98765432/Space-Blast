@@ -48,7 +48,7 @@ func _on_shot_cool_timeout() -> void:
 				attacks.homingShot()
 				enemy_sprite.rotate(deg_to_rad(-90))
 		else:
-				death_beam.shoot()
+				attacks.shootRocket()
 		enemy_sprite.look_at(player.global_position)
 		
 

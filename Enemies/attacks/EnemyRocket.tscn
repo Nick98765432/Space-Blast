@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://82wmkctyvvyk"]
+
+[ext_resource type="Script" path="res://Enemies/enemy_rocket.gd" id="1_46fo2"]
+[ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="1_vjgjf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_peqp4"]
+size = Vector2(12, 8)
+
+[node name="EnemyRocket" type="Node2D" groups=["enemyProj"]]
+script = ExtResource("1_46fo2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.117188, 0.078125)
+texture = ExtResource("1_vjgjf")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="hitbox" type="Area2D" parent="." groups=["enemyProj"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("RectangleShape2D_peqp4")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
