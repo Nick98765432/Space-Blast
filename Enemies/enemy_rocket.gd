@@ -20,6 +20,7 @@ func _physics_process(delta: float) -> void:
 
 func parried():
 	ifParried = true
+	hitbox.ifParried = true
 	speed = 900
 	rotation_degrees += 180
 
