@@ -168,8 +168,4 @@ position = Vector2(937, 271)
 position = Vector2(-223, 191)
 player = NodePath("../Player")
 
-[node name="TeleGuySpawner2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("19_1knc1")]
-position = Vector2(-195, 298)
-player = NodePath("../Player")
-
 [connection signal="finished" from="Intro" to="Intro" method="_on_finished"]

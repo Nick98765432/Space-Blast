@@ -6,8 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_peqp4"]
 size = Vector2(12, 8)
 
-[node name="EnemyRocket" type="Node2D" groups=["enemyProj"]]
+[node name="EnemyRocket" type="Area2D" groups=["enemyProj"]]
 script = ExtResource("1_46fo2")
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_peqp4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.117188, 0.078125)
@@ -18,9 +21,4 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
-[node name="hitbox" type="Area2D" parent="." groups=["enemyProj"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-shape = SubResource("RectangleShape2D_peqp4")
-
-[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

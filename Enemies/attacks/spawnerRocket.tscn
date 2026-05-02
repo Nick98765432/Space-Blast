@@ -1,14 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjt63hnch322f"]
+[gd_scene load_steps=5 format=3 uid="uid://cjt63hnch322f"]
 
 [ext_resource type="Script" path="res://Enemies/attacks/spawner_rocket.gd" id="1_41gqe"]
 [ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="2_oo5ba"]
-[ext_resource type="Script" path="res://Enemies/attacks/hitbox.gd" id="3_cb2db"]
 [ext_resource type="PackedScene" uid="uid://bwgwwl5ewt7pf" path="res://Enemies/attacks/eTrailSpawner.tscn" id="3_vhn7t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oxd25"]
 size = Vector2(12, 8)
 
-[node name="SpawnerRocket" type="Node2D" groups=["enemyProj"]]
+[node name="SpawnerRocket" type="Area2D" groups=["enemyProj"]]
 script = ExtResource("1_41gqe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -20,11 +19,11 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
-[node name="hitbox" type="Area2D" parent="." groups=["enemyProj"]]
-script = ExtResource("3_cb2db")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-shape = SubResource("RectangleShape2D_oxd25")
-
 [node name="ETrailSpawner" parent="." instance=ExtResource("3_vhn7t")]
 active = true
+spacing = 64.0
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oxd25")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

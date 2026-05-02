@@ -2,18 +2,23 @@ extends Node2D
 class_name explosionSpawner
 
 var explosion: PackedScene = preload("res://Enemies/attacks/ExplosionTrail.tscn")
+var frames: int
+var framesLeft: int = 0
 @export var active: bool = false
-@onready var spacing: Area2D = $Spacing
+@export var spacing: float = 80
 
-
+func _ready() -> void:
+	
+	var speed = get_parent().speed
+	frames = ceil(spacing / (speed / 60))
 func _process(delta: float) -> void:
 	if active:
-		var canPlace: bool = true
-		for i in spacing.get_overlapping_areas():
-			if i.get_parent() is explosionTrail:
-				canPlace = false
-		if canPlace:
+		if framesLeft <= 0:
 			place()
+			framesLeft = frames
+		else:
+			framesLeft -= 1
+
 
 func activate():
 	active = true

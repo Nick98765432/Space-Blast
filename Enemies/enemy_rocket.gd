@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 class_name rocket
 
 var speed = 1200
@@ -8,7 +8,7 @@ var damage: float = 40
 var target: Player
 var deflect: bool = false
 var explosion: PackedScene = preload("res://Enemies/attacks/Explosion.tscn")
-@onready var hitbox: Area2D = $hitbox
+
 
 
 func _ready() -> void:
@@ -20,7 +20,6 @@ func _physics_process(delta: float) -> void:
 
 func parried():
 	ifParried = true
-	hitbox.ifParried = true
 	speed = 900
 	rotation_degrees += 180
 
@@ -31,7 +30,7 @@ func explode():
 	queue_free()
 
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
+func _on_body_entered(body: Node2D) -> void:
 	if not(ifParried):
 		if isParriable:
 			#parriable
@@ -54,7 +53,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 				body.health_handler.hurt(1)
 			queue_free()
 			#change this to explode later
-			
+
 
 func _on_destroy():
 	queue_free()
