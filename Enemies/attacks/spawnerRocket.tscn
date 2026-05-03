@@ -21,7 +21,6 @@ autostart = true
 
 [node name="ETrailSpawner" parent="." instance=ExtResource("3_vhn7t")]
 active = true
-spacing = 64.0
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_oxd25")

@@ -4,8 +4,8 @@ class_name explosionSpawner
 var explosion: PackedScene = preload("res://Enemies/attacks/ExplosionTrail.tscn")
 var frames: int
 var framesLeft: int = 0
+var spacing: float = 160
 @export var active: bool = false
-@export var spacing: float = 80
 
 func _ready() -> void:
 	

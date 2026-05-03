@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://brty50fkbop4r"]
+[gd_scene load_steps=24 format=4 uid="uid://brty50fkbop4r"]
 
 [ext_resource type="PackedScene" uid="uid://cqwptbkpsicpn" path="res://UI/Upgrades.tscn" id="1_icrtm"]
 [ext_resource type="PackedScene" uid="uid://cdaielgc0lshr" path="res://Player/player.tscn" id="1_re1we"]
@@ -18,7 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://ly8tu4r8ls8n" path="res://Levels/LevelBuilderStuff/Scenes/spawners/scatterShotGuySpawner.tscn" id="15_w1io5"]
 [ext_resource type="PackedScene" uid="uid://ca3yhjtp63qow" path="res://Levels/LevelBuilderStuff/Scenes/spawners/projGuySpawner.tscn" id="16_g7p25"]
 [ext_resource type="PackedScene" uid="uid://chgxv86w7uwq3" path="res://Levels/LevelBuilderStuff/Scenes/spawners/dashGuySpawner.tscn" id="18_ujo0w"]
-[ext_resource type="PackedScene" uid="uid://ctf1qegjgm8oq" path="res://Levels/LevelBuilderStuff/Scenes/spawners/teleGuySpawner.tscn" id="19_1knc1"]
+[ext_resource type="PackedScene" uid="uid://dlxy3vkwnnr3u" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/hazards/ExplosiveBarrel.tscn" id="19_km56i"]
+[ext_resource type="PackedScene" uid="uid://csiqn5fgo30nh" path="res://Enemies/Scenes/melee enemy.tscn" id="20_fxiax"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3rxq0"]
 vertices = PackedVector2Array(25, 25, -25, 25, -25, -25, 25, -25)
@@ -164,8 +165,15 @@ position = Vector2(737, 191)
 [node name="DashGuySpawner" parent="Enemies/Room 2/Wave 3" instance=ExtResource("18_ujo0w")]
 position = Vector2(937, 271)
 
-[node name="TeleGuySpawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("19_1knc1")]
-position = Vector2(-223, 191)
+[node name="ExplosiveBarrel" parent="." instance=ExtResource("19_km56i")]
+position = Vector2(-318, 221)
+
+[node name="MeleeEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("20_fxiax")]
+position = Vector2(-314, 197)
+player = NodePath("../Player")
+
+[node name="MeleeEnemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("20_fxiax")]
+position = Vector2(-318, 251)
 player = NodePath("../Player")
 
 [connection signal="finished" from="Intro" to="Intro" method="_on_finished"]

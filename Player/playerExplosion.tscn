@@ -1,33 +1,33 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqyjxa3mjk6g7"]
+[gd_scene load_steps=11 format=3 uid="uid://d35enp7mfcln2"]
 
-[ext_resource type="Script" path="res://Enemies/attacks/explosion.gd" id="1_vjdhu"]
-[ext_resource type="Texture2D" uid="uid://cix8bx877jv7s" path="res://Enemies/attacks/Sprites and assets/explosionAttack.png" id="2_nrlom"]
+[ext_resource type="Script" path="res://Player/player_explosion.gd" id="1_3menx"]
+[ext_resource type="Texture2D" uid="uid://cix8bx877jv7s" path="res://Enemies/attacks/Sprites and assets/explosionAttack.png" id="2_7q68d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gsew7"]
-atlas = ExtResource("2_nrlom")
+atlas = ExtResource("2_7q68d")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lipl2"]
-atlas = ExtResource("2_nrlom")
+atlas = ExtResource("2_7q68d")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kuaw0"]
-atlas = ExtResource("2_nrlom")
+atlas = ExtResource("2_7q68d")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7w1n7"]
-atlas = ExtResource("2_nrlom")
+atlas = ExtResource("2_7q68d")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hq5fb"]
-atlas = ExtResource("2_nrlom")
+atlas = ExtResource("2_7q68d")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ty2oc"]
-atlas = ExtResource("2_nrlom")
+atlas = ExtResource("2_7q68d")
 region = Rect2(320, 0, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_kqf7k"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_cg7mh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -53,20 +53,20 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2t2k4"]
-radius = 24.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_3j7m3"]
+radius = 38.1182
 
-[node name="Explosion" type="Area2D"]
+[node name="PlayerExplosion" type="Area2D"]
 texture_filter = 1
-script = ExtResource("1_vjdhu")
+script = ExtResource("1_3menx")
 
 [node name="ExplosionSprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_kqf7k")
+sprite_frames = SubResource("SpriteFrames_cg7mh")
 autoplay = "default"
 frame = 5
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_2t2k4")
+shape = SubResource("CircleShape2D_3j7m3")
 
 [connection signal="animation_finished" from="ExplosionSprite" to="." method="_on_explosion_sprite_animation_finished"]

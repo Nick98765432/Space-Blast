@@ -29,4 +29,6 @@ func _on_area_entered(area: Area2D) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if not(body is Player):
+		if body is explosiveBarrel:
+			body.explode()
 		queue_free()

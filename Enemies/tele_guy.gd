@@ -31,7 +31,7 @@ func _on_shot_cool_timeout() -> void:
 	if dead == false:
 		while player.targeted:
 			await get_tree().create_timer(0.25).timeout
-		var attack = randi_range(1, 1)
+		var attack = randi_range(0, 1)
 		player.targeted = true
 		if attack == 1:
 			attacks.telegraph()
