@@ -7,7 +7,7 @@ var damageMult: float
 
 func _ready() -> void:
 	if type == 2:
-		await get_tree().create_timer(0.12).timeout
+		await get_tree().create_timer(0.15).timeout
 		queue_free()
 func _physics_process(delta: float) -> void:
 	global_position += transform.x.normalized() * speed * delta

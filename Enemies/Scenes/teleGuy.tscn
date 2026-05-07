@@ -52,7 +52,7 @@ texture = ExtResource("2_y7c74")
 shape = SubResource("CircleShape2D_lkgh1")
 
 [node name="shotCool" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.7
 one_shot = true
 
 [node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
@@ -67,7 +67,7 @@ texture = ExtResource("2_y7c74")
 
 [node name="healthHandler" type="Node2D" parent="."]
 script = ExtResource("3_73vox")
-health = 8.0
+health = 6.0
 
 [node name="Attacks" parent="." instance=ExtResource("6_nsamm")]
 

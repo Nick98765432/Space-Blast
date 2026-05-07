@@ -1,7 +1,7 @@
 extends Area2D
 class_name rocket
 
-var speed = 1200
+var speed = 700
 var isParriable: bool = false
 var ifParried: bool = false
 var damage: float = 40

@@ -42,13 +42,14 @@ func _on_shot_cool_timeout() -> void:
 		if attack == 1:
 			attacks.tele()
 			await get_tree().create_timer(0.5).timeout
-			attacks.shootSRocket()
-			enemy_sprite.rotate(deg_to_rad(45))
+			enemy_sprite.rotate(deg_to_rad(40))
 			for i in 2:
 				attacks.shootSRocket()
-				enemy_sprite.rotate(deg_to_rad(-90))
+				enemy_sprite.rotate(deg_to_rad(-80))
 		else:
+			for i in 2:
 				attacks.shootRocket()
+				await get_tree().create_timer(0.1).timeout
 		enemy_sprite.look_at(player.global_position)
 		
 

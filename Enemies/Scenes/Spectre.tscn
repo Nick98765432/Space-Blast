@@ -1,7 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://bjl7n7oio8wmj"]
 
 [ext_resource type="Script" path="res://Enemies/Scenes/spectre.gd" id="1_c80yy"]
-[ext_resource type="Texture2D" uid="uid://ccaw0kv4536d1" path="res://Enemies/Sprites and Assets/bossMan1.png" id="1_v85x2"]
 [ext_resource type="PackedScene" uid="uid://du1ro4us48i83" path="res://Enemies/Components/hurtbox.tscn" id="2_emx48"]
 [ext_resource type="Material" uid="uid://bwjafp8uf3uh3" path="res://Player/new_particle_process_material.tres" id="3_8lbl0"]
 [ext_resource type="Texture2D" uid="uid://cbobm6w3fudwx" path="res://Player/sprites and assets/glitchVFX.png" id="3_cjwat"]
@@ -9,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b5iytktg3b2ac" path="res://Enemies/Components/health_handler.tscn" id="4_3b237"]
 [ext_resource type="PackedScene" uid="uid://0ngg4iikui15" path="res://Enemies/Components/phase_dash.tscn" id="4_32a7r"]
 [ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="5_kieh4"]
+[ext_resource type="Texture2D" uid="uid://cxyqnx6xehoc5" path="res://Enemies/Sprites and Assets/DashGuy.png" id="5_r1er3"]
 [ext_resource type="PackedScene" uid="uid://cbu1xieqaka4t" path="res://Enemies/Components/proj_brain.tscn" id="6_g8pam"]
 [ext_resource type="PackedScene" uid="uid://c06hquc6cp2ot" path="res://Enemies/Components/sounds.tscn" id="7_xirbi"]
 [ext_resource type="PackedScene" uid="uid://cenknsm871ybr" path="res://Enemies/Components/pathfinding_brain.tscn" id="8_g4ivx"]
@@ -107,7 +107,7 @@ one_shot = true
 
 [node name="enemySprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_vyvvj")
-texture = ExtResource("1_v85x2")
+texture = ExtResource("5_r1er3")
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 scale = Vector2(0.25, 0.25)
