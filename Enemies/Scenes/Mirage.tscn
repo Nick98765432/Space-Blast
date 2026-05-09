@@ -1,0 +1,107 @@
+[gd_scene load_steps=16 format=3 uid="uid://jqajmnlp4puy"]
+
+[ext_resource type="Script" path="res://Enemies/Scenes/mirage.gd" id="1_kc5bj"]
+[ext_resource type="Texture2D" uid="uid://nvxfte3traah" path="res://Enemies/Sprites and Assets/evil Space Blast man.png" id="1_ohjan"]
+[ext_resource type="Shader" path="res://Player/glitch.gdshader" id="2_qpeb6"]
+[ext_resource type="PackedScene" uid="uid://c06hquc6cp2ot" path="res://Enemies/Components/sounds.tscn" id="2_rx5le"]
+[ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="3_2hylt"]
+[ext_resource type="PackedScene" uid="uid://0ngg4iikui15" path="res://Enemies/Components/phase_dash.tscn" id="3_oaxtw"]
+[ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="4_855cg"]
+[ext_resource type="PackedScene" uid="uid://bwgwwl5ewt7pf" path="res://Enemies/attacks/eTrailSpawner.tscn" id="4_ueews"]
+[ext_resource type="PackedScene" uid="uid://dfdw1m722hj0g" path="res://Enemies/Components/v_2_brain.tscn" id="5_t4o1i"]
+[ext_resource type="Script" path="res://Enemies/health.gd" id="6_k624e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y2kj6"]
+
+[sub_resource type="Shader" id="Shader_n1ync"]
+code = "shader_type canvas_item;
+uniform vec4 flashColour = vec4(1.0);
+uniform float mixAmount = 0.9;
+void fragment() {
+	vec4 colour = texture(TEXTURE, UV);
+	colour.rgb = mix(colour.rgb,flashColour.rgb,mixAmount);
+	COLOR = colour;
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77w63"]
+resource_local_to_scene = true
+shader = SubResource("Shader_n1ync")
+shader_parameter/flashColour = Vector4(1, 1, 1, 1)
+shader_parameter/mixAmount = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_85tnv"]
+radius = 19.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r2gp5"]
+resource_local_to_scene = true
+shader = ExtResource("2_qpeb6")
+shader_parameter/shake_power = 0.035
+shader_parameter/shake_rate = 0.0
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.05
+
+[node name="Mirage" type="CharacterBody2D" groups=["enemies"]]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 6
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_kc5bj")
+
+[node name="wall collisions" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y2kj6")
+
+[node name="enemySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_77w63")
+texture = ExtResource("1_ohjan")
+
+[node name="sightTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="shotCool" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_85tnv")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+scale = Vector2(0.25, 0.25)
+copy_mode = 2
+
+[node name="glitchEffect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_r2gp5")
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+
+[node name="ETrailSpawner" parent="." instance=ExtResource("4_ueews")]
+
+[node name="phaseDash" parent="." node_paths=PackedStringArray("glitchEffect") instance=ExtResource("3_oaxtw")]
+glitchEffect = NodePath("../glitchEffect")
+stamina = 9999999
+maxStamina = 99999999
+
+[node name="Sounds" parent="." instance=ExtResource("2_rx5le")]
+
+[node name="Attacks" parent="." instance=ExtResource("3_2hylt")]
+
+[node name="Particles" parent="." instance=ExtResource("4_855cg")]
+
+[node name="v2Brain" parent="." instance=ExtResource("5_t4o1i")]
+speed = 2400.0
+
+[node name="healthHandler" type="Node2D" parent="."]
+script = ExtResource("6_k624e")
+health = 50.0

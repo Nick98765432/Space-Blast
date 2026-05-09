@@ -8,9 +8,9 @@ var spacing: float = 160
 @export var active: bool = false
 
 func _ready() -> void:
+	if get_parent() is rocket:
+		findFrames(get_parent().speed)
 	
-	var speed = get_parent().speed
-	frames = ceil(spacing / (speed / 60))
 func _process(delta: float) -> void:
 	if active:
 		if framesLeft <= 0:
@@ -30,3 +30,6 @@ func place():
 	var trail = explosion.instantiate()
 	trail.global_position = global_position
 	get_tree().get_root().add_child(trail)
+
+func findFrames(speed):
+	frames = ceil(spacing / (speed / 60))

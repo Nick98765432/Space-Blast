@@ -1,6 +1,7 @@
 extends Node2D
 class_name v2Brain
 
+
 var hit: bool = false
 var movementDir: Vector2
 var sideDir = 90

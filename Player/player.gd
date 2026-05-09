@@ -129,7 +129,7 @@ func _physics_process(delta: float) -> void:
 			parry_particles.restart()
 			parry_timer.start()
 			parryCooled = false
-			await get_tree().create_timer(1.2).timeout
+			await get_tree().create_timer(0.7).timeout
 			parryCooled = true
 		#parry parrying
 		if parry:

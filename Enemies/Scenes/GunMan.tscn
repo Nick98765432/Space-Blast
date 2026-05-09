@@ -13,7 +13,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tt43m"]
 
-[sub_resource type="Shader" id="Shader_n1ync"]
+[sub_resource type="Shader" id="Shader_2dsuh"]
 code = "shader_type canvas_item;
 uniform vec4 flashColour = vec4(1.0);
 uniform float mixAmount = 0.9;
@@ -31,7 +31,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5j6hf"]
 resource_local_to_scene = true
-shader = SubResource("Shader_n1ync")
+shader = SubResource("Shader_2dsuh")
 shader_parameter/flashColour = Vector4(1, 1, 1, 1)
 shader_parameter/mixAmount = 0.0
 
@@ -46,10 +46,10 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_jniij")
 
+[node name="pathfinding" type="NavigationAgent2D" parent="."]
+
 [node name="wall collisions" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tt43m")
-
-[node name="pathfinding" type="NavigationAgent2D" parent="."]
 
 [node name="enemySprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_5j6hf")
@@ -78,7 +78,7 @@ shape = SubResource("CircleShape2D_uo43w")
 
 [node name="healthHandler" type="Node2D" parent="." node_paths=PackedStringArray("bossBar")]
 script = ExtResource("5_465hg")
-health = 100.0
+health = 30.0
 bossBar = NodePath("../boss bar/TextureProgressBar")
 
 [node name="HitstopFix" parent="." instance=ExtResource("8_s0mo2")]
