@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var movementDir: Vector2
 
 var rechargeTime: float = 1.7
 var attackSpeed: float = 1
@@ -26,12 +27,14 @@ var attacking: bool = false
 
 
 func _ready() -> void:
-	e_trail_spawner.findFrames(phase_dash.dashSpeed)
+	e_trail_spawner.findFrames(phase_dash.dashSpeed / 60)
 
 func _physics_process(delta: float) -> void:
 	if not dead:
 		await get_tree().create_timer(0.5).timeout
-		enemy_sprite.look_at(player.global_position)
+		movementDir = to_local(player.global_position).normalized()
+		if not attacks.isAttacking:
+			enemy_sprite.look_at(player.global_position)
 		particles.parry_tele.rotation = enemy_sprite.rotation
 		if phase_dash.stamina > 0 and not attacking:
 			attackPattern()
@@ -55,31 +58,33 @@ func recharge():
 	phase_dash.stamina = phase_dash.maxStamina
 
 func attack():
-	currentAttack = randi_range(0, 3)
+	currentAttack = randi_range(0, 2)
 	if lastAttack:
 		if lastAttack == currentAttack:
-			currentAttack = randi_range(0, 3)
+			currentAttack = randi_range(0, 2)
 	match currentAttack:
-		0 , 1:
+		0:
 			e_trail_spawner.active = true
-			phase_dash.dash(Vector2(cos(enemy_sprite.rotation), sin(enemy_sprite.rotation)))
+			predash()
 			await get_tree().create_timer(phase_dash.dashDur).timeout
 			e_trail_spawner.active = false
-		2:
-			var shootTime: float = 0.5
-			attacks.untelegraph()
 			await get_tree().create_timer(0.1).timeout
+			attacks.dash(true, true)
+			await get_tree().create_timer(0.65).timeout
+			attacks.done()
+		1:
+			var shootTime: float = 0.5
 			dash()
 			await get_tree().create_timer(phase_dash.dashDur + 0.2).timeout
+			attacks.untelegraph()
+			await get_tree().create_timer(0.2).timeout
 			attacks.shootRocket()
 			await get_tree().create_timer(shootTime).timeout
 			enemy_sprite.rotate(deg_to_rad(40))
 			for i in 2:
 				attacks.shootSRocket()
 				enemy_sprite.rotate(deg_to_rad(-80))
-			await get_tree().create_timer(shootTime).timeout
-			attacks.shootRocket()
-		3:
+		2:
 			attacks.telegraph()
 			await get_tree().create_timer(0.2).timeout
 			phase_dash.dash(Vector2(cos(enemy_sprite.rotation), sin(enemy_sprite.rotation)))
@@ -97,11 +102,15 @@ func dash():
 	var pos: Vector2 = ((player.global_position - global_position) + Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * brain.distance).normalized()
 	phase_dash.dash(pos)
 	
+func predash():
+	var pos = to_local((player.global_position + (player.velocity * (global_position.distance_to(player.global_position)/(phase_dash.dashSpeed/60))))).normalized()
+	phase_dash.dash(pos)
+
 func waitTime():
 	match currentAttack:
-		0, 1:
-			return phase_dash.dashDur + 1
-		2:
-			return phase_dash.dashDur + 0.2 + 1 + 1
-		3: 
+		0:
+			return phase_dash.dashDur + 0.1 + 0.65 + 1
+		1:
+			return phase_dash.dashDur + 0.2 + 0.5 + 1
+		2: 
 			return phase_dash.dashDur * 2 + 0.2  + 0.22 + 1

@@ -66,7 +66,7 @@ func dash(parriable: bool, predict: bool):
 		telegraph()
 	else:
 		untelegraph()
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.15).timeout
 	sounds.dash_sfx.play()
 	damageDone = false
 	isAttacking = true

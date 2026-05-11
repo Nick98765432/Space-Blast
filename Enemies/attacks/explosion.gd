@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	if not damageDone:
 		for i in get_overlapping_bodies():
 			if i is Player:
-				i.damage(30)
+				i.damage(25)
 				damageDone = true
 
 

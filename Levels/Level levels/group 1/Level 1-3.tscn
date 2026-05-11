@@ -143,7 +143,7 @@ position = Vector2(767, 638)
 [node name="meleeSpawner2" parent="Enemies/Room 3/Wave 1" instance=ExtResource("9_dfhc6")]
 position = Vector2(1120, 638)
 
-[node name="meleeSpawner3" parent="Enemies/Room 3/Wave 1" instance=ExtResource("9_dfhc6")]
+[node name="ScatterShotGuySpawner" parent="Enemies/Room 3/Wave 1" instance=ExtResource("12_joslo")]
 position = Vector2(940, 522)
 
 [node name="Wave 2" parent="Enemies/Room 3" instance=ExtResource("8_4s7on")]

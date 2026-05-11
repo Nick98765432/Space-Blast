@@ -87,6 +87,7 @@ offset_right = 25.0
 offset_bottom = 25.0
 
 [node name="ETrailSpawner" parent="." instance=ExtResource("4_ueews")]
+spacing = 40.0
 
 [node name="phaseDash" parent="." node_paths=PackedStringArray("glitchEffect") instance=ExtResource("3_oaxtw")]
 glitchEffect = NodePath("../glitchEffect")
