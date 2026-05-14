@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ebh654kfwuer"]
+
+[ext_resource type="Texture2D" uid="uid://dyi7rfudya2n6" path="res://Levels/Sprites and Assets/box shadow.png" id="1_hiqb7"]
+[ext_resource type="Texture2D" uid="uid://cuk17pgybs74u" path="res://Levels/Sprites and Assets/box.png" id="1_wlne3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_am6ih"]
+radius = 21.2132
+
+[node name="Box" type="Node2D"]
+texture_filter = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.545098)
+texture = ExtResource("1_hiqb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wlne3")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_am6ih")
