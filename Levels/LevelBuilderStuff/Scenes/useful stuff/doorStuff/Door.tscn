@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlvxlfrxyvtrx"]
+[gd_scene load_steps=7 format=3 uid="uid://dlvxlfrxyvtrx"]
 
-[ext_resource type="Texture2D" uid="uid://dow7unihfwthl" path="res://Levels/Sprites and Assets/placeholder door.png" id="1_22xjl"]
 [ext_resource type="Script" path="res://Levels/LevelBuilderStuff/door.gd" id="1_613gm"]
+[ext_resource type="Texture2D" uid="uid://bw6jtr1kbesx3" path="res://Levels/Sprites and Assets/red door.png" id="2_nbd3p"]
+[ext_resource type="Texture2D" uid="uid://dt30g04x8euy" path="res://Levels/Sprites and Assets/blue door.png" id="3_g3kvq"]
+[ext_resource type="Texture2D" uid="uid://de1rsb75d345i" path="res://Levels/Sprites and Assets/alt door.png" id="4_4kryu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yjbc1"]
 size = Vector2(38, 60)
@@ -14,6 +16,8 @@ height = 120.0
 z_index = -1
 texture_filter = 1
 script = ExtResource("1_613gm")
+redSprite = ExtResource("2_nbd3p")
+blueSprite = ExtResource("3_g3kvq")
 
 [node name="upper" type="StaticBody2D" parent="."]
 collision_layer = 7
@@ -21,7 +25,7 @@ collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="upper"]
 position = Vector2(0, -30)
-texture = ExtResource("1_22xjl")
+texture = ExtResource("4_4kryu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="upper"]
 position = Vector2(0, -30)
@@ -33,7 +37,7 @@ collision_mask = 7
 
 [node name="Sprite2D2" type="Sprite2D" parent="lower"]
 position = Vector2(0, 30)
-texture = ExtResource("1_22xjl")
+texture = ExtResource("4_4kryu")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="lower"]
 position = Vector2(0, 30)

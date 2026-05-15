@@ -42,7 +42,7 @@ physics_layer_0/collision_mask = 3
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_5b1mg")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_im36x"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o7nf5"]
 texture = ExtResource("8_mecsy")
 texture_region_size = Vector2i(40, 40)
 0:0/0 = 0
@@ -52,9 +52,9 @@ texture_region_size = Vector2i(40, 40)
 
 [sub_resource type="TileSet" id="TileSet_nn3jk"]
 tile_size = Vector2i(40, 40)
-sources/1 = SubResource("TileSetAtlasSource_im36x")
+sources/1 = SubResource("TileSetAtlasSource_o7nf5")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p20pq"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aw0xi"]
 texture = ExtResource("7_g0qep")
 separation = Vector2i(1, 1)
 texture_region_size = Vector2i(40, 40)
@@ -138,7 +138,7 @@ tile_size = Vector2i(40, 40)
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "walls"
 terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
-sources/0 = SubResource("TileSetAtlasSource_p20pq")
+sources/0 = SubResource("TileSetAtlasSource_aw0xi")
 
 [node name="Level1-1" type="Node2D"]
 texture_filter = 1

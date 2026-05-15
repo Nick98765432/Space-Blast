@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=4 uid="uid://c1h1pkc4yg5pk"]
+[gd_scene load_steps=21 format=4 uid="uid://c1h1pkc4yg5pk"]
 
 [ext_resource type="AudioStream" uid="uid://b46mr55iao38r" path="res://Sounds/Music/Taken Over - Infrared Scale.wav" id="1_l5w17"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="2_ovjk6"]
 [ext_resource type="Texture2D" uid="uid://484mit73nl15" path="res://Levels/Sprites and Assets/tile placeholder.png" id="3_ai0yp"]
 [ext_resource type="PackedScene" uid="uid://cdaielgc0lshr" path="res://Player/player.tscn" id="4_2icj2"]
 [ext_resource type="Script" path="res://Levels/camera_2d.gd" id="5_4qjfv"]
+[ext_resource type="PackedScene" uid="uid://ebh654kfwuer" path="res://Levels/LevelBuilderStuff/Scenes/props/Box.tscn" id="6_3sffv"]
 [ext_resource type="PackedScene" uid="uid://dlvxlfrxyvtrx" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/doorStuff/Door.tscn" id="6_28e1w"]
 [ext_resource type="PackedScene" uid="uid://4p3e8ik3mhq" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/encounterTransitions/nextRoom.tscn" id="7_e8vx0"]
 [ext_resource type="PackedScene" uid="uid://dt5edhor2d5qh" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/Rooms.tscn" id="8_dccoc"]
@@ -60,43 +61,37 @@ position_smoothing_enabled = true
 script = ExtResource("5_4qjfv")
 player = NodePath("../Player")
 
+[node name="Box" parent="." instance=ExtResource("6_3sffv")]
+position = Vector2(106, 102)
+
+[node name="Box2" parent="." instance=ExtResource("6_3sffv")]
+position = Vector2(207, 281)
+
+[node name="Box3" parent="." instance=ExtResource("6_3sffv")]
+position = Vector2(464, 89)
+
 [node name="Level" type="Node2D" parent="."]
 
 [node name="ExplosiveBarrel2" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(535, 77)
+position = Vector2(126, 113)
 
 [node name="ExplosiveBarrel4" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(443, 77)
+position = Vector2(106, 73)
+
+[node name="ExplosiveBarrel3" parent="Level" instance=ExtResource("14_vovti")]
+position = Vector2(185, 292)
 
 [node name="ExplosiveBarrel5" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(367, 77)
+position = Vector2(207, 252)
 
 [node name="ExplosiveBarrel6" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(275, 77)
+position = Vector2(484, 100)
 
 [node name="ExplosiveBarrel7" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(188, 77)
+position = Vector2(440, 102)
 
 [node name="ExplosiveBarrel8" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(96, 77)
-
-[node name="ExplosiveBarrel9" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(535, 275)
-
-[node name="ExplosiveBarrel10" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(443, 275)
-
-[node name="ExplosiveBarrel11" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(367, 275)
-
-[node name="ExplosiveBarrel12" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(275, 275)
-
-[node name="ExplosiveBarrel13" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(188, 275)
-
-[node name="ExplosiveBarrel14" parent="Level" instance=ExtResource("14_vovti")]
-position = Vector2(96, 275)
+position = Vector2(464, 60)
 
 [node name="Door" parent="Level" instance=ExtResource("6_28e1w")]
 position = Vector2(640, 180)
@@ -156,7 +151,7 @@ position = Vector2(1416, 275)
 
 [node name="Door3" parent="Level" instance=ExtResource("6_28e1w")]
 position = Vector2(1580, 360)
-rotation = -1.57079
+rotation = 1.5708
 
 [node name="NextRoom2" parent="Level" instance=ExtResource("7_e8vx0")]
 position = Vector2(1583, 396)

@@ -60,6 +60,7 @@ var dashes: int = 2
 @onready var dash_trail: Line2D = $dashTrail
 @onready var glitch_effect: ColorRect = $glitchEffect
 @onready var glitch_sfx: AudioStreamPlayer = $Sounds/glitchSFX
+@onready var stamina_bar: ProgressBar = $HealthBar/staminaBar
 
 
 
@@ -78,6 +79,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	current = (global_position / screenSize).floor()
 	health_bar.value = move_toward(health_bar.value, health, 7)
+	stamina_bar.value = dashes
+	if dashAgain:
+		stamina_bar.self_modulate.a = 1
+	else:
+		stamina_bar.self_modulate.a = 0.5
 	if not dead:
 		#damage mult for glass cannon
 		PlayerData.mult = 1
@@ -313,6 +319,7 @@ func glitchIn():
 func _on_dash_cool_timeout() -> void:
 	if dashes < 2:
 		dashes += 1
-		dash_cool.start()
-	else:
-		dashAgain = true
+		if dashes == 2:
+			dashAgain = true
+		if dashes < 2:
+			dash_cool.start()

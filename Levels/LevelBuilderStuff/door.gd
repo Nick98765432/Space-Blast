@@ -5,6 +5,8 @@ var locked: bool = false
 @export var speed: float = 10
 @export var red: bool = false
 @export var blue: bool = false
+@export var redSprite: CompressedTexture2D
+@export var blueSprite: CompressedTexture2D
 @onready var upper: StaticBody2D = $upper
 @onready var lower: StaticBody2D = $lower
 @onready var player: Player = get_tree().get_first_node_in_group("player")
@@ -12,7 +14,15 @@ var locked: bool = false
 func _ready() -> void:
 	Signals.connect("lock", _on_lock)
 	Signals.connect("unlock", _on_unlock)
-
+	if red and blue:
+		$upper/Sprite2D.texture = redSprite
+		$lower/Sprite2D2.texture = blueSprite
+	elif red:
+		$upper/Sprite2D.texture = redSprite
+		$lower/Sprite2D2.texture = redSprite
+	elif blue:
+		$upper/Sprite2D.texture = blueSprite
+		$lower/Sprite2D2.texture = blueSprite
 
 func _process(delta: float) -> void:
 	if (not opened) or locked:

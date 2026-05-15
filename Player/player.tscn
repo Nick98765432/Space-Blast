@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cdaielgc0lshr"]
+[gd_scene load_steps=40 format=3 uid="uid://cdaielgc0lshr"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_5eh5h"]
 [ext_resource type="Texture2D" uid="uid://b6i1ul2i3y5u7" path="res://Player/sprites and assets/Space Blast man.png" id="2_srdbb"]
@@ -147,6 +147,13 @@ initial_velocity_max = 621.21
 gravity = Vector3(0, 0, 0)
 scale_min = 3.0
 scale_max = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jtso"]
+bg_color = Color(0.698039, 0.807843, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -311,15 +318,34 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -25.0
-offset_top = -42.0
+offset_top = -47.0
 offset_right = 25.0
-offset_bottom = -10.0
+offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
 value = 100.0
 texture_under = ExtResource("6_bq038")
 texture_progress = ExtResource("7_thfcu")
 texture_progress_offset = Vector2(1, 0)
+
+[node name="staminaBar" type="ProgressBar" parent="HealthBar"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -6.0
+offset_right = 25.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_5jtso")
+max_value = 2.0
+value = 2.0
+show_percentage = false
 
 [node name="Sounds" type="Node2D" parent="."]
 

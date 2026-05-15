@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxh3f8dmbtts7"]
+[gd_scene load_steps=14 format=3 uid="uid://dxh3f8dmbtts7"]
 
 [ext_resource type="Script" path="res://Enemies/gun_man.gd" id="1_jniij"]
 [ext_resource type="Texture2D" uid="uid://nvxfte3traah" path="res://Enemies/Sprites and Assets/evil Space Blast man.png" id="2_xjowx"]
@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cp1xd2tlpbi6t" path="res://Enemies/Components/particles.tscn" id="6_3emvg"]
 [ext_resource type="PackedScene" uid="uid://dfdw1m722hj0g" path="res://Enemies/Components/v_2_brain.tscn" id="6_aw67n"]
 [ext_resource type="PackedScene" uid="uid://cye7mxblquxyt" path="res://Enemies/Components/hitstopFix.tscn" id="8_s0mo2"]
-[ext_resource type="Texture2D" uid="uid://dkjx8jcdvrsbc" path="res://Enemies/Sprites and Assets/Boss Bar.png" id="11_qgidi"]
-[ext_resource type="Texture2D" uid="uid://bdg3en600yk0y" path="res://Enemies/Sprites and Assets/Boss Life.png" id="12_ijhlf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tt43m"]
 
@@ -37,6 +35,13 @@ shader_parameter/mixAmount = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uo43w"]
 radius = 19.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8kqm"]
+bg_color = Color(0.94902, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="GunMan" type="CharacterBody2D" groups=["enemies"]]
 texture_filter = 1
@@ -78,27 +83,44 @@ shape = SubResource("CircleShape2D_uo43w")
 
 [node name="healthHandler" type="Node2D" parent="." node_paths=PackedStringArray("bossBar")]
 script = ExtResource("5_465hg")
-health = 30.0
-bossBar = NodePath("../boss bar/TextureProgressBar")
+health = 40.0
+bossBar = NodePath("../boss bar/ProgressBar")
 
 [node name="HitstopFix" parent="." instance=ExtResource("8_s0mo2")]
 
 [node name="boss bar" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="boss bar"]
-texture_filter = 1
+[node name="ProgressBar" type="ProgressBar" parent="boss bar"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -305.0
-offset_top = 15.0
-offset_right = 305.0
-offset_bottom = 47.0
+offset_left = -231.5
+offset_top = 9.0
+offset_right = 231.5
+offset_bottom = 36.0
 grow_horizontal = 2
-value = 100.0
-texture_under = ExtResource("11_qgidi")
-texture_progress = ExtResource("12_ijhlf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_x8kqm")
+max_value = 40.0
+value = 40.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="boss bar/ProgressBar"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gunslinger"
 metadata/_edit_use_anchors_ = true
 
 [connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]

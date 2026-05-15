@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://jqajmnlp4puy"]
+[gd_scene load_steps=17 format=3 uid="uid://jqajmnlp4puy"]
 
 [ext_resource type="Script" path="res://Enemies/Scenes/mirage.gd" id="1_kc5bj"]
 [ext_resource type="Texture2D" uid="uid://nvxfte3traah" path="res://Enemies/Sprites and Assets/evil Space Blast man.png" id="1_ohjan"]
@@ -46,6 +46,13 @@ shader_parameter/shake_rate = 0.0
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.05
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7age2"]
+bg_color = Color(0.94902, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Mirage" type="CharacterBody2D" groups=["enemies"]]
 texture_filter = 1
@@ -103,6 +110,43 @@ maxStamina = 99999999
 [node name="v2Brain" parent="." instance=ExtResource("5_t4o1i")]
 speed = 2400.0
 
-[node name="healthHandler" type="Node2D" parent="."]
+[node name="healthHandler" type="Node2D" parent="." node_paths=PackedStringArray("bossBar")]
 script = ExtResource("6_k624e")
-health = 50.0
+health = 60.0
+bossBar = NodePath("../boss bar/ProgressBar")
+
+[node name="boss bar" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="boss bar"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -231.5
+offset_top = 9.0
+offset_right = 231.5
+offset_bottom = 36.0
+grow_horizontal = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_7age2")
+max_value = 60.0
+value = 60.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="boss bar/ProgressBar"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Mirage
+"
+metadata/_edit_use_anchors_ = true

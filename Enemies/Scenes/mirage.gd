@@ -68,33 +68,28 @@ func attack():
 			predash()
 			await get_tree().create_timer(phase_dash.dashDur).timeout
 			e_trail_spawner.active = false
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.2).timeout
 			attacks.dash(true, true)
 			await get_tree().create_timer(0.65).timeout
 			attacks.done()
 		1:
 			var shootTime: float = 0.5
-			dash()
-			await get_tree().create_timer(phase_dash.dashDur + 0.2).timeout
-			attacks.untelegraph()
+			attacks.telegraph()
 			await get_tree().create_timer(0.2).timeout
-			attacks.shootRocket()
-			await get_tree().create_timer(shootTime).timeout
 			enemy_sprite.rotate(deg_to_rad(40))
 			for i in 2:
 				attacks.shootSRocket()
 				enemy_sprite.rotate(deg_to_rad(-80))
 		2:
-			attacks.telegraph()
 			await get_tree().create_timer(0.2).timeout
-			phase_dash.dash(Vector2(cos(enemy_sprite.rotation), sin(enemy_sprite.rotation)))
+			dash()
 			await get_tree().create_timer(phase_dash.dashDur).timeout
-			attacks.preShotgun()
+			attacks.telegraph()
 			await get_tree().create_timer(0.22).timeout
 			if phase_dash.stamina <= 0:
 				phase_dash.stamina = 1
 			phase_dash.dash(Vector2(cos(enemy_sprite.rotation), sin(enemy_sprite.rotation)))
-			await get_tree().create_timer(phase_dash.dashDur).timeout
+			await get_tree().create_timer(phase_dash.dashDur + 0.15).timeout
 			attacks.preShotgun()
 	
 	lastAttack = currentAttack
@@ -109,8 +104,8 @@ func predash():
 func waitTime():
 	match currentAttack:
 		0:
-			return phase_dash.dashDur + 0.1 + 0.65 + 1
+			return phase_dash.dashDur + 0.2 + 0.65 + 1
 		1:
-			return phase_dash.dashDur + 0.2 + 0.5 + 1
+			return  0.2 + 1
 		2: 
-			return phase_dash.dashDur * 2 + 0.2  + 0.22 + 1
+			return phase_dash.dashDur * 2 + 0.2  + 0.22 + 0.15 + 1

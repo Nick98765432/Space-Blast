@@ -7,7 +7,7 @@ var energyGiven = false
 @onready var parent: Node = $".."
 @export var isBoss: bool
 @export var health: float
-@export var bossBar: TextureProgressBar
+@export var bossBar: ProgressBar
 
 func _ready() -> void:
 	await get_tree().create_timer(0.001).timeout
@@ -21,7 +21,7 @@ func _ready() -> void:
 		bossBar.max_value = health
 		bossBar.value = health
 		bossBar.show()
-		bossBar.position = Vector2(15, player.bossBarCount * (15 + 32) + 15)
+		bossBar.position.y = player.bossBarCount * (15 + 32) + 15
 		player.bossBarCount += 1
 	else:
 		if bossBar:
