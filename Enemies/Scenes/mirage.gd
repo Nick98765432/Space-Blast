@@ -68,7 +68,7 @@ func attack():
 			predash()
 			await get_tree().create_timer(phase_dash.dashDur).timeout
 			e_trail_spawner.active = false
-			await get_tree().create_timer(0.2).timeout
+			await get_tree().create_timer(0.5).timeout
 			attacks.dash(true, true)
 			await get_tree().create_timer(0.65).timeout
 			attacks.done()
@@ -104,7 +104,7 @@ func predash():
 func waitTime():
 	match currentAttack:
 		0:
-			return phase_dash.dashDur + 0.2 + 0.65 + 1
+			return phase_dash.dashDur + 0.5 + 0.65 + 1
 		1:
 			return  0.2 + 1
 		2: 

@@ -70,6 +70,8 @@ func hurt(amount):
 			return
 	emit_signal("hit")
 	health -= amount
+	if health <= 0 and not parent.dead:
+		parent.sounds.death.play()
 	#delay stops crashing if hit on frame one
 	await get_tree().create_timer(0.0011).timeout
 	player.parryEnergy += (amount) * 3

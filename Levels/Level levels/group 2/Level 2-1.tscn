@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=4 uid="uid://c1h1pkc4yg5pk"]
 
-[ext_resource type="AudioStream" uid="uid://b46mr55iao38r" path="res://Sounds/Music/Taken Over - Infrared Scale.wav" id="1_l5w17"]
+[ext_resource type="AudioStream" uid="uid://qvc7kauqwtb5" path="res://Sounds/Music/No Turning Back Now.wav" id="1_hpsya"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="2_ovjk6"]
 [ext_resource type="Texture2D" uid="uid://484mit73nl15" path="res://Levels/Sprites and Assets/tile placeholder.png" id="3_ai0yp"]
 [ext_resource type="PackedScene" uid="uid://cdaielgc0lshr" path="res://Player/player.tscn" id="4_2icj2"]
@@ -43,7 +43,7 @@ sources/0 = SubResource("TileSetAtlasSource_iv5wu")
 [node name="Level 2-1" type="Node2D"]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_l5w17")
+stream = ExtResource("1_hpsya")
 volume_db = -3.0
 script = ExtResource("2_ovjk6")
 

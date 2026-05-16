@@ -17,6 +17,7 @@ func explode():
 			createExplosion(global_position + Vector2(rand, rand2))
 
 func createExplosion(pos):
+	$AudioStreamPlayer.play()
 	var boom = explosion.instantiate()
 	boom.global_position = pos
 	get_tree().get_root().add_child(boom)

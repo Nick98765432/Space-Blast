@@ -18,8 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://ly8tu4r8ls8n" path="res://Levels/LevelBuilderStuff/Scenes/spawners/scatterShotGuySpawner.tscn" id="15_w1io5"]
 [ext_resource type="PackedScene" uid="uid://ca3yhjtp63qow" path="res://Levels/LevelBuilderStuff/Scenes/spawners/projGuySpawner.tscn" id="16_g7p25"]
 [ext_resource type="PackedScene" uid="uid://chgxv86w7uwq3" path="res://Levels/LevelBuilderStuff/Scenes/spawners/dashGuySpawner.tscn" id="18_ujo0w"]
-[ext_resource type="PackedScene" uid="uid://c0tlo2ft5d445" path="res://Levels/LevelBuilderStuff/Scenes/spawners/GunManSpawner.tscn" id="20_2kpdt"]
 [ext_resource type="Texture2D" uid="uid://jpj2arrfvkuy" path="res://Levels/Sprites and Assets/Wall tileset.png" id="20_vdni6"]
+[ext_resource type="PackedScene" uid="uid://jqajmnlp4puy" path="res://Enemies/Scenes/Mirage.tscn" id="20_y3o1p"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3rxq0"]
 vertices = PackedVector2Array(25, 25, -25, 25, -25, -25, 25, -25)
@@ -199,9 +199,8 @@ position = Vector2(937, 271)
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_42mkl")
 
-[node name="GunManSpawner" parent="." node_paths=PackedStringArray("player") instance=ExtResource("20_2kpdt")]
-position = Vector2(-336, 254)
-bar = true
+[node name="Mirage" parent="." node_paths=PackedStringArray("player") instance=ExtResource("20_y3o1p")]
+position = Vector2(-405, 215)
 player = NodePath("../Player")
 
 [connection signal="finished" from="Intro" to="Intro" method="_on_finished"]

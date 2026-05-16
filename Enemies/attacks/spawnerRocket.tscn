@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjt63hnch322f"]
 
 [ext_resource type="Script" path="res://Enemies/attacks/spawner_rocket.gd" id="1_41gqe"]
-[ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="2_oo5ba"]
+[ext_resource type="Texture2D" uid="uid://dlv2t7omyco7r" path="res://Enemies/attacks/Sprites and assets/rocket.png" id="2_hsf4e"]
 [ext_resource type="PackedScene" uid="uid://bwgwwl5ewt7pf" path="res://Enemies/attacks/eTrailSpawner.tscn" id="3_vhn7t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oxd25"]
@@ -11,8 +11,8 @@ size = Vector2(12, 8)
 script = ExtResource("1_41gqe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.117188, 0.078125)
-texture = ExtResource("2_oo5ba")
+texture_filter = 1
+texture = ExtResource("2_hsf4e")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

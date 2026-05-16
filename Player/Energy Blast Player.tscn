@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgmlskbvubiph"]
+[gd_scene load_steps=6 format=3 uid="uid://cgmlskbvubiph"]
 
 [ext_resource type="Script" path="res://Player/energy_blast_player.gd" id="1_2rfhj"]
-[ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="2_fgb75"]
+[ext_resource type="Texture2D" uid="uid://m7222r5ffx3g" path="res://Player/sprites and assets/shot.png" id="2_ebs4r"]
+[ext_resource type="Texture2D" uid="uid://bepqnaimc1y7p" path="res://Player/sprites and assets/shotgun (1).png" id="3_vi7ls"]
+[ext_resource type="Texture2D" uid="uid://bnicf5shml2k3" path="res://Player/sprites and assets/minigun.png" id="4_a74mx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nm4gf"]
 size = Vector2(14, 8)
@@ -9,10 +11,13 @@ size = Vector2(14, 8)
 [node name="EnergyBlastPlayer" type="Area2D"]
 collision_layer = 0
 script = ExtResource("1_2rfhj")
+shot = ExtResource("2_ebs4r")
+shotgun = ExtResource("3_vi7ls")
+auto = ExtResource("4_a74mx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.09375, 0.0625)
-texture = ExtResource("2_fgb75")
+texture_filter = 1
+texture = ExtResource("2_ebs4r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_nm4gf")

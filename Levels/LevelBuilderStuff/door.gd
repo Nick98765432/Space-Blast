@@ -10,6 +10,8 @@ var locked: bool = false
 @onready var upper: StaticBody2D = $upper
 @onready var lower: StaticBody2D = $lower
 @onready var player: Player = get_tree().get_first_node_in_group("player")
+@onready var door_sfx: AudioStreamPlayer = $DoorSFX
+
 
 func _ready() -> void:
 	Signals.connect("lock", _on_lock)
@@ -50,12 +52,16 @@ func close():
 func _on_open_close_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		opened = true
+		if not locked:
+			door_sfx.play()
 
 
 func _on_open_close_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		opened = false
-		
+		if not locked:
+			door_sfx.play()
+
 func _on_lock():
 	locked = true
 

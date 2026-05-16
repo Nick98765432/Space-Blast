@@ -61,7 +61,7 @@ var dashes: int = 2
 @onready var glitch_effect: ColorRect = $glitchEffect
 @onready var glitch_sfx: AudioStreamPlayer = $Sounds/glitchSFX
 @onready var stamina_bar: ProgressBar = $HealthBar/staminaBar
-
+@onready var death: AudioStreamPlayer = $Sounds/death
 
 
 
@@ -157,18 +157,18 @@ func _physics_process(delta: float) -> void:
 		#shoot
 		#checks for weapon type to shot correct shot
 		if Input.is_action_pressed("shoot") and ableToShoot:
-			if weapon == 1 and shotCooled:
+			if weapon == 1 and shotCooled and PlayerData.weapons.has(1):
 				shoot(1, dir.angle())
 				shoot_sfx.play()
 				shotCooled = false
 				shot_cooldown.start()
-			if weapon == 2 and shotCooled2:
+			if weapon == 2 and shotCooled2 and PlayerData.weapons.has(2):
 				for i in 8:
 					shoot(2, dir.angle() + deg_to_rad(randf_range(-20, 20)))
 				shotgun_sfx.play()
 				shotCooled2 = false
 				shotgun_cooldown.start()
-			if weapon == 3 and shotCooled3 and ammo > 0:
+			if weapon == 3 and shotCooled3 and ammo > 0 and PlayerData.weapons.has(3):
 				shoot(3, dir.angle() + deg_to_rad(randf_range(-7, 7)))
 				shoot_sfx_2.play()
 				shotCooled3 = false
@@ -213,16 +213,17 @@ func _physics_process(delta: float) -> void:
 	
 
 func switch(switchTo):
-	switch_speed.start()
-	ableToShoot = false
-	weapon = switchTo
-	change_weap.play()
-	if switchTo == 1:
-		$"Single Switch particle".restart()
-	elif switchTo == 2:
-		$"Shotgun Switch particle".restart()
-	elif switchTo == 3:
-		$"Auto Switch particle3".restart()
+	if PlayerData.weapons.has(switchTo):
+		switch_speed.start()
+		ableToShoot = false
+		weapon = switchTo
+		change_weap.play()
+		if switchTo == 1:
+			$"Single Switch particle".restart()
+		elif switchTo == 2:
+			$"Shotgun Switch particle".restart()
+		elif switchTo == 3:
+			$"Auto Switch particle3".restart()
 	
 func _on_parry_timer_timeout() -> void:
 	parry = false
@@ -264,6 +265,8 @@ func tripleShotgun():
 func damage(amount):
 	if not isDashing:
 		health -= amount * (1 - resist)
+		if health <= 0 and not dead:
+			death.play()
 
 
 func _on_beserk_duration_timeout() -> void:

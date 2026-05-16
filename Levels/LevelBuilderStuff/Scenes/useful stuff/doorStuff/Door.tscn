@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlvxlfrxyvtrx"]
+[gd_scene load_steps=8 format=3 uid="uid://dlvxlfrxyvtrx"]
 
 [ext_resource type="Script" path="res://Levels/LevelBuilderStuff/door.gd" id="1_613gm"]
 [ext_resource type="Texture2D" uid="uid://bw6jtr1kbesx3" path="res://Levels/Sprites and Assets/red door.png" id="2_nbd3p"]
 [ext_resource type="Texture2D" uid="uid://dt30g04x8euy" path="res://Levels/Sprites and Assets/blue door.png" id="3_g3kvq"]
 [ext_resource type="Texture2D" uid="uid://de1rsb75d345i" path="res://Levels/Sprites and Assets/alt door.png" id="4_4kryu"]
+[ext_resource type="AudioStream" uid="uid://dnt7d0e3waact" path="res://Sounds/SFX/saangosu__automatic-door-open.wav" id="5_urmop"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yjbc1"]
 size = Vector2(38, 60)
@@ -47,6 +48,9 @@ shape = SubResource("RectangleShape2D_yjbc1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="open_close area"]
 shape = SubResource("CapsuleShape2D_nrv2r")
+
+[node name="DoorSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_urmop")
 
 [connection signal="body_entered" from="open_close area" to="." method="_on_open_close_area_body_entered"]
 [connection signal="body_exited" from="open_close area" to="." method="_on_open_close_area_body_exited"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://21a0sue56s7f"]
+[gd_scene load_steps=6 format=3 uid="uid://21a0sue56s7f"]
 
-[ext_resource type="Texture2D" uid="uid://c31nxwngibvxg" path="res://Levels/Sprites and Assets/icon.svg" id="1_udcwc"]
 [ext_resource type="Script" path="res://Enemies/attacks/enemy_energy_blast.gd" id="1_x607a"]
+[ext_resource type="Texture2D" uid="uid://eadno6vbcmep" path="res://Enemies/attacks/Sprites and assets/shot.png" id="2_nx0bd"]
+[ext_resource type="Texture2D" uid="uid://cqt17sbi1xskj" path="res://Enemies/attacks/Sprites and assets/shotgun.png" id="3_iepyg"]
+[ext_resource type="Texture2D" uid="uid://dc48vrpqwf5xl" path="res://Enemies/attacks/Sprites and assets/minigun.png" id="4_d0ago"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tovy"]
 size = Vector2(8, 4)
@@ -9,10 +11,13 @@ size = Vector2(8, 4)
 [node name="EnemyEnergyBlast" type="Area2D" groups=["enemyProj"]]
 collision_mask = 5
 script = ExtResource("1_x607a")
+shot = ExtResource("2_nx0bd")
+shotgun = ExtResource("3_iepyg")
+auto = ExtResource("4_d0ago")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.09375, 0.0625)
-texture = ExtResource("1_udcwc")
+texture_filter = 1
+texture = ExtResource("2_nx0bd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6tovy")

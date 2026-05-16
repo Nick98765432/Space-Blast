@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://cp1xd2tlpbi6t"]
+[gd_scene load_steps=26 format=3 uid="uid://cp1xd2tlpbi6t"]
 
 [ext_resource type="Script" path="res://Enemies/Components/particles.gd" id="1_6untt"]
 [ext_resource type="Texture2D" uid="uid://b3ct4sarc83iu" path="res://Enemies/attacks/Sprites and assets/parriable.png" id="1_grjfk"]
 [ext_resource type="Texture2D" uid="uid://c0nck4toihkvd" path="res://Enemies/attacks/Sprites and assets/unparriable.png" id="2_0j0dj"]
 [ext_resource type="Texture2D" uid="uid://cb5vbn80xhgw7" path="res://Enemies/Sprites and Assets/spade boss.png" id="3_ag7gx"]
+[ext_resource type="Texture2D" uid="uid://kmcwilmcypb4" path="res://Enemies/Sprites and Assets/spawn.png" id="4_c1q77"]
 [ext_resource type="Texture2D" uid="uid://bptlyltdkkd46" path="res://Enemies/Sprites and Assets/Explode.png" id="4_mrt38"]
 [ext_resource type="Material" uid="uid://bwjafp8uf3uh3" path="res://Player/new_particle_process_material.tres" id="6_jd3q5"]
 [ext_resource type="Texture2D" uid="uid://cbobm6w3fudwx" path="res://Player/sprites and assets/glitchVFX.png" id="7_nbe0n"]
@@ -21,6 +22,13 @@ emission_shape_offset = Vector3(10, -3, 0)
 gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_5vwps")
 
+[sub_resource type="Curve" id="Curve_vaoag"]
+_data = [Vector2(0.00896861, 1), 0.0, 0.0, 0, 0, Vector2(0.600897, 0.00371754), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h67bj"]
+curve = SubResource("Curve_vaoag")
+
 [sub_resource type="Curve" id="Curve_mmmu7"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -30,10 +38,13 @@ curve = SubResource("Curve_mmmu7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r0bxi"]
 particle_flag_disable_z = true
+angular_velocity_min = 300.0
+angular_velocity_max = 300.0
 gravity = Vector3(0, 0, 0)
-scale_min = 100.0
-scale_max = 100.0
+scale_min = 7.0
+scale_max = 7.0
 scale_curve = SubResource("CurveTexture_srx8o")
+alpha_curve = SubResource("CurveTexture_h67bj")
 
 [sub_resource type="Curve" id="Curve_f8lg0"]
 _data = [Vector2(0.056338, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -110,9 +121,11 @@ lifetime = 0.2
 one_shot = true
 
 [node name="spawnPart" type="GPUParticles2D" parent="."]
+texture_filter = 1
 emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_r0bxi")
+texture = ExtResource("4_c1q77")
 lifetime = 0.5
 one_shot = true
 

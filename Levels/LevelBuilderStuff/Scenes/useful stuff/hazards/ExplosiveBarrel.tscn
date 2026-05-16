@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlxy3vkwnnr3u"]
+[gd_scene load_steps=5 format=3 uid="uid://dlxy3vkwnnr3u"]
 
 [ext_resource type="Texture2D" uid="uid://rmmqmq356lr7" path="res://Levels/Sprites and Assets/explosive barrel.png" id="1_s11h0"]
 [ext_resource type="Script" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/hazards/explosive_barrel.gd" id="1_sud2t"]
+[ext_resource type="AudioStream" uid="uid://ldtpfai04oy3" path="res://Sounds/SFX/anomaex__sci-fi_explosion_2.wav" id="3_0nhlb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yc3m4"]
 height = 32.0
@@ -17,3 +18,7 @@ texture = ExtResource("1_s11h0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_yc3m4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_0nhlb")
+volume_db = -2.0

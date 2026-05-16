@@ -7,22 +7,28 @@ var type: int
 var damage: float = 35
 var target: Player
 var deflect: bool = false
+@export var shot: CompressedTexture2D
+@export var shotgun: CompressedTexture2D
+@export var auto: CompressedTexture2D
 
 func _ready() -> void:
 	Signals.connect("destroy", _on_destroy)
 	if type == 1:
 		isParriable = true
 		speed = 600
+		$Sprite2D.texture = shot
 	elif type == 2:
 		isParriable = true
 	elif type == 3:
 		isParriable = true
 		speed = 600
 		damage = 10
+		$Sprite2D.texture = shotgun
 	elif type == 4:
 		isParriable = false
 		speed = 1000
 		damage = 3.5
+		$Sprite2D.texture = auto
 	
 func _physics_process(delta: float) -> void:
 	if type == 1 or type == 3 or type == 4:

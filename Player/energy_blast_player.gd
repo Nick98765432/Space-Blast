@@ -5,7 +5,19 @@ var speed = 1000
 var type = 1
 var damageMult: float
 
+@export var shot: CompressedTexture2D
+@export var shotgun: CompressedTexture2D
+@export var auto: CompressedTexture2D
+
+
 func _ready() -> void:
+	if type == 1:
+		$Sprite2D.texture = shot
+	elif type == 2:
+		$Sprite2D.texture = shotgun
+	elif type == 3:
+		$Sprite2D.texture = auto
+	
 	if type == 2:
 		await get_tree().create_timer(0.15).timeout
 		queue_free()

@@ -7,3 +7,4 @@ class_name Sounds
 @onready var fullauto_sfx: AudioStreamPlayer = $shotSFX2
 @onready var teleport_sfx: AudioStreamPlayer = $teleportSFX
 @onready var dash_sfx: AudioStreamPlayer = $dashSFX
+@onready var death: AudioStreamPlayer = $death
