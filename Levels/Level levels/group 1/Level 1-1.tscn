@@ -148,6 +148,7 @@ stream = ExtResource("1_nhtxx")
 volume_db = -3.0
 autoplay = true
 script = ExtResource("2_v16v0")
+intro = true
 
 [node name="Music" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("intro")]
 stream = ExtResource("3_grpvx")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://ydtt66708bt2"]
+[gd_scene load_steps=29 format=4 uid="uid://ydtt66708bt2"]
 
 [ext_resource type="AudioStream" uid="uid://b46mr55iao38r" path="res://Sounds/Music/Taken Over - Infrared Scale.wav" id="1_kseid"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="2_kbcg5"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://s5rskgpj4mpd" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/doorStuff/RedKey.tscn" id="13_5h2pn"]
 [ext_resource type="PackedScene" uid="uid://c0tlo2ft5d445" path="res://Levels/LevelBuilderStuff/Scenes/spawners/GunManSpawner.tscn" id="14_ddsie"]
 [ext_resource type="PackedScene" uid="uid://c6nybe6m7akgp" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/LevelEnd.tscn" id="16_6vuim"]
+[ext_resource type="AudioStream" uid="uid://bi20r3lox2aba" path="res://Sounds/Music/Another Chance - Infrared Scale.wav" id="18_g7xef"]
+[ext_resource type="PackedScene" uid="uid://c1h1pkc4yg5pk" path="res://Levels/Level levels/group 2/Level 2-1.tscn" id="21_qx10y"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2f3ce"]
 vertices = PackedVector2Array(20, 20, -20, 20, -20, -20, 20, -20)
@@ -280,15 +282,20 @@ position = Vector2(766, 456)
 [node name="ProjGuySpawner2" parent="Enemies/Room 3/Wave 2" instance=ExtResource("10_h0q26")]
 position = Vector2(1120, 456)
 
-[node name="Door4" parent="Enemies" instance=ExtResource("6_jb7vc")]
+[node name="Door4" parent="Enemies" node_paths=PackedStringArray("music") instance=ExtResource("6_jb7vc")]
 position = Vector2(300, 0)
 rotation = 1.5708
 red = true
 blue = true
+stopMusic = true
+music = NodePath("../../Music")
 
-[node name="NextRoom4" parent="Enemies" instance=ExtResource("7_miwav")]
-position = Vector2(320, -93)
+[node name="NextRoom4" parent="Enemies" node_paths=PackedStringArray("current") instance=ExtResource("7_miwav")]
+position = Vector2(320, -137)
 scale = Vector2(32.76, 1)
+changeMusic = true
+current = NodePath("../../Music")
+newMusic = ExtResource("18_g7xef")
 
 [node name="Room 4" parent="Enemies" instance=ExtResource("7_nguxp")]
 roomNum = 4
@@ -302,3 +309,4 @@ bar = true
 [node name="LevelEnd" parent="Enemies" instance=ExtResource("16_6vuim")]
 position = Vector2(300, -360)
 rotation = 1.5708
+next_level = ExtResource("21_qx10y")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://c1h1pkc4yg5pk"]
+[gd_scene load_steps=28 format=4 uid="uid://c1h1pkc4yg5pk"]
 
 [ext_resource type="AudioStream" uid="uid://qvc7kauqwtb5" path="res://Sounds/Music/No Turning Back Now.wav" id="1_hpsya"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="2_ovjk6"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dlxy3vkwnnr3u" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/hazards/ExplosiveBarrel.tscn" id="14_vovti"]
 [ext_resource type="PackedScene" uid="uid://ly8tu4r8ls8n" path="res://Levels/LevelBuilderStuff/Scenes/spawners/scatterShotGuySpawner.tscn" id="15_h41sl"]
 [ext_resource type="PackedScene" uid="uid://c6nybe6m7akgp" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/LevelEnd.tscn" id="16_c3a6k"]
+[ext_resource type="PackedScene" uid="uid://niyvwjxqyl" path="res://Levels/Level levels/group 2/Level 2-2.tscn" id="20_lfxvo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2f3ce"]
 vertices = PackedVector2Array(20, 20, -20, 20, -20, -20, 20, -20)
@@ -439,3 +440,4 @@ position = Vector2(962, 1341)
 [node name="LevelEnd" parent="Level" instance=ExtResource("16_c3a6k")]
 position = Vector2(820, 1441)
 rotation = -1.57079
+next_level = ExtResource("20_lfxvo")

@@ -26,10 +26,6 @@ func _ready() -> void:
 	else:
 		if bossBar:
 			bossBar.hide()
-	if bossBar:
-		print(bossBar.visible)
-		print(bossBar.position)
-	print(player.bossBarCount)
 
 func _process(delta: float) -> void:
 	if bossBar:

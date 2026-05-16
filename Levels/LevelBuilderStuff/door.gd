@@ -5,6 +5,8 @@ var locked: bool = false
 @export var speed: float = 10
 @export var red: bool = false
 @export var blue: bool = false
+@export var stopMusic: bool = false
+@export var music: AudioStreamPlayer
 @export var redSprite: CompressedTexture2D
 @export var blueSprite: CompressedTexture2D
 @onready var upper: StaticBody2D = $upper
@@ -54,6 +56,8 @@ func _on_open_close_area_body_entered(body: Node2D) -> void:
 		opened = true
 		if not locked:
 			door_sfx.play()
+			if stopMusic:
+				music.stop()
 
 
 func _on_open_close_area_body_exited(body: Node2D) -> void:
@@ -64,6 +68,7 @@ func _on_open_close_area_body_exited(body: Node2D) -> void:
 
 func _on_lock():
 	locked = true
+	opened = false
 
 func _on_unlock():
 	locked = false

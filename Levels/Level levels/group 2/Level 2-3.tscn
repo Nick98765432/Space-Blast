@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dpcxtgekp4wdq"]
+[gd_scene load_steps=27 format=4 uid="uid://dpcxtgekp4wdq"]
 
 [ext_resource type="AudioStream" uid="uid://qvc7kauqwtb5" path="res://Sounds/Music/No Turning Back Now.wav" id="1_l8idd"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="2_0yuof"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b2ibhn8rcdb1e" path="res://Levels/LevelBuilderStuff/Scenes/spawners/meleeSpawner.tscn" id="13_iov42"]
 [ext_resource type="PackedScene" uid="uid://ctf1qegjgm8oq" path="res://Levels/LevelBuilderStuff/Scenes/spawners/teleGuySpawner.tscn" id="14_5aspc"]
 [ext_resource type="PackedScene" uid="uid://s5rskgpj4mpd" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/doorStuff/RedKey.tscn" id="14_7y6vo"]
+[ext_resource type="AudioStream" uid="uid://c4oisdxdslhy0" path="res://Sounds/Music/Beyond Comprehension - Infrared Scale.wav" id="16_htaxw"]
 [ext_resource type="PackedScene" uid="uid://du0oxjga7nmv5" path="res://Levels/LevelBuilderStuff/Scenes/spawners/MirageSpawner.tscn" id="16_x8j8o"]
 [ext_resource type="PackedScene" uid="uid://c6nybe6m7akgp" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/LevelEnd.tscn" id="17_yu0bb"]
 [ext_resource type="PackedScene" uid="uid://ebh654kfwuer" path="res://Levels/LevelBuilderStuff/Scenes/props/Box.tscn" id="18_wbrnd"]
@@ -174,10 +175,12 @@ player = NodePath("../Player")
 
 [node name="Level" type="Node2D" parent="."]
 
-[node name="Door" parent="Level" instance=ExtResource("8_ajbfh")]
+[node name="Door" parent="Level" node_paths=PackedStringArray("music") instance=ExtResource("8_ajbfh")]
 position = Vector2(300, 0)
 rotation = 1.5708
 red = true
+stopMusic = true
+music = NodePath("../../Music")
 
 [node name="Door2" parent="Level" instance=ExtResource("8_ajbfh")]
 position = Vector2(300, 360)
@@ -236,9 +239,12 @@ position = Vector2(304, 994)
 position = Vector2(300, 943)
 rotation = 1.5708
 
-[node name="NextRoom3" parent="Level" instance=ExtResource("9_5rusm")]
-position = Vector2(302, -63)
-scale = Vector2(13.28, 1.44)
+[node name="NextRoom3" parent="Level" node_paths=PackedStringArray("current") instance=ExtResource("9_5rusm")]
+position = Vector2(304, -140)
+scale = Vector2(30.92, 1.44)
+changeMusic = true
+current = NodePath("../../Music")
+newMusic = ExtResource("16_htaxw")
 
 [node name="Room 3" parent="Level" instance=ExtResource("10_skfin")]
 roomNum = 3
