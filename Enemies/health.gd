@@ -26,10 +26,14 @@ func _ready() -> void:
 	else:
 		if bossBar:
 			bossBar.hide()
-
-func _process(_delta: float) -> void:
 	if bossBar:
-		bossBar.value = health
+		print(bossBar.visible)
+		print(bossBar.position)
+	print(player.bossBarCount)
+
+func _process(delta: float) -> void:
+	if bossBar:
+		bossBar.value = move_toward(bossBar.value, health, 60 * delta)
 	if health <= 0:
 		if not energyGiven:
 			player.ammo = 30
@@ -48,8 +52,9 @@ func _process(_delta: float) -> void:
 			get_parent().particles.explode_2.emitting = true
 			parent.enemy_sprite.hide()
 			await get_tree().create_timer(1).timeout
-			player.bossBarCount -= 1
-			Signals.emit_signal("bossDeath")
+			if isBoss:
+				player.bossBarCount -= 1
+				Signals.emit_signal("bossDeath")
 			player.targeted = false
 			parent.queue_free()
 

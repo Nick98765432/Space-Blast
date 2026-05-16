@@ -12,6 +12,9 @@ class_name Spawner
 func _ready() -> void:
 	Signals.connect("change", _on_change)
 	sprite_2d.hide()
+	monitorable = false
+	monitoring = false
+	
 func _on_change():
 	if encounter == player.encounter:
 		spawn(guy)

@@ -9,6 +9,8 @@ radius = 33.0606
 
 [node name="meleeSpawner" type="Area2D"]
 texture_filter = 1
+monitoring = false
+monitorable = false
 script = ExtResource("1_sru2a")
 guy = ExtResource("2_xt8ui")
 

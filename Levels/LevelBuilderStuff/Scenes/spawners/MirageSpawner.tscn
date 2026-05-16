@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://du0oxjga7nmv5"]
+
+[ext_resource type="Script" path="res://Levels/LevelBuilderStuff/enemy_spawner.gd" id="1_7cc5i"]
+[ext_resource type="Texture2D" uid="uid://cb5vbn80xhgw7" path="res://Enemies/Sprites and Assets/spade boss.png" id="2_5b870"]
+[ext_resource type="PackedScene" uid="uid://jqajmnlp4puy" path="res://Enemies/Scenes/Mirage.tscn" id="2_7eeg5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p167p"]
+radius = 33.0606
+
+[node name="MirageSpawner" type="Area2D"]
+texture_filter = 1
+monitoring = false
+monitorable = false
+script = ExtResource("1_7cc5i")
+guy = ExtResource("2_7eeg5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p167p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5b870")

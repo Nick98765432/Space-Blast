@@ -168,6 +168,7 @@ tile_set = SubResource("TileSet_t107p")
 position = Vector2(320, 180)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["camera"]]
+z_index = 100
 position = Vector2(320, 180)
 position_smoothing_enabled = true
 script = ExtResource("6_bqe1u")

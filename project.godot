@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Space Blast the Remake"
-run/main_scene="res://Levels/Level levels/group 2/Level 2-2.tscn"
+run/main_scene="res://Levels/Level levels/group 2/Level 2-3.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://Levels/Sprites and Assets/icon.svg"
 

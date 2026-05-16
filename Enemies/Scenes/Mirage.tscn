@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://jqajmnlp4puy"]
 
 [ext_resource type="Script" path="res://Enemies/Scenes/mirage.gd" id="1_kc5bj"]
-[ext_resource type="Texture2D" uid="uid://nvxfte3traah" path="res://Enemies/Sprites and Assets/evil Space Blast man.png" id="1_ohjan"]
+[ext_resource type="Texture2D" uid="uid://cb5vbn80xhgw7" path="res://Enemies/Sprites and Assets/spade boss.png" id="2_lpicv"]
 [ext_resource type="Shader" path="res://Player/glitch.gdshader" id="2_qpeb6"]
 [ext_resource type="PackedScene" uid="uid://c06hquc6cp2ot" path="res://Enemies/Components/sounds.tscn" id="2_rx5le"]
 [ext_resource type="PackedScene" uid="uid://vk8r8f8b2e7x" path="res://Enemies/Components/attacks.tscn" id="3_2hylt"]
@@ -67,7 +67,7 @@ shape = SubResource("CircleShape2D_y2kj6")
 
 [node name="enemySprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_77w63")
-texture = ExtResource("1_ohjan")
+texture = ExtResource("2_lpicv")
 
 [node name="sightTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -123,9 +123,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -231.5
-offset_top = 9.0
+offset_top = 15.0
 offset_right = 231.5
-offset_bottom = 36.0
+offset_bottom = 42.0
 grow_horizontal = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_7age2")
 max_value = 60.0
