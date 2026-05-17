@@ -1,0 +1,329 @@
+[gd_scene load_steps=13 format=3 uid="uid://g6ydyypqsvkm"]
+
+[ext_resource type="Script" path="res://Levels/Level levels/Main menu/main_menu.gd" id="1_w2cub"]
+[ext_resource type="Texture2D" uid="uid://g1xvkre0j6i5" path="res://Levels/Sprites and Assets/space.png" id="2_koegc"]
+[ext_resource type="Texture2D" uid="uid://b6i1ul2i3y5u7" path="res://Player/sprites and assets/Space Blast man.png" id="3_8jfnj"]
+[ext_resource type="AudioStream" uid="uid://bldqwisnj75d6" path="res://Sounds/Music/Trouble-On-Mercury.mp3" id="4_6fjp8"]
+
+[sub_resource type="Animation" id="Animation_slw26"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fk4xi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mylb7"]
+_data = {
+"RESET": SubResource("Animation_fk4xi"),
+"new_animation": SubResource("Animation_slw26")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_bcwwq"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ec7c7"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_u62hl"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_7kr2m"]
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_xrjbm"]
+font_size = 8
+
+[node name="MainMenu" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_w2cub")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mylb7")
+}
+autoplay = "new_animation"
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
+z_index = -1
+offset_right = 691.0
+offset_bottom = 374.0
+color = Color(0, 0, 0, 1)
+
+[node name="Bg" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(320, 180)
+texture = ExtResource("2_koegc")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = -138.0
+offset_right = 87.5
+offset_bottom = 138.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 200
+
+[node name="Label" type="Label" parent="Control/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Space Blast"
+label_settings = SubResource("LabelSettings_bcwwq")
+
+[node name="Button" type="Button" parent="Control/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="credit" type="Button" parent="Control/VBoxContainer2"]
+layout_mode = 2
+text = "Credits"
+
+[node name="TextureRect" type="Sprite2D" parent="Control"]
+z_index = -1
+position = Vector2(320, 180)
+scale = Vector2(3, 3)
+texture = ExtResource("3_8jfnj")
+
+[node name="Control2" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -33.0
+offset_right = 102.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="normal" type="Button" parent="Control2/VBoxContainer"]
+layout_mode = 2
+text = "Normal"
+
+[node name="tester" type="Button" parent="Control2/VBoxContainer"]
+layout_mode = 2
+text = "Tester Mode (All Unlocks)"
+
+[node name="Control3" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control3/VBoxContainer"]
+layout_mode = 2
+
+[node name="Level 1-1" type="Button" parent="Control3/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Level 1 - 1"
+
+[node name="Level 1-2" type="Button" parent="Control3/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Level 1 - 2"
+
+[node name="Level 1-3" type="Button" parent="Control3/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Level 1 - 3"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control3/VBoxContainer"]
+layout_mode = 2
+
+[node name="Level 2-1" type="Button" parent="Control3/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Level 2 - 1"
+
+[node name="Level 2-2" type="Button" parent="Control3/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Level 2 - 2"
+
+[node name="Level 2-3" type="Button" parent="Control3/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Level 2 - 3"
+
+[node name="Control4" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="back" type="Button" parent="Control4"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control4/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control4/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music"
+
+[node name="Label2" type="Label" parent="Control4/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "\"Another Chance\"
+\"Beyond Comprehension\"
+\"No Turning Back Now\"
+\"Taken Over\"
+by Infrared Scale
+www.youtube.com/@InfraredScale/
+
+\"Trouble On Mercury\"
+by Eric Matyas
+www.soundimage.org"
+label_settings = SubResource("LabelSettings_ec7c7")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control4/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Control4/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Art
+"
+
+[node name="Label3" type="Label" parent="Control4/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Enemy Art by Jackson A
+All other art by me"
+label_settings = SubResource("LabelSettings_u62hl")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control4/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Control4/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "SFX"
+
+[node name="Label4" type="Label" parent="Control4/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Glitch #55 by Bryce835
+from Freesound.org (CC0)
+
+Sci-Fi_Explosion_2 by Anomaex 
+from Freesound.org (CC0)
+
+teleport by outroelison 
+from Freesound.org (CC0)
+
+reload by GFL7 
+from Freesound.org (CC0)
+
+automatic door open by saangosu 
+from Freesound.org (CC0)
+
+"
+label_settings = SubResource("LabelSettings_7kr2m")
+
+[node name="Label" type="Label" parent="Control4/HBoxContainer"]
+layout_mode = 2
+text = "reload by GFL7 
+from Freesound.org (CC0)
+
+shoot02 by V-ktor
+from Freesound.org (CC0)
+
+Shotgun 02 by Clueless79
+from Freesound.org (CC0)
+
+large explosion 1 by V-ktor
+from Freesound.org (CC0)
+
+Layered Gunshot 5 by xenonn
+
+from Freesound.org (CC0)"
+label_settings = SubResource("LabelSettings_xrjbm")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6fjp8")
+autoplay = true
+
+[connection signal="button_up" from="Control/VBoxContainer2/VBoxContainer/Button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="Control/VBoxContainer2/credit" to="." method="_on_credit_button_up"]
+[connection signal="button_up" from="Control2/VBoxContainer/normal" to="." method="_on_normal_button_up"]
+[connection signal="button_up" from="Control2/VBoxContainer/tester" to="." method="_on_tester_button_up"]
+[connection signal="button_up" from="Control3/VBoxContainer/VBoxContainer2/Level 1-1" to="." method="_on__button_up"]
+[connection signal="button_up" from="Control3/VBoxContainer/VBoxContainer2/Level 1-2" to="." method="_on_level_12_button_up"]
+[connection signal="button_up" from="Control3/VBoxContainer/VBoxContainer2/Level 1-3" to="." method="_on_level_13_button_up"]
+[connection signal="button_up" from="Control3/VBoxContainer/VBoxContainer3/Level 2-1" to="." method="_on_level_21_button_up"]
+[connection signal="button_up" from="Control3/VBoxContainer/VBoxContainer3/Level 2-2" to="." method="_on_level_22_button_up"]
+[connection signal="button_up" from="Control3/VBoxContainer/VBoxContainer3/Level 2-3" to="." method="_on_level_23_button_up"]
+[connection signal="button_up" from="Control4/back" to="." method="_on_back_button_up"]

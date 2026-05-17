@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bxxwp0jnp4mca"]
+[gd_scene load_steps=37 format=4 uid="uid://bxxwp0jnp4mca"]
 
 [ext_resource type="AudioStream" uid="uid://df8gh08u32xu6" path="res://Sounds/Music/Taken OverIntro- Infrared Scale.wav" id="1_nhtxx"]
 [ext_resource type="Script" path="res://Levels/intro.gd" id="2_v16v0"]
@@ -18,7 +18,99 @@
 [ext_resource type="PackedScene" uid="uid://2jopgibauwk5" path="res://Levels/LevelBuilderStuff/Scenes/spawners/spectreSpawner.tscn" id="14_ktdst"]
 [ext_resource type="PackedScene" uid="uid://c6nybe6m7akgp" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/LevelEnd.tscn" id="15_8ggu1"]
 [ext_resource type="PackedScene" uid="uid://c4hpuj7u71hah" path="res://Levels/Level levels/group 1/Level 1-2.tscn" id="16_dtq4g"]
+[ext_resource type="PackedScene" uid="uid://tg2b080hghgc" path="res://Levels/LevelBuilderStuff/tutorial/tutorialSegment.tscn" id="19_tlhv5"]
+[ext_resource type="PackedScene" uid="uid://rr51o3107bmk" path="res://Levels/level end/endAnimation.tscn" id="20_0cy2m"]
 [ext_resource type="PackedScene" uid="uid://ebh654kfwuer" path="res://Levels/LevelBuilderStuff/Scenes/props/Box.tscn" id="21_n1y5v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jf7ib"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aux8n"]
+font_size = 64
+
+[sub_resource type="Animation" id="Animation_sw7d8"]
+resource_name = "new_animation"
+length = 19.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Control/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10.0333, 12.9667, 17.0667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["A passion project by me", "Originally created in Scratch", "Remade in Godot", "Introducing...", "Space Blast"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Control/Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 18.9333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Control/Label:label_settings")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 17.0667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("LabelSettings_jf7ib"), SubResource("LabelSettings_aux8n")]
+}
+
+[sub_resource type="Animation" id="Animation_r65hi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Control/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["A passion project by me"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Control/Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Control/Label:label_settings")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("LabelSettings_aux8n")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u8psw"]
+_data = {
+"RESET": SubResource("Animation_r65hi"),
+"new_animation": SubResource("Animation_sw7d8")
+}
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2f3ce"]
 vertices = PackedVector2Array(20, 20, -20, 20, -20, -20, 20, -20)
@@ -140,6 +232,42 @@ terrain_set_0/terrain_0/name = "walls"
 terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
 sources/0 = SubResource("TileSetAtlasSource_aw0xi")
 
+[sub_resource type="Animation" id="Animation_slw26"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fk4xi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mylb7"]
+_data = {
+"RESET": SubResource("Animation_fk4xi"),
+"new_animation": SubResource("Animation_slw26")
+}
+
 [node name="Level1-1" type="Node2D"]
 texture_filter = 1
 
@@ -149,6 +277,37 @@ volume_db = -3.0
 autoplay = true
 script = ExtResource("2_v16v0")
 intro = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Intro"]
+libraries = {
+"": SubResource("AnimationLibrary_u8psw")
+}
+autoplay = "new_animation"
+
+[node name="Control" type="Control" parent="Intro/AnimationPlayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="Label" type="Label" parent="Intro/AnimationPlayer/Control"]
+visible = false
+z_index = 100
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "A passion project by me"
+label_settings = SubResource("LabelSettings_aux8n")
 
 [node name="Music" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("intro")]
 stream = ExtResource("3_grpvx")
@@ -208,6 +367,11 @@ rotation = 1.57079
 position = Vector2(300, 411)
 scale = Vector2(5.96001, 1)
 
+[node name="TutorialSegment" parent="Enemies" instance=ExtResource("19_tlhv5")]
+position = Vector2(300, 411)
+scale = Vector2(7.16, 1)
+text = "press [SPACE] to parry attacks"
+
 [node name="Room 2" parent="Enemies" instance=ExtResource("8_ehmnt")]
 roomNum = 1
 
@@ -239,6 +403,12 @@ position = Vector2(640, 900)
 [node name="Door7" parent="Enemies" instance=ExtResource("11_h7dci")]
 position = Vector2(1280, 1260)
 
+[node name="TutorialSegment2" parent="Enemies" instance=ExtResource("19_tlhv5")]
+position = Vector2(691, 888)
+rotation = 1.57079
+scale = Vector2(7.16, 1)
+text = "parries rapidly charge up an ult which can be used with [RIGHT CLICK]"
+
 [node name="Room 3" parent="Enemies" instance=ExtResource("8_ehmnt")]
 roomNum = 2
 
@@ -262,6 +432,12 @@ position = Vector2(787, 896)
 [node name="Door4" parent="Enemies" instance=ExtResource("11_h7dci")]
 position = Vector2(940, 1080)
 rotation = 1.57079
+
+[node name="TutorialSegment3" parent="Enemies" instance=ExtResource("19_tlhv5")]
+position = Vector2(941, 1132)
+rotation = 3.14159
+scale = Vector2(7.16, 1)
+text = "A Yellow flash indicates an attack is parriable and Blue otherwise"
 
 [node name="NextRoom4" parent="Enemies" instance=ExtResource("12_7asca")]
 position = Vector2(940, 1132)
@@ -290,6 +466,12 @@ position = Vector2(812, 1181)
 [node name="NextRoom2" parent="Enemies" instance=ExtResource("12_7asca")]
 position = Vector2(1620, 1172)
 scale = Vector2(6.79469, 2.27947)
+
+[node name="TutorialSegment4" parent="Enemies" instance=ExtResource("19_tlhv5")]
+position = Vector2(1620, 1184)
+rotation = 3.14159
+scale = Vector2(7.16, 1)
+text = "press [SHIFT] to dash"
 
 [node name="Room 5" parent="Enemies" instance=ExtResource("8_ehmnt")]
 roomNum = 4
@@ -382,11 +564,14 @@ waveNum = 2
 
 [node name="SpectreSpawner" parent="Enemies/Room 7/Wave 3" instance=ExtResource("14_ktdst")]
 position = Vector2(1612, 552)
+drop = true
 
-[node name="LevelEnd" parent="Enemies" instance=ExtResource("15_8ggu1")]
+[node name="LevelEnd" parent="Enemies" node_paths=PackedStringArray("fade") instance=ExtResource("15_8ggu1")]
 position = Vector2(1620, 360)
 rotation = 1.57079
+currentLevel = 1
 next_level = ExtResource("16_dtq4g")
+fade = NodePath("../../EndAnimation")
 
 [node name="Box" parent="." instance=ExtResource("21_n1y5v")]
 position = Vector2(153, 96)
@@ -410,5 +595,19 @@ position = Vector2(757, 1012)
 
 [node name="Box4" parent="." instance=ExtResource("21_n1y5v")]
 position = Vector2(521, 293)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mylb7")
+}
+autoplay = "new_animation"
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
+z_index = 1
+offset_right = 691.0
+offset_bottom = 374.0
+color = Color(0, 0, 0, 1)
+
+[node name="EndAnimation" parent="." instance=ExtResource("20_0cy2m")]
 
 [connection signal="finished" from="Intro" to="Intro" method="_on_finished"]

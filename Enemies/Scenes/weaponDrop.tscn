@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3pajn3fib3ka"]
+
+[ext_resource type="Script" path="res://Enemies/Scenes/weapon_drop.gd" id="1_ymy73"]
+[ext_resource type="Texture2D" uid="uid://caov74f5foeic" path="res://Enemies/Sprites and Assets/weaponDrop.png" id="2_81vty"]
+[ext_resource type="AudioStream" uid="uid://c3e8u2jrnxlj1" path="res://Sounds/SFX/Reload GFL7.wav" id="3_gv0yx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlwfu"]
+size = Vector2(32, 32)
+
+[node name="WeaponDrop" type="Area2D"]
+script = ExtResource("1_ymy73")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_81vty")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nlwfu")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gv0yx")
+volume_db = -7.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

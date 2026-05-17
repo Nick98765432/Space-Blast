@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://dpcxtgekp4wdq"]
+[gd_scene load_steps=32 format=4 uid="uid://dpcxtgekp4wdq"]
 
 [ext_resource type="AudioStream" uid="uid://qvc7kauqwtb5" path="res://Sounds/Music/No Turning Back Now.wav" id="1_l8idd"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="2_0yuof"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://du0oxjga7nmv5" path="res://Levels/LevelBuilderStuff/Scenes/spawners/MirageSpawner.tscn" id="16_x8j8o"]
 [ext_resource type="PackedScene" uid="uid://c6nybe6m7akgp" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/LevelEnd.tscn" id="17_yu0bb"]
 [ext_resource type="PackedScene" uid="uid://ebh654kfwuer" path="res://Levels/LevelBuilderStuff/Scenes/props/Box.tscn" id="18_wbrnd"]
+[ext_resource type="PackedScene" uid="uid://g6ydyypqsvkm" path="res://Levels/Level levels/Main menu/Main Menu.tscn" id="19_paxav"]
+[ext_resource type="PackedScene" uid="uid://rr51o3107bmk" path="res://Levels/level end/endAnimation.tscn" id="20_5eame"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2f3ce"]
 vertices = PackedVector2Array(20, 20, -20, 20, -20, -20, 20, -20)
@@ -140,6 +142,42 @@ terrain_set_0/terrain_0/name = "walls"
 terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
 sources/0 = SubResource("TileSetAtlasSource_gorhs")
 
+[sub_resource type="Animation" id="Animation_slw26"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fk4xi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mylb7"]
+_data = {
+"RESET": SubResource("Animation_fk4xi"),
+"new_animation": SubResource("Animation_slw26")
+}
+
 [node name="Level 2-3" type="Node2D"]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
@@ -255,9 +293,12 @@ roomNum = 3
 position = Vector2(304, -267)
 bar = true
 
-[node name="LevelEnd" parent="Level" instance=ExtResource("17_yu0bb")]
+[node name="LevelEnd" parent="Level" node_paths=PackedStringArray("fade") instance=ExtResource("17_yu0bb")]
 position = Vector2(300, -360)
 rotation = 1.57079
+currentLevel = 6
+next_level = ExtResource("19_paxav")
+fade = NodePath("../../EndAnimation")
 
 [node name="Box" parent="." instance=ExtResource("18_wbrnd")]
 position = Vector2(87, 155)
@@ -273,3 +314,17 @@ position = Vector2(581, 176)
 
 [node name="Box5" parent="." instance=ExtResource("18_wbrnd")]
 position = Vector2(549, 176)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mylb7")
+}
+autoplay = "new_animation"
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
+z_index = 1
+offset_right = 691.0
+offset_bottom = 374.0
+color = Color(0, 0, 0, 1)
+
+[node name="EndAnimation" parent="." instance=ExtResource("20_5eame")]

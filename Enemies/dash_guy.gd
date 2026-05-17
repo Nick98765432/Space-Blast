@@ -7,6 +7,7 @@ var sideDir: float
 var movementDir
 var attackDir
 var pos: Vector2
+var drop: bool = false
 @export var player: Player
 @onready var sight_timer: Timer = $sightTimer
 @onready var enemy_sprite: Sprite2D = $enemySprite

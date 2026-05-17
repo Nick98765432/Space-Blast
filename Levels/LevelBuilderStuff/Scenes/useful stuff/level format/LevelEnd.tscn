@@ -20,6 +20,7 @@ scale = Vector2(1.48, 19.04)
 shape = SubResource("RectangleShape2D_l44au")
 
 [node name="nextLevel" type="Area2D" parent="."]
+collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="nextLevel"]
 position = Vector2(-84, 0)

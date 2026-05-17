@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://lyj2mx2lbhve"]
+
+[ext_resource type="Script" path="res://Levels/level end/end_of_level.gd" id="1_5i8ph"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vnxx2"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_xiscf"]
+font_size = 32
+
+[node name="EndOfLevel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5i8ph")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -44.0
+offset_right = 20.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LettterLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "S"
+label_settings = SubResource("LabelSettings_vnxx2")
+horizontal_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "1000"
+label_settings = SubResource("LabelSettings_xiscf")
+horizontal_alignment = 1
+
+[node name="DeathLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Deaths: 100"
+horizontal_alignment = 1

@@ -206,6 +206,7 @@ func _physics_process(delta: float) -> void:
 			global_position = spawnLocation
 			$"Player sprite".show()
 			health = 100
+			$CanvasLayer2.hide()
 			dead = false
 			encounter.y = 0
 			Signals.emit_signal("destroy")
@@ -266,7 +267,9 @@ func damage(amount):
 	if not isDashing:
 		health -= amount * (1 - resist)
 		if health <= 0 and not dead:
+			$CanvasLayer2.show()
 			death.play()
+			PlayerData.deaths += 1
 
 
 func _on_beserk_duration_timeout() -> void:

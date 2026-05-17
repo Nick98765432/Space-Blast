@@ -4,6 +4,7 @@ class_name Spawner
 @export var guy: PackedScene
 @export var extraHealth: bool
 @export var bar: bool
+@export var drop: bool
 @export var encounter: Vector2i
 @export var player: Player
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -28,3 +29,5 @@ func spawn(kind: PackedScene):
 		enemy.health_handler.health *= 2
 	if bar:
 		enemy.health_handler.isBoss = true
+	if drop: 
+		enemy.drop = true

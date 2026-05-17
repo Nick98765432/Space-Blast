@@ -120,7 +120,7 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Gunslinger"
+text = "Prototype"
 metadata/_edit_use_anchors_ = true
 
 [connection signal="timeout" from="sightTimer" to="." method="_on_sight_timer_timeout"]

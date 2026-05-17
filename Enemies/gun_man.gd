@@ -6,6 +6,8 @@ var attacking: bool = false
 var isParryable: bool = false
 var shot : PackedScene = preload("res://Enemies/attacks/enemy energy blast.tscn")
 var last: int
+var drop: bool = false
+var item: PackedScene = preload("res://Enemies/Scenes/weaponDrop.tscn")
 @export var player: Player
 @onready var pathfinding: NavigationAgent2D = $pathfinding
 @onready var sight_timer: Timer = $sightTimer
@@ -18,6 +20,9 @@ var last: int
 @onready var particles: Particles = $Particles
 @onready var hitbox: Area2D = $hitbox
 @onready var brain: v2Brain = $v2Brain
+
+func _ready() -> void:
+	health_handler.connect("death", _on_death)
 
 func _physics_process(delta: float) -> void:
 	if not dead:
@@ -55,3 +60,10 @@ func _on_shot_cool_timeout() -> void:
 					await get_tree().create_timer(0.05).timeout
 					attacks.fullAuto()
 		attacking = false
+
+func _on_death():
+	if drop:
+		var droppedItem = item.instantiate()
+		droppedItem.global_position = global_position
+		droppedItem.value = 3
+		get_tree().get_root().add_child(droppedItem)

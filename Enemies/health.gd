@@ -1,6 +1,7 @@
 extends Node2D
 class_name healthHandler
 signal hit
+signal death
 
 var player: Player
 var energyGiven = false
@@ -73,6 +74,7 @@ func hurt(amount):
 	health -= amount
 	if health <= 0 and not parent.dead:
 		parent.sounds.death.play()
+		emit_signal("death")
 	#delay stops crashing if hit on frame one
 	await get_tree().create_timer(0.0011).timeout
 	player.parryEnergy += (amount) * 3

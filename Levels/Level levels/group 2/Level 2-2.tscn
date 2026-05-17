@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://niyvwjxqyl"]
+[gd_scene load_steps=35 format=4 uid="uid://niyvwjxqyl"]
 
 [ext_resource type="AudioStream" uid="uid://qvc7kauqwtb5" path="res://Sounds/Music/No Turning Back Now.wav" id="1_no4gc"]
 [ext_resource type="Script" path="res://Levels/music.gd" id="2_lobj7"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://s5rskgpj4mpd" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/doorStuff/RedKey.tscn" id="18_wcid3"]
 [ext_resource type="PackedScene" uid="uid://c6nybe6m7akgp" path="res://Levels/LevelBuilderStuff/Scenes/useful stuff/level format/LevelEnd.tscn" id="19_2baht"]
 [ext_resource type="PackedScene" uid="uid://dpcxtgekp4wdq" path="res://Levels/Level levels/group 2/Level 2-3.tscn" id="23_nnkfj"]
+[ext_resource type="PackedScene" uid="uid://rr51o3107bmk" path="res://Levels/level end/endAnimation.tscn" id="24_jybtl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2f3ce"]
 vertices = PackedVector2Array(20, 20, -20, 20, -20, -20, 20, -20)
@@ -143,6 +144,42 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "walls"
 terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
 sources/0 = SubResource("TileSetAtlasSource_1s6tb")
+
+[sub_resource type="Animation" id="Animation_slw26"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fk4xi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mylb7"]
+_data = {
+"RESET": SubResource("Animation_fk4xi"),
+"new_animation": SubResource("Animation_slw26")
+}
 
 [node name="Level 2-2" type="Node2D"]
 
@@ -520,7 +557,23 @@ position = Vector2(1820, -92)
 [node name="ScatterShotGuySpawner" parent="Level/Room 6/Wave 4" instance=ExtResource("12_s7el8")]
 position = Vector2(1407, -185)
 
-[node name="LevelEnd" parent="." instance=ExtResource("19_2baht")]
+[node name="LevelEnd" parent="." node_paths=PackedStringArray("fade") instance=ExtResource("19_2baht")]
 position = Vector2(1921, -180)
 rotation = 3.14159
+currentLevel = 5
 next_level = ExtResource("23_nnkfj")
+fade = NodePath("../EndAnimation")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mylb7")
+}
+autoplay = "new_animation"
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
+z_index = 1
+offset_right = 691.0
+offset_bottom = 374.0
+color = Color(0, 0, 0, 1)
+
+[node name="EndAnimation" parent="." instance=ExtResource("24_jybtl")]

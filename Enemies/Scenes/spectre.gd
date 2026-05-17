@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 var dead = false
+var drop: bool = false
+var item: PackedScene = preload("res://Enemies/Scenes/weaponDrop.tscn")
 @onready var side_dash: Timer = $sideDash
 @onready var shot_cool: Timer = $shotCool
 @onready var enemy_sprite: Sprite2D = $enemySprite
@@ -13,6 +15,8 @@ var dead = false
 @export var player: Player
 @onready var phase_dash: phaseDash = $phaseDash
 
+func _ready() -> void:
+	health_handler.connect("death", _on_death)
 
 func _physics_process(delta: float) -> void:
 	if not dead:
@@ -47,3 +51,10 @@ func _on_shot_cool_timeout() -> void:
 func _on_side_dash_timeout() -> void:
 	if pathfinding_brain.lineOfSight():
 		pass
+
+func _on_death():
+	if drop:
+		var droppedItem = item.instantiate()
+		droppedItem.global_position = global_position
+		droppedItem.value = 2
+		get_tree().get_root().add_child(droppedItem)
