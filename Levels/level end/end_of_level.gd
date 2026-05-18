@@ -24,6 +24,8 @@ func _ready() -> void:
 	level = PlayerData.level
 	deaths = PlayerData.deaths
 	nextLevel = PlayerData.nextLevel
+	if level == 6:
+		nextLevel = load("res://Levels/Level levels/Main menu/Main Menu.tscn")
 	findRank()
 
 
@@ -100,7 +102,6 @@ func findRank():
 	lettter_label.text = letterRank[rank]
 	time_label.text = str(time)
 	death_label.text = "Deaths: " + str(deaths)
-	
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
