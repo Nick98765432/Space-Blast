@@ -270,6 +270,7 @@ func damage(amount):
 			$CanvasLayer2.show()
 			death.play()
 			PlayerData.deaths += 1
+			dead = true
 
 
 func _on_beserk_duration_timeout() -> void:
